@@ -3,6 +3,8 @@ import { sample } from 'lodash';
 
 // ----------------------------------------------------------------------
 
+console.log([...Array(24)])
+
 const users = [...Array(24)].map((_, index) => ({
   id: faker.datatype.uuid(),
   avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,

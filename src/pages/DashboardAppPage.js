@@ -1,8 +1,13 @@
 import { Helmet } from 'react-helmet-async';
+
 import { faker } from '@faker-js/faker';
+
 // @mui
 import { useTheme } from '@mui/material/styles';
+
 import { Grid, Container, Typography } from '@mui/material';
+import { useState } from 'react';
+
 // components
 import Iconify from '../components/iconify';
 // sections
@@ -20,8 +25,59 @@ import {
 
 // ----------------------------------------------------------------------
 
-export default function DashboardAppPage() {
+export default function DashboardAppPage(props) {
   const theme = useTheme();
+  const arr = props.data.props.data
+  const [data,setData] = useState([]) ;
+  let uniqueStates = []
+  let uniqueCities = []
+  arr.forEach((a)=>{
+    const index = uniqueStates.findIndex(elem => elem.state === a.state);
+    if (index === -1) {
+      uniqueStates.push({state : a.state});
+    }
+    const index1 = uniqueCities.findIndex(elem => elem.city === a.city);
+    if (index === -1) {
+      uniqueCities.push({city : a.city});
+    }
+  })
+  uniqueStates = uniqueStates.flatMap((a)=>a.state)
+  uniqueCities = uniqueCities.flatMap((a)=>a.city)
+
+  const counts = {};
+  const cities = {};
+
+  arr.forEach(item => {
+    if (counts[item.state]) {
+      counts[item.state].value += 1;
+    } else {
+      counts[item.state] = {
+        label: item.state,
+        value: 1
+      };
+    }
+    if (cities[item.city]) {
+      cities[item.city].value += 1;
+    } else {
+      cities[item.city] = {
+        label: item.city,
+        value: 1
+      };
+    }
+  });
+
+
+  const uniqueStatesData = Object.values(counts);
+
+  let uniqueCitiesData = (Object.values(cities)).filter((ct)=>ct.value>=40);
+  const handleFullCityData = () =>{
+    uniqueCitiesData = Object.values(cities)
+    console.log(uniqueCitiesData)
+
+  }
+  console.log(uniqueCitiesData)
+
+  
 
   return (
     <>
@@ -36,7 +92,7 @@ export default function DashboardAppPage() {
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Weekly Sales" total={714000} icon={'ant-design:android-filled'} />
+            <AppWidgetSummary title="Weekly Sales" total={arr.length} icon={'ant-design:android-filled'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
@@ -93,13 +149,8 @@ export default function DashboardAppPage() {
 
           <Grid item xs={12} md={6} lg={4}>
             <AppCurrentVisits
-              title="Current Visits"
-              chartData={[
-                { label: 'America', value: 4344 },
-                { label: 'Asia', value: 5435 },
-                { label: 'Europe', value: 1443 },
-                { label: 'Africa', value: 4443 },
-              ]}
+              title="Popular States"
+              chartData= {uniqueStatesData}
               chartColors={[
                 theme.palette.primary.main,
                 theme.palette.info.main,
@@ -110,21 +161,11 @@ export default function DashboardAppPage() {
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
+              <button onClick={handleFullCityData}>Full Data</button>
             <AppConversionRates
-              title="Conversion Rates"
+              title="City Visits Percentage"
               subheader="(+43%) than last year"
-              chartData={[
-                { label: 'Italy', value: 400 },
-                { label: 'Japan', value: 430 },
-                { label: 'China', value: 448 },
-                { label: 'Canada', value: 470 },
-                { label: 'France', value: 540 },
-                { label: 'Germany', value: 580 },
-                { label: 'South Korea', value: 690 },
-                { label: 'Netherlands', value: 1100 },
-                { label: 'United States', value: 1200 },
-                { label: 'United Kingdom', value: 1380 },
-              ]}
+              chartData={uniqueCitiesData}
             />
           </Grid>
 
