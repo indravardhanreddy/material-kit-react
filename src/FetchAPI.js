@@ -7,7 +7,7 @@ function FetchAPI() {
     console.log(data)
 
     const fetchInfo = async () => {
-        await fetch('http://localhost:5253/api/Customers')
+        await fetch('http://localhost:7009/api/values')
             .then((res) => res.json())
             .then((d) => setData(d))
     }

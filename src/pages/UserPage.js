@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { filter } from 'lodash';
+import { filter, last } from 'lodash';
 import { sentenceCase } from 'change-case';
 import { useState,useEffect } from 'react';
 // @mui
@@ -68,7 +68,7 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user) => _user.firstname.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(array, (_user) => _user.firstName.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
   return stabilizedThis.map((el) => el[0]);
 }
@@ -76,10 +76,11 @@ function applySortFilter(array, comparator, query) {
 export default function UserPage(props) {
 
   const [data, setData] = useState([]);
+  console.log(data)
     
         const fetchInfo = async () => {
-            await fetch('http://localhost:5253/api/Customers')
-                .then((res) => res.json())
+          await fetch('https://localhost:7099/api/Values')
+          .then((res) => res.json())
                 .then((d) => setData(d))
         }
     
@@ -192,32 +193,32 @@ export default function UserPage(props) {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, firstname, email, phone, city, avatarUrl, joinedDate } = row;
-                    const selectedUser = selected.indexOf(firstname) !== -1;
+                    const { orderId, firstName, lastName, orderDate, requiredDate, avatarUrl, orderStatus } = row;
+                    const selectedUser = selected.indexOf(firstName) !== -1;
 
                     return (
-                      <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedUser}>
+                      <TableRow hover key={orderId} tabIndex={-1} role="checkbox" selected={selectedUser}>
                         <TableCell padding="checkbox">
-                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, firstname)} />
+                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, firstName)} />
                         </TableCell>
 
                         <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>
-                            <Avatar alt={firstname} src={avatarUrl} />
+                            <Avatar alt={firstName} src={avatarUrl} />
                             <Typography variant="subtitle2" noWrap>
-                              {firstname}
+                              {firstName}
                             </Typography>
                           </Stack>
                         </TableCell>
 
-                        <TableCell align="left">{email}</TableCell>
+                        <TableCell align="left">{orderDate}</TableCell>
 
-                        <TableCell align="left">{phone}</TableCell>
+                        <TableCell align="left">{requiredDate}</TableCell>
 
-                        <TableCell align="left">{joinedDate ? 'Yes' : 'No'}</TableCell>
+                        <TableCell align="left">{orderStatus}</TableCell>
 
                         <TableCell align="left">
-                          <Label color={(city === 'banned' && 'error') || 'success'}>{sentenceCase(city)}</Label>
+                          <Label color={(lastName === 'banned' && 'error') || 'success'}>{sentenceCase(lastName)}</Label>
                         </TableCell>
 
                         <TableCell align="right">
