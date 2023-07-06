@@ -35,9 +35,12 @@ const Main = styled('div')(({ theme }) => ({
 export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
 
+  const callBack = (childData)=>{
+    console.log(childData)
+  }
   return (
     <StyledRoot>
-      <Header onOpenNav={() => setOpen(true)} />
+      <Header onOpenNav={() => setOpen(true)} handleCallback1={callBack}/>
 
       <Nav openNav={open} onCloseNav={() => setOpen(false)} />
 

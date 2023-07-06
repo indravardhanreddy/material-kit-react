@@ -1,26 +1,38 @@
 import { useState } from 'react';
+
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // @mui
 import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
 import Iconify from '../../../components/iconify';
+import { login } from '../../../reducers/user'
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
+  const [email,setEmail] = useState('default@gmail.com');
+  const [password,setPassword] = useState('default')
+  const dispatch = useDispatch()
+
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = () => {
+    dispatch(login({
+      "name": email.split('@')[0],
+      "email": email
+  }))
     navigate('/dashboard', { replace: true });
   };
 
   return (
     <>
       <Stack spacing={3}>
-        <TextField name="email" label="Email address" />
+        <TextField name="email" label="Email address" onChange={(e)=>{
+          setEmail(e.target.value)}} />
 
         <TextField
           name="password"

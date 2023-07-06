@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 // utils
+import React,{ useState } from 'react';
+
 import { bgBlur } from '../../../utils/cssStyles';
 // components
 import Iconify from '../../../components/iconify';
@@ -11,6 +13,7 @@ import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
 import NotificationsPopover from './NotificationsPopover';
+import CalendarControl from './CalendarControl';
 
 // ----------------------------------------------------------------------
 
@@ -19,6 +22,7 @@ const NAV_WIDTH = 280;
 const HEADER_MOBILE = 64;
 
 const HEADER_DESKTOP = 92;
+
 
 const StyledRoot = styled(AppBar)(({ theme }) => ({
   ...bgBlur({ color: theme.palette.background.default }),
@@ -36,18 +40,27 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   },
 }));
 
+
 // ----------------------------------------------------------------------
 
 Header.propTypes = {
   onOpenNav: PropTypes.func,
 };
 
-export default function Header({ onOpenNav }) {
+export default function Header(props) {
+  const [childData,setChildData] = useState(null);
+
+  
+const callBack= (childData)=>{
+  setChildData(childData)
+}
+  props.handleCallback1(childData)
+  console.log(props)
   return (
     <StyledRoot>
       <StyledToolbar>
         <IconButton
-          onClick={onOpenNav}
+          onClick={props.onOpenNav}
           sx={{
             mr: 1,
             color: 'text.primary',
@@ -68,6 +81,7 @@ export default function Header({ onOpenNav }) {
             sm: 1,
           }}
         >
+          <CalendarControl handleCallback={callBack}/>
           <LanguagePopover />
           <NotificationsPopover />
           <AccountPopover />
