@@ -2,8 +2,15 @@ import { useState } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useSelector,useDispatch } from 'react-redux';
 import ProfilePage from '../../MenuItems/ProfilePage';
+import Home from '../profileitems/Home';
+import Settings from '../profileitems/Settings'
+import OurProduct from '../profileitems/OurProduct'
+import Profile from '../profileitems/Profile'
+
+
+
 // mocks_
 import account from '../../../_mock/account';
 // ----------------------------------------------------------------------
@@ -30,7 +37,7 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
-  const user = useSelector((state)=>{return state.user.value})
+  const user = useSelector((state)=>{return state})
   console.log(user)
   const [open, setOpen] = useState(null);
 
@@ -42,8 +49,21 @@ export default function AccountPopover() {
     setOpen(null);
   };
 
-  const handleMenuItems = () =>{
-    console.log()
+  const handleMenuItems = (item) =>{
+    console.log(item)
+    switch(item){
+      case 'Home': <Home /> 
+      break;
+      case 'Profile': <Profile/>
+      break;
+      case 'Settings': <Settings/>
+      break;
+      case 'Our Product': <OurProduct/>
+      break;
+      default : <Home/> 
+      break;
+    }
+      
     return (
       <ProfilePage/>
     )
@@ -103,7 +123,7 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleMenuItems}>
+            <MenuItem key={option.label} onClick={() =>handleMenuItems(option.label)}>
               {option.label}
             </MenuItem>
           ))}

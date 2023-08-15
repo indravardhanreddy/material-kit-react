@@ -15,6 +15,7 @@ function FetchAPI() {
 
     useEffect(() => {
         fetchInfo();
+        alert("APIs not deployed on server yet");
     }, []);
 
     return (

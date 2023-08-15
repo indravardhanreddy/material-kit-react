@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker';
 import { useTheme } from '@mui/material/styles';
 
 import { Grid, Container, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // components
 import Iconify from '../components/iconify';
@@ -76,8 +76,6 @@ export default function DashboardAppPage(props) {
 
   }
   console.log(uniqueCitiesData)
-
-  
 
   return (
     <>

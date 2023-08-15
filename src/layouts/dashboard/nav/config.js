@@ -1,4 +1,5 @@
 // component
+import { useSelector, useDispatch } from 'react-redux';
 import SvgColor from '../../../components/svg-color';
 
 // ----------------------------------------------------------------------
@@ -37,9 +38,19 @@ const navConfig = [
     icon: icon('ic_lock'),
   },
   {
+    title: 'signup',
+    path: '/signup',
+    icon: icon('ic_lock'),
+  },
+  {
     title: 'Not found',
     path: '/404',
     icon: icon('ic_disabled'),
+  },
+  {
+    title: 'CompanyBlock',
+    path: '/companydetails',
+    icon: icon('ic_lock'),
   },
 ];
 

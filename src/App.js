@@ -1,6 +1,8 @@
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 // routes
+import { Provider } from 'react-redux';
+import { store } from './redux/store/store';
 import Router from './routes';
 // theme
 import ThemeProvider from './theme';
@@ -13,14 +15,16 @@ import FetchAPI from './FetchAPI';
 
 export default function App() {
   return (
-    <HelmetProvider>
-      <BrowserRouter>
-        <ThemeProvider>
-          <ScrollToTop />
-          <StyledChart />
-          <FetchAPI />
-        </ThemeProvider>
-      </BrowserRouter>
-    </HelmetProvider>
+    <Provider store={store}>
+      <HelmetProvider>
+        <BrowserRouter>
+          <ThemeProvider>
+            <ScrollToTop />
+            <StyledChart />
+            <FetchAPI />
+          </ThemeProvider>
+        </BrowserRouter>
+      </HelmetProvider>
+    </Provider>
   );
 }

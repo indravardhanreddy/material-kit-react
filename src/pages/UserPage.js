@@ -162,6 +162,8 @@ export default function UserPage(props) {
 
   return (
     <>
+
+    <>
       <Helmet>
         <title> User | Minimal UI </title>
       </Helmet>
@@ -303,6 +305,7 @@ export default function UserPage(props) {
           Delete
         </MenuItem>
       </Popover>
+    </>
     </>
   );
 }

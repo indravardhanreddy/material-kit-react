@@ -240,7 +240,9 @@ const UsersList = () => {
     const handleCallback = (childData) => {
         console.log(childData)
     }
+    
     return (
+        <>
         <div className="card">
             <Toast ref={toast} />
             <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
@@ -253,6 +255,7 @@ const UsersList = () => {
                 <Column field="count" header="Visits" sortable />
             </DataTable>
         </div>
+        </>
     );
 }
 
