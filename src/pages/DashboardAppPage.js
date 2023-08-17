@@ -80,7 +80,7 @@ export default function DashboardAppPage(props) {
   return (
     <>
       <Helmet>
-        <title> Dashboard | Minimal UI </title>
+        <title> Dashboard | TheActuals </title>
       </Helmet>
 
       <Container maxWidth="xl">

@@ -165,7 +165,7 @@ export default function UserPage(props) {
 
     <>
       <Helmet>
-        <title> User | Minimal UI </title>
+        <title> User | TheActuals </title>
       </Helmet>
 
       <Container>

@@ -15,13 +15,18 @@ const SORT_OPTIONS = [
   { value: 'oldest', label: 'Oldest' },
 ];
 
+const handleCopyText = (text) => {
+  console.log(text)
+  navigator.clipboard.writeText(text);
+}
+
 // ----------------------------------------------------------------------
 
 export default function BlogPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard: Blog | Minimal UI </title>
+        <title> Dashboard: Blog | TheActuals </title>
       </Helmet>
 
       <Container>
@@ -41,7 +46,7 @@ export default function BlogPage() {
 
         <Grid container spacing={3}>
           {POSTS.map((post, index) => (
-            <BlogPostCard key={post.id} post={post} index={index} />
+            <BlogPostCard key={post.id} post={post} index={index}/>
           ))}
         </Grid>
       </Container>
