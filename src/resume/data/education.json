@@ -1,0 +1,27 @@
+[
+  {
+    "title": "B.Tech in Computer Science and Engineering",
+    "subTitle": "BML Munjal University",
+    "date": "August 2018 - Present",
+    "extra": true,
+    "expanded": false,
+    "courses": [
+      "Software Engineering",
+      "Computer Networks",
+      "Deep Learning",
+      "Reinforcement Learning",
+      "Database Management Systems",
+      "Artificial Intelligence",
+      "Computer Organization",
+      "Design and Analysis of Algorithms"
+    ]
+  },
+  {
+    "title": "Higher Secondary Education (PCM)",
+    "subTitle": "Sri Chaitanya College",
+    "date": "July 2016 - May 2018",
+    "description": "Percentage: 97.20%",
+    "extra": false,
+    "courses": []
+  }
+]

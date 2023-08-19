@@ -1,0 +1,28 @@
+[
+  {
+    "title": "Software Engineer",
+    "subTitle": "Evalueserve, Gurgaon",
+    "date": "Jan 2022 - Present",
+    "extra": true,
+    "expanded": true,
+    "workDone": [
+      "Working on Dynamic Path Selection for network traffic to optimize application performance.",
+      "Improved and advanced test infrastructure capabilities, with a primary focus on AWS."
+    ],
+    "tags": ["React", "Javascript", ".Net", "SQL Server", "Azure", "Node js"]
+  },
+  {
+    "title": "Software Intern",
+    "subTitle": "Rann Labs",
+    "date": "June 2020 - August 2020",
+    "extra": true,
+    "expanded": true,
+    "workDone": [
+      "Conducted a Text analysis of Machine Learning approaches for Bot Text Generation.",
+      "Created a Whatsapp chatbot response model as a starting point.",
+      "Established efficient input examples using ML by retrieving training data from valid sources.",
+      "Implementation involved making a bot to generate automatic resonses."
+    ],
+    "tags": ["Machine Learning", "Whatsapp Bot", "Python", "Twilio API"]
+  }
+]

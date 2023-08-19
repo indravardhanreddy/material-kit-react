@@ -1,4 +1,5 @@
 import { Navigate, useRoutes } from 'react-router-dom';
+import React,{useState} from 'react';
 // layouts
 import DashboardLayout from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
@@ -12,10 +13,14 @@ import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import CompanyBlock from './pages/CompanyBlock'
 import SignUpPage from './pages/SignupPage';
+import Main from "./resume/Main";
+import {ThemeContext} from "./resume/Context";
 
 // ----------------------------------------------------------------------
 
 export default function Router(props) {
+  const [theme, setTheme] = useState(localStorage.getItem('theme'));
+
   const routes = useRoutes([
     {
       path: '/dashboard',
@@ -45,6 +50,10 @@ export default function Router(props) {
         { path: '404', element: <Page404 /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],
+    },
+    {
+      path: 'resume',
+      element: <Main />,
     },
     {
       path: '*',

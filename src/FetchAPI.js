@@ -12,12 +12,6 @@ function FetchAPI() {
             .then((d) => setData(d))
     }
 
-
-    useEffect(() => {
-        fetchInfo();
-        alert("APIs not deployed on server yet");
-    }, []);
-
     return (
         <div>
             <Router data = {data}/>

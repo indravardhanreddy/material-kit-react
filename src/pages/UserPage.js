@@ -83,11 +83,11 @@ export default function UserPage(props) {
           .then((res) => res.json())
                 .then((d) => setData(d))
         }
-    
-        useEffect(() => {
-            fetchInfo();
-        }, []);
 
+        useEffect(() => {
+          fetchInfo();
+          alert("APIs not deployed on server yet");
+      }, []);
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);
