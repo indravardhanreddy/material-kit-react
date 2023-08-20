@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useEffect, useState, useRef } from "react";
+import { Toast } from "primereact/toast";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,22 +14,76 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
-export default function SignUpPage() {
-  const handleSubmit = (event) => {
+function SignupPage() {
+  const toast = useRef(null);
+  const [user, setUser] = useState({
+    username: '',
+    emailaddress: '',
+    firstname: '',
+    lastname: '',
+    password: '',
+    country: ''
+  });
+
+
+  const handleChange = (e) =>{
+    const { name, value} = e.target
+    setUser((prevUser)=>({
+      ...prevUser,[name]:value
+    }));
+  }
+
+  const handleSubmit = event => {
+    
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+
+    fetch('https://localhost:7099/api/Users/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(response => response.json())
+      .then(data => {
+        if(data.errorMessage){
+          showErrorToast(data.errorMessage)
+        }
+        else{
+        showSuccessToast("Signup Successful\nPlease Signin to Continue")
+        }
+        // Handle success or other actions
+      })
+      .catch(error => {
+        console.error('Error creating user:', error);
+        // Handle error
+      });
+  };
+
+  const showSuccessToast = (message) => {
+    toast.current.show({
+      severity: 'success',
+      summary: 'Success Message',
+      detail: message,
+      life: 3000 // Display for 3 seconds
+    });
+  };
+
+  const showErrorToast = (message) => {
+    toast.current.show({
+      severity: 'error',
+      summary: 'Error Message',
+      detail: message,
+      life: 5000 // Display for 5 seconds
     });
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+<ThemeProvider theme={defaultTheme}>
+<Toast ref={toast} />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -50,11 +105,12 @@ export default function SignUpPage() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="firstname"
                   required
                   fullWidth
-                  id="firstName"
+                  id="firstname"
                   label="First Name"
+                  onChange={handleChange}
                   autoFocus
                 />
               </Grid>
@@ -62,9 +118,10 @@ export default function SignUpPage() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="lastname"
                   label="Last Name"
-                  name="lastName"
+                  name="lastname"
+                  onChange={handleChange}
                   autoComplete="family-name"
                 />
               </Grid>
@@ -72,10 +129,11 @@ export default function SignUpPage() {
                 <TextField
                   required
                   fullWidth
-                  id="email"
+                  id="emailaddress"
                   label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  name="emailaddress"
+                  autoComplete="emailaddress"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -86,7 +144,19 @@ export default function SignUpPage() {
                   label="Password"
                   type="password"
                   id="password"
+                  onChange={handleChange}
                   autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="country"
+                  label="Country"
+                  id="country"
+                  onChange={handleChange}
+                  autoComplete="country"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -101,6 +171,7 @@ export default function SignUpPage() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onSubmit = {handleSubmit}
             >
               Sign Up
             </Button>
@@ -115,5 +186,8 @@ export default function SignUpPage() {
         </Box>
       </Container>
     </ThemeProvider>
+
   );
 }
+
+export default SignupPage;

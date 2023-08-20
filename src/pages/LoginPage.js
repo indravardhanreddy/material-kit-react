@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from 'react'
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { styled } from '@mui/material/styles';
@@ -40,6 +41,7 @@ const StyledContent = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function LoginPage() {
+
   const mdUp = useResponsive('up', 'md');
 
   return (
@@ -69,7 +71,7 @@ export default function LoginPage() {
         <Container maxWidth="sm">
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              Sign in to Minimal
+              Sign in to The Actuals
             </Typography>
 
             <Typography variant="body2" sx={{ mb: 5 }}>

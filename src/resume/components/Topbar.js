@@ -34,11 +34,13 @@ const template = (item, options) => {
     );
 }
 
+  // eslint-disable-next-line object-shorthand
 const items = [
     {
         label: 'Home',
         icon: 'pi pi-fw pi-home',
         url: '#',
+        // eslint-disable-next-line object-shorthand
         template: template
     },
     {
@@ -48,11 +50,13 @@ const items = [
             {
                 label: 'Projects',
                 url: '#projects',
+                // eslint-disable-next-line object-shorthand
                 template: template
             },
             {
                 label: 'Experience',
                 url: '#experience',
+                // eslint-disable-next-line object-shorthand
                 template: template
             }
         ]
@@ -61,33 +65,37 @@ const items = [
         label: 'Skills',
         icon: 'pi pi-fw pi-bolt',
         url: '#skills',
+        // eslint-disable-next-line object-shorthand
         template: template
     },
     {
         label: 'Education',
         icon: 'pi pi-fw pi-book',
         url: '#education',
+        // eslint-disable-next-line object-shorthand
         template: template
     },
     {
         label: 'Contact',
         icon: 'pi pi-fw pi-phone',
         url: '#contact',
+        // eslint-disable-next-line object-shorthand
         template: template
     },
     {
         label: 'Resume',
         icon: 'pi pi-fw pi-download',
+        // eslint-disable-next-line object-shorthand
         template: (item, options) => {
 
             return (
                 <>
-                    <div role="menuitem" id="resume-download" className={options.className} onClick={() => {
-                        window.open(`/Subhash's Resume.pdf`, "_blank");
+                    <button role="menuitem" id="resume-download" className={options.className} onClick={() => {
+                        window.open(`/Resume.pdf`, "_blank");
                     }}>
                         <span className={options.iconClassName}/>
                         <span className="p-menuitem-text">{item.label}</span>
-                    </div>
+                    </button>
                 </>
             );
         }
@@ -106,11 +114,11 @@ function TopBar() {
         const linkElement = document.getElementById('theme-link');
         const cloneLinkElement = linkElement.cloneNode(true);
         const newThemeUrl = linkElement.getAttribute('href').replace(theme, newTheme);
-        cloneLinkElement.setAttribute('id', elementId + '-clone');
+        cloneLinkElement.setAttribute('id', `${elementId} + -clone`);
         cloneLinkElement.setAttribute('href', newThemeUrl);
         cloneLinkElement.addEventListener('load', () => {
             linkElement.remove();
-            cloneLinkElement.setAttribute('id', elementId);
+            cloneLinkElement.setAttribute('id', elementId); 
             localStorage.setItem('theme', newTheme);
             setIsThemeSwitching(false);
             setTheme(newTheme);

@@ -68,7 +68,7 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user) => _user.firstName.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(array, (_user) => _user.firstname.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
   return stabilizedThis.map((el) => el[0]);
 }
@@ -79,14 +79,13 @@ export default function UserPage(props) {
   console.log(data)
     
         const fetchInfo = async () => {
-          await fetch('https://localhost:7099/api/Values')
+          await fetch('https://localhost:7099/api/Users')
           .then((res) => res.json())
                 .then((d) => setData(d))
         }
 
         useEffect(() => {
           fetchInfo();
-          alert("APIs not deployed on server yet");
       }, []);
   const [open, setOpen] = useState(null);
 
@@ -195,32 +194,32 @@ export default function UserPage(props) {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { orderId, firstName, lastName, orderDate, requiredDate, avatarUrl, orderStatus } = row;
-                    const selectedUser = selected.indexOf(firstName) !== -1;
+                    const { username, firstname, lastname, password, country, avatarUrl, emailaddress } = row;
+                    const selectedUser = selected.indexOf(firstname) !== -1;
 
                     return (
-                      <TableRow hover key={orderId} tabIndex={-1} role="checkbox" selected={selectedUser}>
+                      <TableRow hover key={username} tabIndex={-1} role="checkbox" selected={selectedUser}>
                         <TableCell padding="checkbox">
-                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, firstName)} />
+                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, firstname)} />
                         </TableCell>
 
                         <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>
-                            <Avatar alt={firstName} src={avatarUrl} />
+                            <Avatar alt={firstname} src={avatarUrl} />
                             <Typography variant="subtitle2" noWrap>
-                              {firstName}
+                              {firstname}
                             </Typography>
                           </Stack>
                         </TableCell>
 
-                        <TableCell align="left">{orderDate}</TableCell>
+                        <TableCell align="left">{password}</TableCell>
 
-                        <TableCell align="left">{requiredDate}</TableCell>
+                        <TableCell align="left">{country}</TableCell>
 
-                        <TableCell align="left">{orderStatus}</TableCell>
+                        <TableCell align="left">{emailaddress}</TableCell>
 
                         <TableCell align="left">
-                          <Label color={(lastName === 'banned' && 'error') || 'success'}>{sentenceCase(lastName)}</Label>
+                          <Label color={(lastname === 'banned' && 'error') || 'success'}>{sentenceCase(lastname)}</Label>
                         </TableCell>
 
                         <TableCell align="right">

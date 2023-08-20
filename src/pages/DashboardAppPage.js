@@ -90,7 +90,7 @@ export default function DashboardAppPage(props) {
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Weekly Sales" total={arr.length} icon={'ant-design:android-filled'} />
+            <AppWidgetSummary title="Weekly Sales" total={2345554} icon={'ant-design:android-filled'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
@@ -159,7 +159,6 @@ export default function DashboardAppPage(props) {
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
-              <button onClick={handleFullCityData}>Full Data</button>
             <AppConversionRates
               title="City Visits Percentage"
               subheader="(+43%) than last year"

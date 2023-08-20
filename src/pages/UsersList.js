@@ -24,7 +24,7 @@ const UsersList = () => {
     const [globalFilterValue, setGlobalFilterValue] = useState('');
 
     const fetchInfo = async () => {
-        await fetch('https://localhost:7099/api/Values')
+        await fetch('https://localhost:7099/api/Users')
             .then((res) => res.json())
             .then((d) => {
                 setRawData(d)
@@ -95,7 +95,7 @@ const UsersList = () => {
         const _expandedRows = {};
 
         products.forEach((p) => {
-            (_expandedRows[`${p.customerId}`] = true)
+            (_expandedRows[`${p.username}`] = true)
             return _expandedRows
         });
         setExpandedRows(_expandedRows);
@@ -110,7 +110,7 @@ const UsersList = () => {
     };
 
     const amountBodyTemplate = (rowData) => {
-        return formatCurrency(rowData.orderId);
+        return formatCurrency(rowData.emailaddress);
     };
 
     const statusOrderBodyTemplate = (rowData) => {

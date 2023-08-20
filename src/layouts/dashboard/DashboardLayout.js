@@ -1,11 +1,11 @@
 import React,{ useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
-import {Widget, addResponseMessage, addLinkSnippet, addUserMessage, setQuickButtons, renderCustomComponent} from 'react-chat-widget';
+// import {Widget, addResponseMessage, addLinkSnippet, addUserMessage, setQuickButtons, renderCustomComponent} from 'react-chat-widget';
 import { Button } from 'primereact/button';
 import Header from './header';
 import Nav from './nav';
-import 'react-chat-widget/lib/styles.css';
+// import 'react-chat-widget/lib/styles.css';
 
 const siteProps = {
   name: "Elamri Maryem",
@@ -49,20 +49,20 @@ export default function DashboardLayout() {
     console.log(childData)
   }
 
-  const handleNewUserMessage = newMessage => {
-    console.log(`New message incoming! ${newMessage}`);
-    // Now send the message through the backend API
-  };
+  // const handleNewUserMessage = newMessage => {
+  //   console.log(`New message incoming! ${newMessage}`);
+  //   // Now send the message through the backend API
+  // };
   
-  const handleQuickButtonClicked = data => {
-    console.log(data);
-    setButtons(prevButtons => prevButtons.filter(button => button.value !== data));
-  };
+  // const handleQuickButtonClicked = data => {
+  //   console.log(data);
+  //   setButtons(prevButtons => prevButtons.filter(button => button.value !== data));
+  // };
 
-  useEffect(() => {
-    addResponseMessage('Welcome to this awesome chat!');
-    setQuickButtons(buttons); // Replace "buttons" with your actual quick buttons data
-  }, []); 
+  // useEffect(() => {
+  //   addResponseMessage('Welcome to this awesome chat!');
+  //   setQuickButtons(buttons); // Replace "buttons" with your actual quick buttons data
+  // }, []); 
   return (
     <div>
     <StyledRoot>
@@ -74,13 +74,13 @@ export default function DashboardLayout() {
         <Outlet />
       </Main>
 
-      <Widget
+      {/* <Widget
           handleNewUserMessage={handleNewUserMessage}
           handleQuickButtonClicked={handleQuickButtonClicked}
           // profileAvatar={'text'}
           title="TheActuals"
           subtitle="TheAct Bot"
-        />
+        /> */}
     </StyledRoot>
     </div>
   );
