@@ -90,19 +90,19 @@ export default function DashboardAppPage(props) {
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Weekly Sales" total={2345554} icon={'ant-design:android-filled'} />
+            <AppWidgetSummary title="Weekly Sales" total={2345554} icon={'ant-design:dashboard-filled'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="New Users" total={1352831} color="info" icon={'ant-design:apple-filled'} />
+            <AppWidgetSummary title="New Users" total={1352831} color="info" icon={'bxs:objects-vertical-bottom'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Item Orders" total={1723315} color="warning" icon={'ant-design:windows-filled'} />
+            <AppWidgetSummary title="Item Orders" total={1723315} color="warning" icon={'clarity:flame-solid'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Bug Reports" total={234} color="error" icon={'ant-design:bug-filled'} />
+            <AppWidgetSummary title="Bug Reports" total={234} color="error" icon={'ic:baseline-verified'} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
@@ -215,24 +215,24 @@ export default function DashboardAppPage(props) {
               title="Traffic by Site"
               list={[
                 {
-                  name: 'FaceBook',
+                  name: 'Instagram',
                   value: 323234,
-                  icon: <Iconify icon={'eva:facebook-fill'} color="#1877F2" width={32} />,
+                  icon: <Iconify icon={'line-md:instagram'} color="#1877F2" width={32} />,
                 },
                 {
-                  name: 'Google',
+                  name: 'Github',
                   value: 341212,
-                  icon: <Iconify icon={'eva:google-fill'} color="#DF3E30" width={32} />,
+                  icon: <Iconify icon={'line-md:github'} color="#DF3E30" width={32} />,
                 },
                 {
                   name: 'Linkedin',
                   value: 411213,
-                  icon: <Iconify icon={'eva:linkedin-fill'} color="#006097" width={32} />,
+                  icon: <Iconify icon={'line-md:linkedin'} color="#006097" width={32} />,
                 },
                 {
                   name: 'Twitter',
                   value: 443232,
-                  icon: <Iconify icon={'eva:twitter-fill'} color="#1C9CEA" width={32} />,
+                  icon: <Iconify icon={'line-md:twitter-x'} color="#1C9CEA" width={32} />,
                 },
               ]}
             />

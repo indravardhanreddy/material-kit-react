@@ -48,7 +48,7 @@ function IndustrialExperience() {
         )
     }
 
-    for (let i = 0; i < industryExperience.length; i++) {
+    for (let i = 0; i < industryExperience.length; i+1) {
         industryExperience[i].extraContent = extraContent(industryExperience[i].workDone, industryExperience[i].tags);
     }
 

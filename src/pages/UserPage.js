@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { filter, last } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 // @mui
 import {
   Card,
@@ -76,17 +76,16 @@ function applySortFilter(array, comparator, query) {
 export default function UserPage(props) {
 
   const [data, setData] = useState([]);
-  console.log(data)
-    
-        const fetchInfo = async () => {
-          await fetch('https://localhost:7099/api/Users')
-          .then((res) => res.json())
-                .then((d) => setData(d))
-        }
 
-        useEffect(() => {
-          fetchInfo();
-      }, []);
+  const fetchInfo = async () => {
+    await fetch('https://localhost:7099/api/Users')
+      .then((res) => res.json())
+      .then((d) => setData(d))
+  }
+
+  useEffect(() => {
+    fetchInfo();
+  }, []);
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);
@@ -162,149 +161,150 @@ export default function UserPage(props) {
   return (
     <>
 
-    <>
-      <Helmet>
-        <title> User | TheActuals </title>
-      </Helmet>
+      <>
+        <Helmet>
+          <title> User | TheActuals </title>
+        </Helmet>
 
-      <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" gutterBottom>
-            User
-          </Typography>
-          <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
-          </Button>
-        </Stack>
+        <Container>
+          <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+            <Typography variant="h4" gutterBottom>
+              User
+            </Typography>
+            <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
+              New User
+            </Button>
+          </Stack>
 
-        <Card>
-          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+          {data.length > 0 ?
+            <Card>
+              <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
 
-          <Scrollbar>
-            <TableContainer sx={{ minWidth: 800 }}>
-              <Table>
-                <UserListHead
-                  order={order}
-                  orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
-                  rowCount={data.length}
-                  numSelected={selected.length}
-                  onRequestSort={handleRequestSort}
-                  onSelectAllClick={handleSelectAllClick}
-                />
-                <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { username, firstname, lastname, password, country, avatarUrl, emailaddress } = row;
-                    const selectedUser = selected.indexOf(firstname) !== -1;
+              <Scrollbar>
+                <TableContainer sx={{ minWidth: 800 }}>
+                  <Table>
+                    <UserListHead
+                      order={order}
+                      orderBy={orderBy}
+                      headLabel={TABLE_HEAD}
+                      rowCount={data.length}
+                      numSelected={selected.length}
+                      onRequestSort={handleRequestSort}
+                      onSelectAllClick={handleSelectAllClick}
+                    />
+                    <TableBody>
+                      {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                        const { username, firstname, lastname, password, country, avatarUrl, emailaddress } = row;
+                        const selectedUser = selected.indexOf(firstname) !== -1;
 
-                    return (
-                      <TableRow hover key={username} tabIndex={-1} role="checkbox" selected={selectedUser}>
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, firstname)} />
-                        </TableCell>
+                        return (
+                          <TableRow hover key={username} tabIndex={-1} role="checkbox" selected={selectedUser}>
+                            <TableCell padding="checkbox">
+                              <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, firstname)} />
+                            </TableCell>
 
-                        <TableCell component="th" scope="row" padding="none">
-                          <Stack direction="row" alignItems="center" spacing={2}>
-                            <Avatar alt={firstname} src={avatarUrl} />
-                            <Typography variant="subtitle2" noWrap>
-                              {firstname}
-                            </Typography>
-                          </Stack>
-                        </TableCell>
+                            <TableCell component="th" scope="row" padding="none">
+                              <Stack direction="row" alignItems="center" spacing={2}>
+                                <Avatar alt={firstname} src={avatarUrl} />
+                                <Typography variant="subtitle2" noWrap>
+                                  {firstname}
+                                </Typography>
+                              </Stack>
+                            </TableCell>
 
-                        <TableCell align="left">{password}</TableCell>
+                            <TableCell align="left">{password}</TableCell>
 
-                        <TableCell align="left">{country}</TableCell>
+                            <TableCell align="left">{country}</TableCell>
 
-                        <TableCell align="left">{emailaddress}</TableCell>
+                            <TableCell align="left">{emailaddress}</TableCell>
 
-                        <TableCell align="left">
-                          <Label color={(lastname === 'banned' && 'error') || 'success'}>{sentenceCase(lastname)}</Label>
-                        </TableCell>
+                            <TableCell align="left">
+                              <Label color={(lastname === 'banned' && 'error') || 'success'}>{sentenceCase(lastname)}</Label>
+                            </TableCell>
 
-                        <TableCell align="right">
-                          <IconButton size="large" color="inherit" onClick={handleOpenMenu}>
-                            <Iconify icon={'eva:more-vertical-fill'} />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
+                            <TableCell align="right">
+                              <IconButton size="large" color="inherit" onClick={handleOpenMenu}>
+                                <Iconify icon={'eva:more-vertical-fill'} />
+                              </IconButton>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                      {emptyRows > 0 && (
+                        <TableRow style={{ height: 53 * emptyRows }}>
+                          <TableCell colSpan={6} />
+                        </TableRow>
+                      )}
+                    </TableBody>
 
-                {isNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        <Paper
-                          sx={{
-                            textAlign: 'center',
-                          }}
-                        >
-                          <Typography variant="h6" paragraph>
-                            Not found
-                          </Typography>
+                    {isNotFound && (
+                      <TableBody>
+                        <TableRow>
+                          <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                            <Paper
+                              sx={{
+                                textAlign: 'center',
+                              }}
+                            >
+                              <Typography variant="h6" paragraph>
+                                Not found
+                              </Typography>
 
-                          <Typography variant="body2">
-                            No results found for &nbsp;
-                            <strong>&quot;{filterName}&quot;</strong>.
-                            <br /> Try checking for typos or using complete words.
-                          </Typography>
-                        </Paper>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                )}
-              </Table>
-            </TableContainer>
-          </Scrollbar>
+                              <Typography variant="body2">
+                                No results found for &nbsp;
+                                <strong>&quot;{filterName}&quot;</strong>.
+                                <br /> Try checking for typos or using complete words.
+                              </Typography>
+                            </Paper>
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    )}
+                  </Table>
+                </TableContainer>
+              </Scrollbar>
 
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={data.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Card>
-      </Container>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={data.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </Card> : <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center'}}><Iconify icon={'svg-spinners:blocks-wave'} color="#1877F2" width={60} /></div>}
+        </Container>
 
-      <Popover
-        open={Boolean(open)}
-        anchorEl={open}
-        onClose={handleCloseMenu}
-        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        PaperProps={{
-          sx: {
-            p: 1,
-            width: 140,
-            '& .MuiMenuItem-root': {
-              px: 1,
-              typography: 'body2',
-              borderRadius: 0.75,
+        <Popover
+          open={Boolean(open)}
+          anchorEl={open}
+          onClose={handleCloseMenu}
+          anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+          PaperProps={{
+            sx: {
+              p: 1,
+              width: 140,
+              '& .MuiMenuItem-root': {
+                px: 1,
+                typography: 'body2',
+                borderRadius: 0.75,
+              },
             },
-          },
-        }}
-      >
-        <MenuItem>
-          <Iconify icon={'eva:edit-fill'} sx={{ mr: 2 }} />
-          Edit
-        </MenuItem>
+          }}
+        >
+          <MenuItem>
+            <Iconify icon={'eva:edit-fill'} sx={{ mr: 2 }} />
+            Edit
+          </MenuItem>
 
-        <MenuItem sx={{ color: 'error.main' }}>
-          <Iconify icon={'eva:trash-2-outline'} sx={{ mr: 2 }} />
-          Delete
-        </MenuItem>
-      </Popover>
-    </>
+          <MenuItem sx={{ color: 'error.main' }}>
+            <Iconify icon={'eva:trash-2-outline'} sx={{ mr: 2 }} />
+            Delete
+          </MenuItem>
+        </Popover>
+      </>
     </>
   );
 }

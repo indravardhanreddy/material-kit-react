@@ -20,7 +20,7 @@ function Education() {
         )
     }
 
-    for (let i = 0; i < educationData.length; i++) {
+    for (let i = 0; i < educationData.length; i+1) {
         educationData[i].extraContent = extraContent(educationData[i]);
     }
 
