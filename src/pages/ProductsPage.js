@@ -16,8 +16,8 @@ import Iconify from '../components/iconify';
 // ----------------------------------------------------------------------
 
 export default function ProductsPage() {
-  const [draggable, setDraggable] = useState(true);
-  const [visible, setVisible] = useState(true);
+  const [draggable, setDraggable] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
 
   const toast = useRef(null);
@@ -55,7 +55,7 @@ export default function ProductsPage() {
   
     gtag('config', 'G-G4ZSXFL6SZ');
     ` }}/>
-      <Dialog header="Add Product" visible={visible} onHide={() => setVisible(false)} style={{ width: '70vw' }} draggable={draggable} resizable={false}>
+      <Dialog header="Add Product" visible={visible} onHide={() => setVisible(false)} style={{ width: '70vw' }} draggable={draggable} position='right' resizable={false}>
         <div className="p-inputgroup">
           <span className="p-inputgroup-addon">
             <i className="pi pi-user" />

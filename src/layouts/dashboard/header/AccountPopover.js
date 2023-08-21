@@ -2,7 +2,9 @@ import { useState } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button'
 import ProfilePage from '../../MenuItems/ProfilePage';
 import Home from '../profileitems/Home';
 import Settings from '../profileitems/Settings'
@@ -37,7 +39,7 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
-  const user = useSelector((state)=>{return state})
+  const user = useSelector((state) => { return state })
   console.log(user)
   const [open, setOpen] = useState(null);
 
@@ -49,28 +51,60 @@ export default function AccountPopover() {
     setOpen(null);
   };
 
-  const handleMenuItems = (item) =>{
+  const [visible, setVisible] = useState(false)
+  const [position, setPosition] = useState('center');
+  const [item,setItem] = useState('')
+  const footerContent = (
+    <div>
+      <Button label="No" icon="pi pi-times" onClick={() => setVisible(false)} className="p-button-text" />
+      <Button label="Yes" icon="pi pi-check" onClick={() => setVisible(false)} autoFocus />
+    </div>
+  );
+
+  const show = (page) => {
+    setPosition('top-right');
+    setVisible(true);
+    setItem(page)
+  };
+  const handleMenuItems = (item) => {
     console.log(item)
-    switch(item){
-      case 'Home': <Home /> 
-      break;
-      case 'Profile': <Profile/>
-      break;
-      case 'Settings': <Settings/>
-      break;
-      case 'Our Product': <OurProduct/>
-      break;
-      default : <Home/> 
-      break;
+
+
+    switch (item) {
+      case 'Home':
+        handleClose()
+        show(item)
+        break;
+      case 'Profile':
+        handleClose()
+        show(item)
+        break;
+      case 'Settings': 
+        handleClose()
+        show(item)
+        break;
+      case 'Our Product': 
+        handleClose()
+        show(item)
+        break;
+      default: <Home />
+        break;
     }
-      
+
     return (
-      <ProfilePage/>
+      <ProfilePage />
     )
   }
 
   return (
     <>
+
+      <Dialog header={item} visible={visible} position={position} style={{ width: '50vw' }} onHide={() => setVisible(false)} footer={footerContent} draggable={false} resizable={false}>
+        {item==='Home' && <>Home</> } 
+        {item==='Profile' && <>Profile</>}
+        {item==='Our Product' && <>Our Product</> } 
+        {item==='Settings' && <>Settings</>}
+      </Dialog>
       <IconButton
         onClick={handleOpen}
         sx={{
@@ -123,7 +157,7 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={() =>handleMenuItems(option.label)}>
+            <MenuItem key={option.label} onClick={() => handleMenuItems(option.label)}>
               {option.label}
             </MenuItem>
           ))}

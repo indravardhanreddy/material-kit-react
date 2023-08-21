@@ -14,6 +14,7 @@ const CompanyBlock = () => {
   
     gtag('config', 'G-G4ZSXFL6SZ');
     ` }} />
+
       <div className="mb-3 font-bold text-3xl">
         <span className="text-900">One Product, </span>
         <span className="text-blue-600">Many Solutions</span>

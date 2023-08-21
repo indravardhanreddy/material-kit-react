@@ -4,11 +4,13 @@ import { Column } from 'primereact/column';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
+import { Chips } from "primereact/chips";
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
 import { Toast } from 'primereact/toast';
 import { ExportToCsv } from "export-to-csv";
 import { Checkbox } from 'primereact/checkbox';
+import Iconify from '../components/iconify';
 import CalendarControl from '../layouts/dashboard/header/CalendarControl';
 
 const UsersList = () => {
@@ -16,7 +18,7 @@ const UsersList = () => {
     const [rawData, setRawData] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
-    const [checked,setChecked] = useState()
+    const [checked, setChecked] = useState()
     const [filters, setFilters] = useState({
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
         firstName: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
@@ -25,7 +27,7 @@ const UsersList = () => {
     const [globalFilterValue, setGlobalFilterValue] = useState('');
 
     const fetchInfo = async () => {
-        await fetch('https://localhost:7099/api/Users')
+        await fetch('https://localhost:7099/api/Accounts')
             .then((res) => res.json())
             .then((d) => {
                 setRawData(d)
@@ -57,25 +59,19 @@ const UsersList = () => {
         const groupedUsers = {};
 
         rawData.forEach((visit) => {
-            const key = `${visit.firstName}`
+            const key = `${visit.account_id}`
             if (!groupedUsers[key]) {
                 groupedUsers[key] = {
-                    customerId: visit.customerId,
-                    firstName: visit.firstName,
-                    lastName: visit.lastName,
-                    count: 0,
+                    customerId: visit.id,
+                    firstName: visit.id,
+                    lastName: visit.account_id,
+                    count: visit.products.join(","),
                     visits: []
                 }
             }
-            groupedUsers[key].count += 1
+            // groupedUsers[key].count += 1
             groupedUsers[key].visits.push({
-                customerId: visit.customerId,
-                firstName: visit.firstName,
-                lastName: visit.lastName,
-                orderDate: visit.orderDate,
-                requiredDate: visit.requiredDate,
-                orderId: visit.orderId,
-                orderStatus: visit.orderStatus
+                products: visit.products
             })
         })
 
@@ -187,7 +183,7 @@ const UsersList = () => {
                     <Column field="firstName" header="Customer" sortable />
                     <Column field="requiredDate" header="Date" sortable />
                     <Column field="orderId" header="Amount" body={amountBodyTemplate} sortable />
-                    <Column field="OrderStatus" header="Status" body={statusOrderBodyTemplate} sortable />
+                    {/* <Column field="OrderStatus" header="Status" body={statusOrderBodyTemplate} sortable /> */}
                 </DataTable>
             </div>
         );
@@ -241,95 +237,100 @@ const UsersList = () => {
     const handleCallback = (childData) => {
         console.log(childData)
     }
-    
+
     return (
         <>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
-    <script dangerouslySetInnerHTML={{__html: `
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
+            <script dangerouslySetInnerHTML={{
+                __html: `
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
   
     gtag('config', 'G-G4ZSXFL6SZ');
-    ` }}/>
-        
+    ` }} />
 
-        <div className="grid">
-    <div className="col-12 md:col-6 lg:col-3">
-        <div className="surface-0 shadow-2 p-3 border-1 border-50 border-round">
-            <div className="flex justify-content-between mb-3">
-                <div>
-                    <span className="block text-500 font-medium mb-3">Orders</span>
-                    <div className="text-900 font-medium text-xl">152</div>
-                </div>
-                <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                    <i className="pi pi-shopping-cart text-blue-500 text-xl"/>
-                </div>
-            </div>
-            <span className="text-green-500 font-medium">24 new </span>
-            <span className="text-500">since last visit</span>
-        </div>
-    </div>
-    <div className="col-12 md:col-6 lg:col-3">
-        <div className="surface-0 shadow-2 p-3 border-1 border-50 border-round">
-            <div className="flex justify-content-between mb-3">
-                <div>
-                    <span className="block text-500 font-medium mb-3">Revenue</span>
-                    <div className="text-900 font-medium text-xl">$2.100</div>
-                </div>
-                <div className="flex align-items-center justify-content-center bg-orange-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                    <i className="pi pi-map-marker text-orange-500 text-xl"/>
-                </div>
-            </div>
-            <span className="text-green-500 font-medium">%52+ </span>
-            <span className="text-500">since last week</span>
-        </div>
-    </div>
-    <div className="col-12 md:col-6 lg:col-3">
-        <div className="surface-0 shadow-2 p-3 border-1 border-50 border-round">
-            <div className="flex justify-content-between mb-3">
-                <div>
-                    <span className="block text-500 font-medium mb-3">Customers</span>
-                    <div className="text-900 font-medium text-xl">28441</div>
-                </div>
-                <div className="flex align-items-center justify-content-center bg-cyan-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                    <i className="pi pi-inbox text-cyan-500 text-xl"/>
-                </div>
-            </div>
-            <span className="text-green-500 font-medium">520  </span>
-            <span className="text-500">newly registered</span>
-        </div>
-    </div>
-    <div className="col-12 md:col-6 lg:col-3">
-        <div className="surface-0 shadow-2 p-3 border-1 border-50 border-round">
-            <div className="flex justify-content-between mb-3">
-                <div>
-                    <span className="block text-500 font-medium mb-3">Comments</span>
-                    <div className="text-900 font-medium text-xl">152 Unread</div>
-                </div>
-                <div className="flex align-items-center justify-content-center bg-purple-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                    <i className="pi pi-comment text-purple-500 text-xl"/>
-                </div>
-            </div>
-            <span className="text-green-500 font-medium">85 </span>
-            <span className="text-500">responded</span>
-        </div>
-    </div>
-</div>
-    
-    
-        <div className="card">
-            <Toast ref={toast} />
-            <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-                onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate}
-                dataKey="customerId" header={header} tableStyle={{ minWidth: '60rem' }} filters={filters} globalFilterFields={['firstName', 'lastName']} emptyMessage="No customers found.">
 
-                <Column expander={allowExpansion} style={{ width: '5rem' }} />
-                <Column field="firstName" header="First Name" sortable />
-                <Column field="lastName" header="Last Name" sortable />
-                <Column field="count" header="Visits" sortable />
-            </DataTable>
-        </div>
+            <div className="grid">
+                <div className="col-12 md:col-6 lg:col-3">
+                    <div className="surface-0 shadow-2 p-3 border-1 border-50 border-round">
+                        <div className="flex justify-content-between mb-3">
+                            <div>
+                                <span className="block text-500 font-medium mb-3">Orders</span>
+                                <div className="text-900 font-medium text-xl">{products.length}</div>
+                            </div>
+                            <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                                <i className="pi pi-shopping-cart text-blue-500 text-xl" />
+                            </div>
+                        </div>
+                        <span className="text-green-500 font-medium">24 new </span>
+                        <span className="text-500">since last visit</span>
+                    </div>
+                </div>
+                <div className="col-12 md:col-6 lg:col-3">
+                    <div className="surface-0 shadow-2 p-3 border-1 border-50 border-round">
+                        <div className="flex justify-content-between mb-3">
+                            <div>
+                                <span className="block text-500 font-medium mb-3">Revenue</span>
+                                <div className="text-900 font-medium text-xl">$999</div>
+                            </div>
+                            <div className="flex align-items-center justify-content-center bg-orange-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                                <i className="pi pi-map-marker text-orange-500 text-xl" />
+                            </div>
+                        </div>
+                        <span className="text-green-500 font-medium">%52+ </span>
+                        <span className="text-500">since last week</span>
+                    </div>
+                </div>
+                <div className="col-12 md:col-6 lg:col-3">
+                    <div className="surface-0 shadow-2 p-3 border-1 border-50 border-round">
+                        <div className="flex justify-content-between mb-3">
+                            <div>
+                                <span className="block text-500 font-medium mb-3">Customers</span>
+                                <div className="text-900 font-medium text-xl">28441</div>
+                            </div>
+                            <div className="flex align-items-center justify-content-center bg-cyan-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                                <i className="pi pi-inbox text-cyan-500 text-xl" />
+                            </div>
+                        </div>
+                        <span className="text-green-500 font-medium">520  </span>
+                        <span className="text-500">newly registered</span>
+                    </div>
+                </div>
+                <div className="col-12 md:col-6 lg:col-3">
+                    <div className="surface-0 shadow-2 p-3 border-1 border-50 border-round">
+                        <div className="flex justify-content-between mb-3">
+                            <div>
+                                <span className="block text-500 font-medium mb-3">Comments</span>
+                                <div className="text-900 font-medium text-xl">152 Unread</div>
+                            </div>
+                            <div className="flex align-items-center justify-content-center bg-purple-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                                <i className="pi pi-comment text-purple-500 text-xl" />
+                            </div>
+                        </div>
+                        <span className="text-green-500 font-medium">85 </span>
+                        <span className="text-500">responded</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className="card">
+                <Toast ref={toast} />
+
+                {products.length > 0 ?
+                    <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                        onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate}
+                        dataKey="customerId" header={header} tableStyle={{ minWidth: '60rem' }} filters={filters} globalFilterFields={['firstName', 'lastName']} emptyMessage="No customers found.">
+
+                        {/* <Column expander={allowExpansion} style={{ width: '5rem' }} /> */}
+                        <Column field="firstName" header="Data ID" sortable />
+                        <Column field="lastName" header="Account ID" sortable />
+                        <Column field="count" header="Investments"
+                            // body={<Chips value={""} seperator="," />} 
+                            sortable />
+                    </DataTable> : <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}><Iconify icon={'svg-spinners:blocks-wave'} color="#1877F2" width={60} /></div>}
+            </div>
         </>
     );
 }

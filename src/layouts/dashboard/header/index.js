@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 // utils
-import React,{ useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Messages } from 'primereact/messages';
+
 
 import { bgBlur } from '../../../utils/cssStyles';
 // components
 import Iconify from '../../../components/iconify';
-//
 import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
@@ -40,7 +41,6 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   },
 }));
 
-
 // ----------------------------------------------------------------------
 
 Header.propTypes = {
@@ -48,16 +48,30 @@ Header.propTypes = {
 };
 
 export default function Header(props) {
-  const [childData,setChildData] = useState(null);
+  const [childData, setChildData] = useState(null);
+  const msgs = useRef(null);
 
-  
-const callBack= (childData)=>{
-  setChildData(childData)
-}
+  useEffect(()=>{msgs.current.show({
+    severity: 'info',
+    sticky: true,
+    content: (
+      <>
+        <Iconify icon="line-md:alert-circle" />
+        <div className="ml-2">TheActuals is still in Development and API is not deployed on server yet. For Suggestions - </div>
+      </>
+    )
+  });
+},[])
+
+  const callBack = (childData) => {
+    setChildData(childData)
+  }
   props.handleCallback1(childData)
   console.log(props)
   return (
     <StyledRoot>
+      <Messages ref={msgs} />
+
       <StyledToolbar>
         <IconButton
           onClick={props.onOpenNav}
@@ -81,7 +95,7 @@ const callBack= (childData)=>{
             sm: 1,
           }}
         >
-          <CalendarControl handleCallback={callBack}/>
+          <CalendarControl handleCallback={callBack} />
           <LanguagePopover />
           <NotificationsPopover />
           <AccountPopover />
