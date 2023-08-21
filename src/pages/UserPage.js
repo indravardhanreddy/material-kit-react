@@ -160,6 +160,14 @@ export default function UserPage(props) {
 
   return (
     <>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
+    <script dangerouslySetInnerHTML={{__html: `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-G4ZSXFL6SZ');
+    ` }}/>
 
       <>
         <Helmet>

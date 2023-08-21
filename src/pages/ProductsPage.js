@@ -47,6 +47,14 @@ export default function ProductsPage() {
   console.log(visible)
   return (
     <>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
+    <script dangerouslySetInnerHTML={{__html: `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-G4ZSXFL6SZ');
+    ` }}/>
       <Dialog header="Add Product" visible={visible} onHide={() => setVisible(false)} style={{ width: '70vw' }} draggable={draggable} resizable={false}>
         <div className="p-inputgroup">
           <span className="p-inputgroup-addon">
