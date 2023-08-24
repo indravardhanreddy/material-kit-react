@@ -1,9 +1,14 @@
 import { Helmet } from 'react-helmet-async';
 // @mui
+import React, { useState, useEffect} from 'react'
 import { Grid, Button, Container, Stack, Typography } from '@mui/material';
 // components
+import {Dialog} from 'primereact/dialog'
+import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import Iconify from '../components/iconify';
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../sections/@dashboard/blog';
+
 // mock
 import POSTS from '../_mock/blog';
 
@@ -15,6 +20,7 @@ const SORT_OPTIONS = [
   { value: 'oldest', label: 'Oldest' },
 ];
 
+
 const handleCopyText = (text) => {
   console.log(text)
   navigator.clipboard.writeText(text);
@@ -23,6 +29,18 @@ const handleCopyText = (text) => {
 // ----------------------------------------------------------------------
 
 export default function BlogPage() {
+
+  const [posts, setPosts] = useState([]);
+  
+  const fetchInfo = async () => {
+    await fetch('https://localhost:7099/api/Blogs')
+      .then((res) => res.json())
+      .then((d) => setPosts(d))
+  }
+
+  useEffect(() => {
+    fetchInfo();
+  }, []);
   return (
     <>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
@@ -51,12 +69,13 @@ export default function BlogPage() {
           <BlogPostsSearch posts={POSTS} />
           <BlogPostsSort options={SORT_OPTIONS} />
         </Stack>
+        {posts.length>1?
 
         <Grid container spacing={3}>
-          {POSTS.map((post, index) => (
+          {posts.map((post, index) => (
             <BlogPostCard key={post.id} post={post} index={index}/>
           ))}
-        </Grid>
+        </Grid>  : <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}><Iconify icon={'svg-spinners:blocks-wave'} color="#1877F2" width={60} /></div>}
       </Container>
     </>
   );

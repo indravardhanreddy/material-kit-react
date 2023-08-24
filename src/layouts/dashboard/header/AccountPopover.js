@@ -1,6 +1,8 @@
 import { useState } from 'react';
 // @mui
+import 'react-chat-elements/dist/main.css'
 import { alpha } from '@mui/material/styles';
+import { MessageBox, ChatItem ,MeetingMessage, Popup} from 'react-chat-elements'
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dialog } from 'primereact/dialog';
@@ -54,6 +56,8 @@ export default function AccountPopover() {
   const [visible, setVisible] = useState(false)
   const [position, setPosition] = useState('center');
   const [item,setItem] = useState('')
+  const [showchat,setShowchat] = useState(true)
+
   const footerContent = (
     <div>
       <Button label="No" icon="pi pi-times" onClick={() => setVisible(false)} className="p-button-text" />
@@ -100,7 +104,14 @@ export default function AccountPopover() {
     <>
 
       <Dialog header={item} visible={visible} position={position} style={{ width: '50vw' }} onHide={() => setVisible(false)} footer={footerContent} draggable={false} resizable={false}>
-        {item==='Home' && <>Home</> } 
+        {item==='Home' && <><ChatItem
+  avatar={'https://facebook.github.io/react/img/logo.svg'}
+  alt={'Reactjs'}
+  title={'Facebook'}
+  subtitle={'What are you doing?'}
+  date={new Date()}
+  unread={0}
+/></> } 
         {item==='Profile' && <>Profile</>}
         {item==='Our Product' && <>Our Product</> } 
         {item==='Settings' && <>Settings</>}

@@ -25,6 +25,7 @@ const UsersList = () => {
         lastName: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
     });
     const [globalFilterValue, setGlobalFilterValue] = useState('');
+    const result = [];
 
     const fetchInfo = async () => {
         await fetch('https://localhost:7099/api/Accounts')
@@ -171,18 +172,31 @@ const UsersList = () => {
     };
 
     const allowExpansion = async (rowData) => {
-        return await rowData.visits.length > 0;
+        return await rowData>0;
     };
 
     const rowExpansionTemplate = (data) => {
+        const result = []
+        const url = 'https://localhost:7099/api/Accounts/matchingAccounts?account_id=54685'
+        console.log(data.lastName)
+        const fetchInfo = async () => {
+            await fetch(url)
+                .then((res) => res.json())
+                .then((d) => {
+                    console.log(result)
+                })
+        }
+
+        fetchInfo()
         return (
             <div className="p-3">
-                <h5>Orders for {data.firstName}</h5>
-                <DataTable value={data.visits}>
-                    <Column field="orderId" header="Id" sortable />
-                    <Column field="firstName" header="Customer" sortable />
-                    <Column field="requiredDate" header="Date" sortable />
-                    <Column field="orderId" header="Amount" body={amountBodyTemplate} sortable />
+                <h5>Orders for {data.lastName}</h5>
+                <DataTable value={result}>
+                    {console.log(result[0])}
+                    <Column field="name" header="Name" sortable />
+                    <Column field="email" header="Email" sortable />
+                    <Column field="active" header="Active" sortable />
+                    <Column field="accounts" header="Other Accounts" sortable />
                     {/* <Column field="OrderStatus" header="Status" body={statusOrderBodyTemplate} sortable /> */}
                 </DataTable>
             </div>
@@ -323,7 +337,7 @@ const UsersList = () => {
                         onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate}
                         dataKey="customerId" header={header} tableStyle={{ minWidth: '60rem' }} filters={filters} globalFilterFields={['firstName', 'lastName']} emptyMessage="No customers found.">
 
-                        {/* <Column expander={allowExpansion} style={{ width: '5rem' }} /> */}
+                        <Column expander={allowExpansion} style={{ width: '5rem' }} />
                         <Column field="firstName" header="Data ID" sortable />
                         <Column field="lastName" header="Account ID" sortable />
                         <Column field="count" header="Investments"

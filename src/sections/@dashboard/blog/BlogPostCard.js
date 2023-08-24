@@ -1,8 +1,16 @@
 import PropTypes from 'prop-types';
 // @mui
+import { useState } from 'react';
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Link, Card, Grid, Avatar, Typography, CardContent } from '@mui/material';
+import { Box, Link, Grid, Avatar, Card, Typography, CardContent } from '@mui/material';
 // utils
+// import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+import { InputText } from 'primereact/inputtext';
+import { TabView, TabPanel } from 'primereact/tabview';
+import { InputNumber } from 'primereact/inputnumber';
+import { FacebookProvider, Like, useShare } from 'react-facebook';
 import { fDate } from '../../../utils/formatTime';
 import { fShortenNumber } from '../../../utils/formatNumber';
 //
@@ -56,10 +64,12 @@ BlogPostCard.propTypes = {
   index: PropTypes.number,
 };
 
-export default function BlogPostCard({ post, index }) {
-  const { cover, title, view, comment, share, author, createdAt } = post;
-  const latestPostLarge = index === 0;
-  const latestPost = index === 1 || index === 2;
+export default function BlogPostCard({ post, index, value }) {
+  console.log(index)
+  const { cover, title, view, comment, share, author, createdAt, blogPost } = post;
+  const latestPostLarge = -1;
+  const latestPost = -1
+
 
   const POST_INFO = [
     { number: comment, icon: 'eva:message-circle-fill' },
@@ -67,9 +77,55 @@ export default function BlogPostCard({ post, index }) {
     { number: share, icon: 'eva:share-fill' },
   ];
 
+  const header = (
+    <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png" />
+  );
+  const footer = (
+    <div className="flex flex-wrap justify-content-end gap-2">
+      <Button label="Save" icon="pi pi-check" />
+      <Button label="Cancel" icon="pi pi-times" className="p-button-outlined p-button-secondary" />
+    </div>
+  );
+
+  const [blogOpen, setBlogOpen] = useState(false)
+  const [postDetails, setPostDetails] = useState("")
+
+  console.log(postDetails)
+
+  const handleBlog = (post) => {
+    setPostDetails(post)
+    setBlogOpen(true)
+  }
+
+
   return (
-    <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
-      <Card sx={{ position: 'relative' }}>
+    <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 12 : 6}>
+
+      {/* <div className="card flex justify-content-center">
+              <Card title="Title" subTitle="Subtitle" footer={footer} header={header} className="md:w-25rem">
+                  <p className="m-0">
+                    {}
+                     </p>
+              </Card>
+          </div> */}
+
+      {blogOpen === true ? <Dialog header={postDetails.title} visible={blogOpen} onHide={() => setBlogOpen(false)} style={{ width: '70vw' }} position='right' resizable={false}>
+        <TabView>
+          <TabPanel header="Post" leftIcon="pi pi-calendar mr-2">
+            <p className="m-0">
+              {postDetails.blogPost}
+            </p>
+          </TabPanel>
+          <TabPanel header="Author Details" rightIcon="pi pi-user ml-2">
+            <p className="m-0">
+              Author -- {postDetails.author.name}
+              
+            </p>
+          </TabPanel>
+        </TabView>
+      </Dialog> : ""}
+
+      <Card onClick={() => handleBlog(post)}>
         <StyledCardMedia
           sx={{
             ...((latestPostLarge || latestPost) && {
@@ -134,6 +190,20 @@ export default function BlogPostCard({ post, index }) {
           <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
             {fDate(createdAt)}
           </Typography>
+
+          <StyledTitle
+            color="primary"
+            variant="subtitle4"
+            underline="none"
+            sx={{
+              ...(latestPostLarge && { typography: 'h7', height: 90 }),
+              ...((latestPostLarge || latestPost) && {
+                color: 'grey.500',
+              }),
+            }}
+          >
+            {blogPost}
+          </StyledTitle>
 
           <StyledTitle
             color="inherit"

@@ -1,7 +1,9 @@
-import React,{ useState, useEffect } from 'react';
+import React,{ useState, useEffect, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
 // import {Widget, addResponseMessage, addLinkSnippet, addUserMessage, setQuickButtons, renderCustomComponent} from 'react-chat-widget';
+import { SpeedDial } from 'primereact/speeddial';
+import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import Header from './header';
 import Nav from './nav';
@@ -65,7 +67,9 @@ export default function DashboardLayout() {
   // }, []); 
   return (
     <div>
+
     <StyledRoot>
+
       <Header onOpenNav={() => setOpen(true)} handleCallback1={callBack} />
 
       <Nav openNav={open} onCloseNav={() => setOpen(false)} />

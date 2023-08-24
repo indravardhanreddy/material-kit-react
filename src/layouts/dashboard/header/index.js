@@ -5,7 +5,7 @@ import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 // utils
 import React, { useState, useRef, useEffect } from 'react';
 import { Messages } from 'primereact/messages';
-
+import { SpeedDial } from 'primereact/speeddial';
 
 import { bgBlur } from '../../../utils/cssStyles';
 // components
@@ -67,9 +67,41 @@ export default function Header(props) {
     setChildData(childData)
   }
   props.handleCallback1(childData)
+
+  const toast = useRef(null);
+    const items = [
+        {
+            label: 'Add',
+            icon: 'pi pi-pencil',
+            command: () => {
+                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+            }
+        },
+        {
+            label: 'Update',
+            icon: 'pi pi-refresh',
+            command: () => {
+                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+            }
+        },
+        {
+            label: 'Delete',
+            icon: 'pi pi-trash',
+            command: () => {
+                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+            }
+        },
+        {
+            label: 'React Website',
+            icon: 'pi pi-external-link',
+            command: () => {
+                window.location.href = 'https://facebook.github.io/react/';
+            }
+        }
+    ];
   console.log(props)
   return (
-    <StyledRoot>
+    <StyledRoot>no
       <Messages ref={msgs} />
 
       <StyledToolbar>

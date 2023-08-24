@@ -1,6 +1,6 @@
+import React from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Main from "./Main";
-import React from "react";
 import {ThemeContext} from "./Context";
 
 
@@ -11,7 +11,7 @@ function App() {
     return (
         <ThemeContext.Provider value={[theme, setTheme]}>
             <Routes>
-                <Route path="/" element={<Main/>}/>
+                <Route path="/resume" element={<Main/>}/>
                 <Route path="*" element={<Navigate to="/"/>}/>
             </Routes>
         </ThemeContext.Provider>

@@ -89,6 +89,7 @@ export default function ProductsPage() {
           </Stack>
         </Stack>
 
+        {console.log(PRODUCTS)}
         <ProductList products={PRODUCTS} />
         <ProductCartWidget />
       </Container>

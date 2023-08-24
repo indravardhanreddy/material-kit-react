@@ -1,4 +1,5 @@
 import React from 'react'
+import Post from '../sections/@dashboard/blog/Post'
 
 const CompanyBlock = () => {
   return (
@@ -14,6 +15,9 @@ const CompanyBlock = () => {
   
     gtag('config', 'G-G4ZSXFL6SZ');
     ` }} />
+
+<>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }</>
+    <Post />
 
       <div className="mb-3 font-bold text-3xl">
         <span className="text-900">One Product, </span>
