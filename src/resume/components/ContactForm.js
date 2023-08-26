@@ -59,7 +59,7 @@ function ContactForm() {
         // },
         onSubmit: async (data) => {
             setLoading(true);
-            const response = await fetch('https://formspree.io/f/xgedyllq', {
+            const response = await fetch('', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

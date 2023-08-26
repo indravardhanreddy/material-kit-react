@@ -1,12 +1,12 @@
 import { Helmet } from 'react-helmet-async';
-
 import { faker } from '@faker-js/faker';
-
-// @mui
 import { useTheme } from '@mui/material/styles';
-
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from 'react-router-dom'; 
 import { Grid, Container, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
+
+import axios from 'axios';
 
 // components
 import Iconify from '../components/iconify';
@@ -22,27 +22,30 @@ import {
   AppCurrentSubject,
   AppConversionRates,
 } from '../sections/@dashboard/app';
+import { setProfileItems } from '../redux/reducers/profSlice';
 
 // ----------------------------------------------------------------------
 
 export default function DashboardAppPage(props) {
   const theme = useTheme();
   const arr = props.data.props.data
-  const [data,setData] = useState([]) ;
+  const [data, setData] = useState([]);
+  const profileData = useSelector((pd)=>pd.prof)
+  const dispatch = useDispatch();
   let uniqueStates = []
   let uniqueCities = []
-  arr.forEach((a)=>{
+  arr.forEach((a) => {
     const index = uniqueStates.findIndex(elem => elem.state === a.state);
     if (index === -1) {
-      uniqueStates.push({state : a.state});
+      uniqueStates.push({ state: a.state });
     }
     const index1 = uniqueCities.findIndex(elem => elem.city === a.city);
     if (index === -1) {
-      uniqueCities.push({city : a.city});
+      uniqueCities.push({ city: a.city });
     }
   })
-  uniqueStates = uniqueStates.flatMap((a)=>a.state)
-  uniqueCities = uniqueCities.flatMap((a)=>a.city)
+  uniqueStates = uniqueStates.flatMap((a) => a.state)
+  uniqueCities = uniqueCities.flatMap((a) => a.city)
 
   const counts = {};
   const cities = {};
@@ -66,11 +69,46 @@ export default function DashboardAppPage(props) {
     }
   });
 
+  const location = useLocation();
+  const dataa = {
+    'emailaddress' : 'moramindravardhanreddy@gmail.com'
+}
+
+  const fetchInfo = async () => {
+
+    fetch('https://localhost:7099/api/Users/userdata', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.parse(dataa)
+    })
+      .then(response => response.json(data))
+      .then(data => {
+        if (data.successMessage) {
+          console.log(data.successMessage)
+          // showSuccessToast(data.successMessage)
+        }
+        else {
+          // showErrorToast(data.errorMessage)
+        }
+        // Handle success or other actions
+      })
+      .catch(error => {
+        console.error('Error creating user:', error);
+        // Handle error
+      });
+}
+
+useEffect(() => {
+    fetchInfo();
+}, []);
+
 
   const uniqueStatesData = Object.values(counts);
 
-  let uniqueCitiesData = (Object.values(cities)).filter((ct)=>ct.value>=40);
-  const handleFullCityData = () =>{
+  let uniqueCitiesData = (Object.values(cities)).filter((ct) => ct.value >= 40);
+  const handleFullCityData = () => {
     uniqueCitiesData = Object.values(cities)
     console.log(uniqueCitiesData)
 
@@ -79,24 +117,25 @@ export default function DashboardAppPage(props) {
 
   return (
     <>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
-    <script dangerouslySetInnerHTML={{__html: `
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
+      <script dangerouslySetInnerHTML={{
+        __html: `
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
   
     gtag('config', 'G-G4ZSXFL6SZ');
-    ` }}/>
+    ` }} />
       <Helmet>
         <title> Dashboard | TheActuals </title>
       </Helmet>
 
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome 
+          Hi, Welcome
         </Typography>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary title="Weekly Sales" total={2345554} icon={'ant-design:dashboard-filled'} />
           </Grid>
@@ -156,7 +195,7 @@ export default function DashboardAppPage(props) {
           <Grid item xs={12} md={6} lg={4}>
             <AppCurrentVisits
               title="Popular States"
-              chartData= {uniqueStatesData}
+              chartData={uniqueStatesData}
               chartColors={[
                 theme.palette.primary.main,
                 theme.palette.info.main,

@@ -6,6 +6,8 @@ import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 import React, { useState, useRef, useEffect } from 'react';
 import { Messages } from 'primereact/messages';
 import { SpeedDial } from 'primereact/speeddial';
+import { Menubar } from 'primereact/menubar';
+
 
 import { bgBlur } from '../../../utils/cssStyles';
 // components
@@ -51,17 +53,17 @@ export default function Header(props) {
   const [childData, setChildData] = useState(null);
   const msgs = useRef(null);
 
-  useEffect(()=>{msgs.current.show({
-    severity: 'info',
-    sticky: true,
-    content: (
-      <>
-        <Iconify icon="line-md:alert-circle" />
-        <div className="ml-2">TheActuals is still in Development and API is not deployed on server yet. For Suggestions - </div>
-      </>
-    )
-  });
-},[])
+//   useEffect(()=>{msgs.current.show({
+//     severity: 'info',
+//     sticky: true,
+//     content: (
+//       <>
+//         <Iconify icon="line-md:alert-circle" />
+//         <div className="ml-2">TheActuals is still in Development and API is not deployed on server yet. For Suggestions - </div>
+//       </>
+//     )
+//   });
+// },[])
 
   const callBack = (childData) => {
     setChildData(childData)
@@ -99,9 +101,98 @@ export default function Header(props) {
             }
         }
     ];
+
+    const Menuitems = [
+      {
+          label: 'Loans',
+          icon: <Iconify icon="solar:file-bold-duotone"  />,
+          items: [
+              {
+                  label: 'Agriculture Loans',
+                  icon: 'pi pi-fw pi-plus',
+                  items: [
+                      {
+                          label: 'Agri-Gold Loans',
+                          icon: 'pi pi-fw pi-bookmark'
+                      },
+                      {
+                          label: 'Crop & Equipment Loans',
+                          icon: 'pi pi-fw pi-video'
+                      },
+
+                  ]
+              },
+              {
+                  label: 'Education Loans',
+                  icon: 'pi pi-fw pi-trash'
+              },
+              {
+                  separator: true
+              },
+              {
+                  label: 'Home Loans',
+                  icon: 'pi pi-fw pi-external-link'
+              }
+          ]
+      },
+      {
+          label: 'Options',
+          icon: <Iconify icon="iconamoon:edit-duotone" />,
+          items: [
+              {
+                  label: 'Nifty',
+                  icon: 'pi pi-fw pi-align-left'
+              },
+              {
+                  label: 'Finnifty',
+                  icon: 'pi pi-fw pi-align-right'
+              },
+              {
+                  label: 'BankNifty',
+                  icon: 'pi pi-fw pi-align-center'
+              },
+              {
+                  label: 'Intl. Markets',
+                  icon: 'pi pi-fw pi-align-justify'
+              },
+
+          ]
+      },
+      {
+          label: 'Events',
+          icon: <Iconify icon="mdi:events" />,
+          items: [
+              {
+                  label: 'Scheduled',
+                  icon: 'pi pi-fw pi-pencil',
+                  items: [
+                      {
+                          label: 'This Year',
+                          icon: 'pi pi-fw pi-calendar-plus'
+                      },
+                      {
+                          label: 'Future Events',
+                          icon: 'pi pi-fw pi-calendar-minus'
+                      }
+                  ]
+              },
+              {
+                  label: 'Archive',
+                  icon: 'pi pi-fw pi-calendar-times',
+                  items: [
+                      {
+                          label: 'This Year',
+                          icon: 'pi pi-fw pi-calendar-minus'
+                      }
+                  ]
+              }
+          ]
+      }
+  ];
+
   console.log(props)
   return (
-    <StyledRoot>no
+    <StyledRoot>
       <Messages ref={msgs} />
 
       <StyledToolbar>
@@ -110,7 +201,7 @@ export default function Header(props) {
           sx={{
             mr: 1,
             color: 'text.primary',
-            display: { lg: 'none' },
+            display: { lg: 'none' }
           }}
         >
           <Iconify icon="eva:menu-2-fill" />
@@ -118,6 +209,8 @@ export default function Header(props) {
 
         <Searchbar />
         <Box sx={{ flexGrow: 1 }} />
+
+        <Menubar model={Menuitems} style={{border: 'none', backgroundColor: 'transparent'}} />
 
         <Stack
           direction="row"

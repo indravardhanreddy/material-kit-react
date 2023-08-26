@@ -1,13 +1,13 @@
 import { useState, useRef } from 'react';
-
 import { useNavigate } from 'react-router-dom';
-// @mui
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { Toast } from "primereact/toast";
 import { Password } from 'primereact/password'
 import { InputText } from 'primereact/inputtext';
 import { Divider } from 'primereact/divider'
+import { setProfileItems } from '../../../redux/reducers/profSlice';
 // components
 import Iconify from '../../../components/iconify';
 
@@ -19,6 +19,9 @@ export default function LoginForm() {
     emailaddress: '',
     password: '',
   });
+
+  const dispatch = useDispatch();
+
   const toast = useRef(null);
 
   const handleChange = (e) => {
@@ -56,9 +59,10 @@ export default function LoginForm() {
       .then(response => response.json())
       .then(data => {
         if (data.successMessage) {
-          console.log(data.successMessage)
+          console.log(data.userData)
+          dispatch(setProfileItems(data.userData))
           showSuccessToast(data.successMessage)
-          navigate('/dashboard', { replace: true });
+          navigate('/dashboard/app', {state:{name:data.username}});
         }
         else {
           showErrorToast(data.errorMessage)

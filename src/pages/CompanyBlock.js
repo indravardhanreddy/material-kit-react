@@ -17,7 +17,7 @@ const CompanyBlock = () => {
     ` }} />
 
 <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }</>
-    <Post />
+    {/* <Post /> */}
 
       <div className="mb-3 font-bold text-3xl">
         <span className="text-900">One Product, </span>

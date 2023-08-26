@@ -13,14 +13,22 @@ function Main() {
     return (
         <>
             <TopBar/>
-            <div className="h-6"/>
             <Home/>
+            <Projects/>
+            <Skills/>
+            <Contact/> 
+
+            {/* <Education/> */}
+            {/* <Contact/> */}
+            {/* <IndustrialExperience/> */}
+            <div className="h-6"/>
+            {/* <Home/>
             <Projects/>
             <IndustrialExperience/>
             <Skills/>
             <Education/>
-            <Contact/>
-            <ScrollTop threshold={10}/>
+             */}
+            {/* <ScrollTop threshold={10}/> */}
         </>
     );
 }

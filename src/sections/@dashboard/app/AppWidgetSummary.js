@@ -34,8 +34,8 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
   return (
     <Card
       sx={{
-        py: 5,
-        boxShadow: 0,
+        py: 3,
+        boxShadow: 2,
         textAlign: 'center',
         color: (theme) => theme.palette[color].darker,
         bgcolor: (theme) => theme.palette[color].lighter,
@@ -47,16 +47,16 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         sx={{
           color: (theme) => theme.palette[color].dark,
           backgroundImage: (theme) =>
-            `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
+            `linear-gradient(130deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
               theme.palette[color].dark,
-              0.24
-            )} 100%)`,
+              0.20
+            )} 90%)`,
         }}
       >
         <Iconify icon={icon} width={24} height={24} />
       </StyledIcon>
 
-      <Typography variant="h3">{fShortenNumber(total)}</Typography>
+      <Typography variant="h4">{fShortenNumber(total)}</Typography>
 
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
         {title}

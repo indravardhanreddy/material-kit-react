@@ -44,9 +44,60 @@ const navConfig = [
   },
   {
     title: 'CompanyBlock',
-    path: '/companydetails',
+    path: '/dashboard/companydetails',
     icon: icon('ic_lock'),
   },
+];
+
+export const navConfigFunds = [
+  {
+    title: 'Asset Management',
+    path: '/finance/assets',
+    icon: icon('ic_analytics'),
+  },
+  {
+    title: 'Equity',
+    path: '/finance/equity',
+    icon: icon('ic_user'),
+  },
+  {
+    title: 'Hedge Funds',
+    path: '/finance/hedgefunds',
+    icon: icon('ic_user'),
+  },
+  {
+    title: 'Bonds',
+    path: '/finance/bonds',
+    icon: icon('ic_cart'),
+  },
+  {
+    title: 'Mutual Funds',
+    path: '/finance/mutualfunds',
+    icon: icon('ic_lock'),
+  },
+  {
+    title: 'Private Equity',
+    path: '/finance/privateequity',
+    icon: icon('ic_blog'),
+  },
+  {
+    title: 'Other Services',
+    path: '/finance/other',
+    icon: icon('ic_lock'),
+  },
+];
+
+export const navConfigQA = [
+  {
+    title: 'FAQ',
+    path: '/dashboard/app',
+    icon: icon('ic_analytics'),
+  },
+  {
+    title: 'Support',
+    path: '/dashboard/user',
+    icon: icon('ic_user'),
+  }
 ];
 
 export default navConfig;

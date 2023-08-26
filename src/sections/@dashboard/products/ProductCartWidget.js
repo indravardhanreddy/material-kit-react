@@ -1,7 +1,8 @@
 // @mui
 import { styled } from '@mui/material/styles';
 import { Badge } from '@mui/material';
-// component
+import { useState } from 'react';
+import { Sidebar } from 'primereact/sidebar';
 import Iconify from '../../../components/iconify';
 
 // ----------------------------------------------------------------------
@@ -30,11 +31,21 @@ const StyledRoot = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function CartWidget() {
+  const [visibleRight, setVisibleRight] = useState(false);
+
   return (
     <StyledRoot>
-      <Badge showZero badgeContent={0} color="error" max={99}>
+      <Badge showZero badgeContent={0} color="error" max={99} onClick={() => setVisibleRight(true)}>
         <Iconify icon="eva:shopping-cart-fill" width={24} height={24} />
       </Badge>
+
+      <Sidebar visible={visibleRight} position="right" onHide={() => setVisibleRight(false)}>
+        <h2>Right Sidebar</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+      </Sidebar>
     </StyledRoot>
   );
 }

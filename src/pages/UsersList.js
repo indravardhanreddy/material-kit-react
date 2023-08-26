@@ -8,6 +8,7 @@ import { Chips } from "primereact/chips";
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
 import { Toast } from 'primereact/toast';
+import { SelectButton } from 'primereact/selectbutton';
 import { ExportToCsv } from "export-to-csv";
 import { Checkbox } from 'primereact/checkbox';
 import Iconify from '../components/iconify';
@@ -27,7 +28,7 @@ const UsersList = () => {
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const result = [];
 
-    const fetchInfo = async () => {
+        const fetchInfo = async () => {
         await fetch('https://localhost:7099/api/Accounts')
             .then((res) => res.json())
             .then((d) => {
@@ -72,12 +73,13 @@ const UsersList = () => {
             }
             // groupedUsers[key].count += 1
             groupedUsers[key].visits.push({
-                products: visit.products
+                products: visit.id
             })
         })
 
         console.log(groupedUsers)
         setProducts(Object.values(groupedUsers))
+        setRawData([])
     }
 
 
@@ -93,7 +95,7 @@ const UsersList = () => {
         const _expandedRows = {};
 
         products.forEach((p) => {
-            (_expandedRows[`${p.username}`] = true)
+            (_expandedRows[`${p.id}`] = true)
             return _expandedRows
         });
         setExpandedRows(_expandedRows);
@@ -172,7 +174,7 @@ const UsersList = () => {
     };
 
     const allowExpansion = async (rowData) => {
-        return await rowData>0;
+        return await rowData > 0;
     };
 
     const rowExpansionTemplate = (data) => {
@@ -223,9 +225,7 @@ const UsersList = () => {
         <div className="flex flex-wrap justify-content-end gap-2">
             <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} text />
             <Button icon="pi pi-minus" label="Collapse All" onClick={collapseAll} text />
-            <span className="flex flex-wrap justify-content-end ">
-                <Button onClick={download}>Download</Button>
-            </span>
+
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
@@ -252,6 +252,15 @@ const UsersList = () => {
         console.log(childData)
     }
 
+    const [sizeOptions] = useState([
+        { label: 'Small', value: 'small' },
+        { label: 'Normal', value: 'normal' },
+        { label: 'Large', value: 'large' }
+    ]);
+    const [size, setSize] = useState(sizeOptions[1].value);
+
+    const paginatorLeft = <Button type="button" icon="pi pi-refresh" text onClick={fetchInfo}/>;
+    const paginatorRight = <Button type="button" icon="pi pi-download" text onClick={download}/>;
     return (
         <>
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
@@ -328,14 +337,15 @@ const UsersList = () => {
                 </div>
             </div>
 
-
+            
             <div className="card">
                 <Toast ref={toast} />
 
                 {products.length > 0 ?
                     <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-                        onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate}
-                        dataKey="customerId" header={header} tableStyle={{ minWidth: '60rem' }} filters={filters} globalFilterFields={['firstName', 'lastName']} emptyMessage="No customers found.">
+                    paginator rows={15} rowsPerPageOptions={[5, 10, 25, 50]} onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate}
+                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+                    currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight} dataKey="customerId" header={header} size='small'  tableStyle={{ minWidth: '40rem' }} filters={filters} globalFilterFields={['firstName', 'lastName']} emptyMessage="No customers found.">
 
                         <Column expander={allowExpansion} style={{ width: '5rem' }} />
                         <Column field="firstName" header="Data ID" sortable />

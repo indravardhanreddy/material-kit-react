@@ -7,6 +7,7 @@ import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover 
 import { useSelector, useDispatch } from 'react-redux';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button'
+import Iconify from '../../../components/iconify';
 import ProfilePage from '../../MenuItems/ProfilePage';
 import Home from '../profileitems/Home';
 import Settings from '../profileitems/Settings'
@@ -22,26 +23,26 @@ import account from '../../../_mock/account';
 const MENU_OPTIONS = [
   {
     label: 'Home',
-    icon: 'eva:home-fill',
+    icon: <Iconify icon={'basil:home-solid'} color="#1C9CEA" width={20} />,
   },
   {
     label: 'Profile',
-    icon: 'eva:person-fill',
+    icon: <Iconify icon={'solar:settings-bold'} color="#1C9CEA" width={20} />,
   },
   {
     label: 'Settings',
-    icon: 'eva:settings-2-fill',
+    icon:  <Iconify icon={'iconamoon:profile-fill'} color="#1C9CEA" width={20} />,
   },
   {
     label: 'Our Product',
-    icon: 'eva:settings-2-fill',
+    icon:  <Iconify icon={'ph:sparkle-fill'} color="#1C9CEA" width={20} />,
   }
 ];
 
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
-  const user = useSelector((state) => { return state })
+  const user = useSelector((state) => { return state.prof })
   console.log(user)
   const [open, setOpen] = useState(null);
 
@@ -133,7 +134,7 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar src={user.profileItems.profilepic} alt="photoURL" />
       </IconButton>
 
       <Popover
@@ -157,19 +158,16 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {user.name}
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {user.email}
+            {'Indravardhan'}
           </Typography>
         </Box>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{ borderStyle: 'solid' }} />
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={() => handleMenuItems(option.label)}>
-              {option.label}
+            <MenuItem key={option.label}  onClick={() => handleMenuItems(option.label)}>
+              {option.icon}{' | '}{option.label}
             </MenuItem>
           ))}
         </Stack>
@@ -177,7 +175,7 @@ export default function AccountPopover() {
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <MenuItem onClick={handleClose} sx={{ m: 1 }}>
-          Logout
+          {<Iconify icon={'majesticons:logout'} color="#1C9CEA" width={20} />} {' | '}Logout
         </MenuItem>
       </Popover>
     </>

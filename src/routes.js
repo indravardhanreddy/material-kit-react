@@ -13,8 +13,15 @@ import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import CompanyBlock from './pages/CompanyBlock'
 import SignUpPage from './pages/SignupPage';
-import Main from "./resume/Main";
 import {ThemeContext} from "./resume/Context";
+import App from './resume/App';
+import AssetManagement from './financepages/AssetManagement';
+import HedgeFunds from './financepages/HedgeFunds';
+import Equity from './financepages/Equity';
+import PrivateEquity from './financepages/PrivateEquity';
+import MutualFunds from './financepages/MutualFunds';
+import Other from './financepages/Other';
+import Bonds from './financepages/Bonds';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +39,21 @@ export default function Router(props) {
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
         { path: 'userList', element: <UsersList />},
+        { path: 'companydetails', element: <CompanyBlock />},
+      ],
+    },
+    {
+      path: '/finance',
+      element: <DashboardLayout />,
+      children: [
+        { element: <Navigate to="/dashboard/app" />, index: true },
+        { path: 'assets', element: <AssetManagement data = {{props}}/> },
+        { path: 'equity', element: <Equity /> },
+        { path: 'hedgefunds', element: <HedgeFunds /> },
+        { path: 'bonds', element: <Bonds /> },
+        { path: 'mutualfunds', element: <MutualFunds />},
+        { path: 'privateequity', element: <PrivateEquity />},
+        { path: 'other', element: <Other />},
       ],
     },
     {
@@ -42,7 +64,6 @@ export default function Router(props) {
       path: 'signup',
       element: <SignUpPage />,
     },
-    { path: 'companydetails', element: <CompanyBlock />},
     {
       element: <SimpleLayout />,
       children: [
@@ -53,7 +74,7 @@ export default function Router(props) {
     },
     {
       path: 'resume',
-      element: <Main />,
+      element: <App />,
     },
     {
       path: '*',

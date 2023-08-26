@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    fromDate: '2015/01/01',
-    toDate: '2023/08/11',
+    fromDate: 'Sat Aug 19 2023 00:00:00 GMT+0530 (India Standard Time)',
+    toDate: 'Fri Aug 25 2023 00:00:00 GMT+0530 (India Standard Time)',
     globalFilter: []
 }
 

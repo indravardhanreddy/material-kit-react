@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 const useRefDimensions = (ref) => {
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 })

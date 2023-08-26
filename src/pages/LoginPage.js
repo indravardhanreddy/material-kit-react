@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { styled } from '@mui/material/styles';
@@ -46,14 +46,15 @@ export default function LoginPage() {
 
   return (
     <>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
-    <script dangerouslySetInnerHTML={{__html: `
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
+      <script dangerouslySetInnerHTML={{
+        __html: `
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
   
     gtag('config', 'G-G4ZSXFL6SZ');
-    ` }}/>
+    ` }} />
       <Helmet>
         <title> Login | TheActuals </title>
       </Helmet>
@@ -70,9 +71,11 @@ export default function LoginPage() {
         {mdUp && (
           <StyledSection>
             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              Hi, Welcome 
+              <div style={{ marginLeft: '20px', marginRight: '20px', marginTop: '20px' }}>
+                <img src="/assets/illustrations/illustration_login.png" alt="login" />
+              </div>
             </Typography>
-            <img src="/assets/illustrations/illustration_login.png" alt="login" />
+
           </StyledSection>
         )}
 

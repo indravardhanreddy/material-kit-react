@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
-// @mui
+import { useState } from 'react';
 import { Box, Card, Link, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { InputNumber } from 'primereact/inputnumber';
 // utils
+import { Button } from 'primereact/button';
 import { fCurrency } from '../../../utils/formatNumber';
 // components
 import Label from '../../../components/label';
@@ -26,6 +28,11 @@ ShopProductCard.propTypes = {
 
 export default function ShopProductCard({ product }) {
   const { name, cover, price, colors, status, priceSale } = product;
+  const [value3, setValue3] = useState(1);
+  const [countBtn,setCountBtn] = useState(false)
+  const handleProductCount = () =>{
+    setCountBtn(true)
+  }
 
   return (
     <Card>
@@ -72,6 +79,10 @@ export default function ShopProductCard({ product }) {
             {fCurrency(price)}
           </Typography>
         </Stack>
+        <div style={{gap: '30px', flexDirection: 'column'}}>
+          <Button icon="pi pi-shopping-cart" style={{marginRight:'10px', backgroundColor: 'skyblue' , borderColor:'transparent'}} onClick={handleProductCount}/>
+          {countBtn ? <InputNumber inputId="minmax-buttons" inputStyle={{ fontSize: '15px', width:'50px'}} value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" showButtons min={0} max={5} /> :" " }
+        </div>
       </Stack>
     </Card>
   );
