@@ -28,7 +28,7 @@ const UsersList = () => {
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const result = [];
 
-        const fetchInfo = async () => {
+    const fetchInfo = async () => {
         await fetch('https://localhost:7099/api/Accounts')
             .then((res) => res.json())
             .then((d) => {
@@ -259,8 +259,8 @@ const UsersList = () => {
     ]);
     const [size, setSize] = useState(sizeOptions[1].value);
 
-    const paginatorLeft = <Button type="button" icon="pi pi-refresh" text onClick={fetchInfo}/>;
-    const paginatorRight = <Button type="button" icon="pi pi-download" text onClick={download}/>;
+    const paginatorLeft = <Button type="button" icon="pi pi-refresh" text onClick={fetchInfo} />;
+    const paginatorRight = <Button type="button" icon="pi pi-download" text onClick={download} />;
     return (
         <>
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
@@ -337,21 +337,22 @@ const UsersList = () => {
                 </div>
             </div>
 
-            
+
             <div className="card">
                 <Toast ref={toast} />
+                {console.log(products)}
 
                 {products.length > 0 ?
                     <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-                    paginator rows={15} rowsPerPageOptions={[5, 10, 25, 50]} onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate}
-                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                    currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight} dataKey="customerId" header={header} size='small'  tableStyle={{ minWidth: '40rem' }} filters={filters} globalFilterFields={['firstName', 'lastName']} emptyMessage="No customers found.">
+                        paginator rows={15} rowsPerPageOptions={[5, 10, 25, 50]} onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} rowExpansionTemplate={rowExpansionTemplate}
+                        paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+                        currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight} dataKey="customerId" header={header} size='small' tableStyle={{ minWidth: '40rem' }} filters={filters} globalFilterFields={['firstName', 'lastName']} emptyMessage="No customers found.">
 
                         <Column expander={allowExpansion} style={{ width: '5rem' }} />
                         <Column field="firstName" header="Data ID" sortable />
                         <Column field="lastName" header="Account ID" sortable />
                         <Column field="count" header="Investments"
-                            // body={<Chips value={""} seperator="," />} 
+                            body={console.log()}
                             sortable />
                     </DataTable> : <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}><Iconify icon={'svg-spinners:blocks-wave'} color="#1877F2" width={60} /></div>}
             </div>

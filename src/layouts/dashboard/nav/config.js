@@ -90,12 +90,12 @@ export const navConfigFunds = [
 export const navConfigQA = [
   {
     title: 'FAQ',
-    path: '/dashboard/app',
+    path: '/support/faq',
     icon: icon('ic_analytics'),
   },
   {
     title: 'Support',
-    path: '/dashboard/user',
+    path: '/support/care',
     icon: icon('ic_user'),
   }
 ];

@@ -22,6 +22,7 @@ import PrivateEquity from './financepages/PrivateEquity';
 import MutualFunds from './financepages/MutualFunds';
 import Other from './financepages/Other';
 import Bonds from './financepages/Bonds';
+import FAQ from './support/FAQ';
 
 // ----------------------------------------------------------------------
 
@@ -54,6 +55,14 @@ export default function Router(props) {
         { path: 'mutualfunds', element: <MutualFunds />},
         { path: 'privateequity', element: <PrivateEquity />},
         { path: 'other', element: <Other />},
+      ],
+    },
+    {
+      path: '/support',
+      element: <DashboardLayout />,
+      children: [
+        { element: <Navigate to="/dashboard/app" />, index: true },
+        { path: 'faq', element: <FAQ data = {{props}}/> },
       ],
     },
     {
