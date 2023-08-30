@@ -1,5 +1,5 @@
-import { Navigate, useRoutes } from 'react-router-dom';
-import React,{useState} from 'react';
+import { useNavigate, Navigate, useRoutes } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 // layouts
 import DashboardLayout from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
@@ -13,7 +13,7 @@ import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import CompanyBlock from './pages/CompanyBlock'
 import SignUpPage from './pages/SignupPage';
-import {ThemeContext} from "./resume/Context";
+import { ThemeContext } from "./resume/Context";
 import App from './resume/App';
 import AssetManagement from './financepages/AssetManagement';
 import HedgeFunds from './financepages/HedgeFunds';
@@ -23,24 +23,50 @@ import MutualFunds from './financepages/MutualFunds';
 import Other from './financepages/Other';
 import Bonds from './financepages/Bonds';
 import FAQ from './support/FAQ';
+import MainPage from './MainPage';
 
 // ----------------------------------------------------------------------
 
 export default function Router(props) {
   const [theme, setTheme] = useState(localStorage.getItem('theme'));
 
+  function checkIfAuthenticated() {
+    const token = localStorage.getItem('token'); // Replace with your token retrieval logic
+    return token !== null;
+  }
+
+  const AuthRoute = ({ element, path }) => {
+
+    const navigate = useNavigate();
+
+    // Check if the user is authenticated (based on your token logic)
+    const isAuthenticated = checkIfAuthenticated(); // Replace with your authentication logic
+    console.log(isAuthenticated)
+
+    useEffect(() => {
+      if (!isAuthenticated) {
+        navigate('/login');
+        // Redirect to login page if not authenticated
+      }
+    }, [isAuthenticated])
+
+
+    return element;
+  };
+
+
   const routes = useRoutes([
     {
       path: '/dashboard',
-      element: <DashboardLayout />,
+      element: <AuthRoute element={<DashboardLayout />} path = '/dashboard'/>,
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
-        { path: 'app', element: <DashboardAppPage data = {{props}}/> },
-        { path: 'user', element: <UserPage data = {{props}}/> },
-        { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
-        { path: 'userList', element: <UsersList />},
-        { path: 'companydetails', element: <CompanyBlock />},
+        { path: 'app', element: <AuthRoute element={<DashboardAppPage data={{ props }} />} path = '/app'/> },
+        { path: 'user', element: <AuthRoute element={<UserPage data={{ props }} />} path = '/user'/> },
+        { path: 'products', element: <AuthRoute element={<ProductsPage />} path = '/products'/> },
+        { path: 'blog', element: <AuthRoute element={<BlogPage /> } path = '/blog'/>},
+        { path: 'userList', element: <AuthRoute element={<UsersList />} path = '/userlist'/> },
+        { path: 'companydetails', element: <AuthRoute element={<CompanyBlock />} path = '/companydetails'/> },
       ],
     },
     {
@@ -48,13 +74,13 @@ export default function Router(props) {
       element: <DashboardLayout />,
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
-        { path: 'assets', element: <AssetManagement data = {{props}}/> },
-        { path: 'equity', element: <Equity /> },
-        { path: 'hedgefunds', element: <HedgeFunds /> },
-        { path: 'bonds', element: <Bonds /> },
-        { path: 'mutualfunds', element: <MutualFunds />},
-        { path: 'privateequity', element: <PrivateEquity />},
-        { path: 'other', element: <Other />},
+        { path: 'assets', element: <AuthRoute element={<AssetManagement data={{ props }} /> } path = '/assets'/>},
+        { path: 'equity', element: <AuthRoute element={<Equity /> } path = '/equity'/>},
+        { path: 'hedgefunds', element: <AuthRoute element={<HedgeFunds /> } path = '/hedgefunds'/>},
+        { path: 'bonds', element: <AuthRoute element={<Bonds /> } path = '/assets'/>},
+        { path: 'mutualfunds', element: <AuthRoute element={<MutualFunds /> } path = '/mutualfunds'/>},
+        { path: 'privateequity', element: <AuthRoute element={<PrivateEquity /> } path = '/privateequity'/>},
+        { path: 'other', element: <AuthRoute element={<Other /> } path = '/other'/>},
       ],
     },
     {
@@ -62,7 +88,7 @@ export default function Router(props) {
       element: <DashboardLayout />,
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
-        { path: 'faq', element: <FAQ data = {{props}}/> },
+        { path: 'faq', element: <FAQ data={{ props }} /> },
       ],
     },
     {
@@ -76,7 +102,7 @@ export default function Router(props) {
     {
       element: <SimpleLayout />,
       children: [
-        { element: <Navigate to="/login" />, index: true },
+        { element: <Navigate to="/" />, index: true },
         { path: '404', element: <Page404 /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],

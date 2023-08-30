@@ -7,6 +7,8 @@ import { Toast } from "primereact/toast";
 import { Password } from 'primereact/password'
 import { InputText } from 'primereact/inputtext';
 import { Divider } from 'primereact/divider'
+import { useMutation } from '@apollo/client';
+import { SIGNIN_USER } from '../../../FetchMutationsAPI';
 import { setProfileItems } from '../../../redux/reducers/profSlice';
 // components
 import Iconify from '../../../components/iconify';
@@ -15,11 +17,14 @@ import Iconify from '../../../components/iconify';
 
 export default function LoginForm() {
 
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
-    emailaddress: '',
+    email: '',
     password: '',
   });
-
+  const [signinUser, { data, loading, error }] = useMutation(SIGNIN_USER)
+  console.log(error)
   const dispatch = useDispatch();
 
   const toast = useRef(null);
@@ -49,31 +54,25 @@ export default function LoginForm() {
 
     event.preventDefault();
 
-    fetch('https://localhost:7099/api/Users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
+    console.log(user)
+    signinUser({
+
+      variables: {
+        signin: user
+      }
+
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.successMessage) {
-          console.log(data.userData)
-          dispatch(setProfileItems(data.userData))
-          showSuccessToast(data.successMessage)
-          navigate('/dashboard/app', {state:{name:data.username}});
-        }
-        else {
-          showErrorToast(data.errorMessage)
-        }
-        // Handle success or other actions
-      })
-      .catch(error => {
-        console.error('Error creating user:', error);
-        // Handle error
-      });
+
+    setUser({
+      email: '',
+      password: '',
+    })
   };
+
+  if(data !== undefined){
+    localStorage.setItem("token", data.user.token)
+    navigate('/dashboard/app')
+  }
 
   const showSuccessToast = (message) => {
     toast.current.show({
@@ -89,50 +88,54 @@ export default function LoginForm() {
       severity: 'error',
       summary: 'Error Message',
       detail: message,
-      life: 5000 // Display for 5 seconds
+      life: 2000 // Display for 5 seconds
     });
   };
-
-
-
-  const navigate = useNavigate();
-
   const [showPassword, setShowPassword] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const handleClick = () => {
   };
 
   return (
     <>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
-    <script dangerouslySetInnerHTML={{__html: `
+      <Toast ref={toast} />
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
+      <script dangerouslySetInnerHTML={{
+        __html: `
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
   
     gtag('config', 'G-G4ZSXFL6SZ');
-    ` }}/>
-      <Toast ref={toast} />
-      <Stack spacing={3}>
-        <span>
-          <InputText name="emailaddress" keyfilter={/^[^()<>*!]+$/} placeholder='Email Address' label="Email address" value={user.emailaddress}
-            onChange={handleChange} />
-        </span>
+    ` }} />
+      {error !== undefined && showErrorToast(error.message)}
 
-        <span>
-          <Password
-            id='password'
-            name="password"
-            placeholder='Password'
-            label="Password"
-            value={user.password}
-            onChange={handleChange}
-            header={header} footer={footer}
-            toggleMask
-          />
-        </span>
+      <div>
+        <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
+        <label htmlFor="email" className="block text-900 font-medium mb-2">Email</label>
+        <InputText
+          name="email"
+          keyfilter={/^[^()<>*!]+$/}
+          placeholder='Email Address'
+          label="Email address"
+          value={user.email}
+          onChange={handleChange}
+          className="w-full mb-3" />
 
-      </Stack>
+        <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
+        <label htmlFor="password" className="block text-900 font-medium mb-2">Password</label>
+        <InputText
+          className="w-full mb-3"
+          id='password'
+          name="password"
+          placeholder='Password'
+          type='password'
+          label="Password"
+          value={user.password}
+          onChange={handleChange} />
+      </div>
 
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
         <Checkbox name="remember" label="Remember me" />

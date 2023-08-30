@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Toast } from "primereact/toast";
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -13,6 +14,9 @@ import LockOutlined from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { SIGNUP_USER } from '../FetchMutationsAPI';
 import Logo from '../components/logo';
 
 
@@ -22,16 +26,19 @@ const defaultTheme = createTheme();
 function SignupPage() {
   const toast = useRef(null);
   const [user, setUser] = useState({
-    username: '',
-    emailaddress: '',
-    firstname: '',
-    lastname: '',
+    // username: '',
+    email: '',
+    firstName: '',
+    lastName: '',
     password: '',
-    country: ''
   });
 
+  const [formData, setFormData] = useState({})
+  const [signupUser, { data, loading, error }] = useMutation(SIGNUP_USER)
+  const [checked, setChecked] = useState(true)
 
   const handleChange = (e) => {
+    console.log(e)
     const { name, value } = e.target
     setUser((prevUser) => ({
       ...prevUser, [name]: value
@@ -42,27 +49,13 @@ function SignupPage() {
 
     event.preventDefault();
 
-    fetch('https://localhost:7099/api/Users/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
+    console.log(user)
+    signupUser({
+
+      variables: {
+        signup: user
+      }
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.errorMessage) {
-          showErrorToast(data.errorMessage)
-        }
-        else {
-          showSuccessToast("Signup Successful\nPlease Signin to Continue")
-        }
-        // Handle success or other actions
-      })
-      .catch(error => {
-        console.error('Error creating user:', error);
-        // Handle error
-      });
   };
 
   const showSuccessToast = (message) => {
@@ -101,15 +94,10 @@ function SignupPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
-      <script dangerouslySetInnerHTML={{
-        __html: `
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  
-    gtag('config', 'G-G4ZSXFL6SZ');
-    ` }} />
+          {console.log(loading)}
+          <Toast ref={toast} />
+          {data!== undefined && showSuccessToast("Signup Successful\nPlease Login to Continue")}
+          {error!== undefined && showSuccessToast("Signup Successful\nPlease Login to Continue")}
 
       <StyledRoot>
         <Logo
@@ -119,123 +107,50 @@ function SignupPage() {
             left: { xs: 16, sm: 24, md: 40 },
           }}
         />
-        {true && (
-          <StyledSection>
-            <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              <div style={{ marginLeft: '20px', marginRight: '20px', marginTop: '20px' }}>
-                <img src="/assets/illustrations/illustration_login.png" alt="login" />
+      </StyledRoot>
+      <div className="flex align-items-center justify-content-center">
+        <div className="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+          <div className="text-center mb-5">
+            <div className="text-900 text-3xl font-medium mb-3">Welcome</div>
+            <span className="text-600 font-medium line-height-3">Already have an account?</span>
+            <span className="font-medium no-underline ml-2 cursor-pointer">
+                <Link href='/login' className="no-underline" variant="Bold">Login </Link>
+            </span>
+          </div>
+
+          <div>
+            <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
+            <label htmlFor="email" className="block text-900 font-medium mb-2">Email</label>
+            <InputText id="email" name="email" onChange={handleChange} type="text" placeholder="Email address" className="w-full mb-3" />
+
+            <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
+            <label htmlFor="password" className="block text-900 font-medium mb-2">Password</label>
+            <InputText id="password" name="password" onChange={handleChange} type="password" placeholder="Password" className="w-full mb-3" />
+
+            <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
+            <label htmlFor="firstname" className="block text-900 font-medium mb-2">First Name</label>
+            <InputText id="firstname" name="firstName" onChange={handleChange} type="text" placeholder="First Name" className="w-full mb-3" />
+
+            <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
+            <label htmlFor="lastname" className="block text-900 font-medium mb-2">Last Name</label>
+            <InputText id="lastname" name="lastName" onChange={handleChange} type="text" placeholder="Last Name" className="w-full mb-3" />
+
+            <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
+            <div className="flex align-items-center justify-content-between mb-6">
+              <div className="flex align-items-center">
+                <Checkbox id="rememberme" onChange={e => setChecked(e.checked)} checked={checked} className="mr-2" />
+                <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
+                <label htmlFor="rememberme">Remember me</label>
               </div>
-            </Typography>
+              <a className="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot your password?</a>
+            </div>
+          </div>
+          <Button label="Sign In" icon="pi pi-user" onClick={handleSubmit} className="w-full" />
 
-          </StyledSection>
-        )}
-        <Toast ref={toast} />
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlined />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign up
-            </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    autoComplete="given-name"
-                    name="firstname"
-                    required
-                    fullWidth
-                    id="firstname"
-                    label="First Name"
-                    onChange={handleChange}
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="lastname"
-                    label="Last Name"
-                    name="lastname"
-                    onChange={handleChange}
-                    autoComplete="family-name"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="emailaddress"
-                    label="Email Address"
-                    name="emailaddress"
-                    autoComplete="emailaddress"
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    onChange={handleChange}
-                    autoComplete="new-password"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="country"
-                    label="Country"
-                    id="country"
-                    onChange={handleChange}
-                    autoComplete="country"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                    label="Terms & Conditions"
-                  />
-                </Grid>
-              </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onSubmit={handleSubmit}
-              >
-                Sign Up
-              </Button>
-              <Grid container justifyContent="flex-end">
-                <Grid item>
-                  <Link href="/login" variant="body2">
-                    Already have an account? Sign in
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-        </Container>
-      </ StyledRoot>
-
+        </div>
+      </div>
     </ThemeProvider>
-
-  );
+  )
 }
 
 export default SignupPage;

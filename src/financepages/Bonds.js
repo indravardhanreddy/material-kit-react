@@ -8,15 +8,15 @@ const Bonds = () => (
   <>
     <Helmet>
       <title>
-        Account | Devias Kit
+        Account | Profile
       </title>
     </Helmet>
 
     <Box
       component="main"
       sx={{
-        flexGrow: 1,
-        py: 8
+        flexGrow: 0,
+        py: 0
       }}
     >
       <Container maxWidth="lg">
@@ -29,7 +29,7 @@ const Bonds = () => (
           <div>
             <Grid
               container
-              spacing={3}
+              spacing={2}
             >
               <Grid
                 xs={12}

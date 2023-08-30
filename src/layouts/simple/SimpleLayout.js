@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
-// @mui
 import { styled } from '@mui/material/styles';
-// components
+import { Margin } from '@mui/icons-material';
+import MainPage from '../../MainPage';
 import Logo from '../../components/logo';
 
 // ----------------------------------------------------------------------
@@ -24,9 +24,11 @@ export default function SimpleLayout() {
   return (
     <>
       <StyledHeader>
+        <div style={{paddingBottom: '50px'}}>
         <Logo />
+        </div>
       </StyledHeader>
-
+      <MainPage />
       <Outlet />
     </>
   );

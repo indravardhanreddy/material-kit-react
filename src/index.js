@@ -1,6 +1,10 @@
 import ReactDOM from 'react-dom/client';
 import { configureStore } from '@reduxjs/toolkit';
-
+import {
+        ApolloClient,
+        InMemoryCache,
+        ApolloProvider,
+      } from "@apollo/client";
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
@@ -11,10 +15,23 @@ import 'primeicons/primeicons.css';                                 // icons
 import 'primeflex/primeflex.css'; 
 // ----------------------------------------------------------------------
 
+
+      
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const client = new ApolloClient({
+        uri: 'http://localhost:4000',
+        cache: new InMemoryCache(),
+        headers:{
+          authorization:localStorage.getItem("token") || ""
+        }
+      });
 
 root.render(
+        <ApolloProvider client={client}>
+
         <App />
+        </ApolloProvider>
 );
 
 // If you want to enable client cache, register instead.

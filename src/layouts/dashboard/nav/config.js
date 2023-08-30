@@ -97,6 +97,11 @@ export const navConfigQA = [
     title: 'Support',
     path: '/support/care',
     icon: icon('ic_user'),
+  },
+  {
+    title: 'About',
+    path: '/',
+    icon: icon('ic_user'),
   }
 ];
 

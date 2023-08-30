@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from 'react-router-dom'; 
 import { Grid, Container, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
+import { Dialog } from 'primereact/dialog';
 
 import axios from 'axios';
 
@@ -28,12 +29,21 @@ import { setProfileItems } from '../redux/reducers/profSlice';
 
 export default function DashboardAppPage(props) {
   const theme = useTheme();
-  const arr = props.data.props.data
+  // const arr = props.data.props.data
   const [data, setData] = useState([]);
   const profileData = useSelector((pd)=>pd.prof)
   const dispatch = useDispatch();
   let uniqueStates = []
   let uniqueCities = []
+
+  const token = localStorage.getItem("token")
+  console.log(token)
+
+  if(!token){
+    <Dialog />
+  }
+
+  const arr = []
   arr.forEach((a) => {
     const index = uniqueStates.findIndex(elem => elem.state === a.state);
     if (index === -1) {

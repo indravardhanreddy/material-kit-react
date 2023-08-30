@@ -21,7 +21,7 @@ export default function App() {
           <ThemeProvider>
             <ScrollToTop />
             <StyledChart />
-            <FetchAPI />
+            <Router />
           </ThemeProvider>
         </BrowserRouter>
       </HelmetProvider>

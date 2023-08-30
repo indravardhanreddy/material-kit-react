@@ -2,11 +2,12 @@ import { useState } from 'react';
 // @mui
 import 'react-chat-elements/dist/main.css'
 import { alpha } from '@mui/material/styles';
-import { MessageBox, ChatItem ,MeetingMessage, Popup} from 'react-chat-elements'
+import { MessageBox, ChatItem, MeetingMessage, Popup } from 'react-chat-elements'
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button'
+import { Navigate, useNavigate } from 'react-router-dom';
 import Iconify from '../../../components/iconify';
 import ProfilePage from '../../MenuItems/ProfilePage';
 import Home from '../profileitems/Home';
@@ -31,11 +32,11 @@ const MENU_OPTIONS = [
   },
   {
     label: 'Settings',
-    icon:  <Iconify icon={'iconamoon:profile-fill'} color="#1C9CEA" width={20} />,
+    icon: <Iconify icon={'iconamoon:profile-fill'} color="#1C9CEA" width={20} />,
   },
   {
     label: 'Our Product',
-    icon:  <Iconify icon={'ph:sparkle-fill'} color="#1C9CEA" width={20} />,
+    icon: <Iconify icon={'ph:sparkle-fill'} color="#1C9CEA" width={20} />,
   }
 ];
 
@@ -45,19 +46,23 @@ export default function AccountPopover() {
   const user = useSelector((state) => { return state.prof })
   console.log(user)
   const [open, setOpen] = useState(null);
+  const navigate = useNavigate();
+
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
 
   const handleClose = () => {
+    localStorage.removeItem("token")
+    navigate('/login')
     setOpen(null);
   };
 
   const [visible, setVisible] = useState(false)
   const [position, setPosition] = useState('center');
-  const [item,setItem] = useState('')
-  const [showchat,setShowchat] = useState(true)
+  const [item, setItem] = useState('')
+  const [showchat, setShowchat] = useState(true)
 
   const footerContent = (
     <div>
@@ -84,11 +89,11 @@ export default function AccountPopover() {
         handleClose()
         show(item)
         break;
-      case 'Settings': 
+      case 'Settings':
         handleClose()
         show(item)
         break;
-      case 'Our Product': 
+      case 'Our Product':
         handleClose()
         show(item)
         break;
@@ -104,18 +109,18 @@ export default function AccountPopover() {
   return (
     <>
 
-      <Dialog header={item} visible={visible} position={position} style={{ width: '50vw' }} onHide={() => setVisible(false)} footer={footerContent} draggable={false} resizable={false}>
-        {item==='Home' && <><ChatItem
-  avatar={'https://facebook.github.io/react/img/logo.svg'}
-  alt={'Reactjs'}
-  title={'Facebook'}
-  subtitle={'What are you doing?'}
-  date={new Date()}
-  unread={0}
-/></> } 
-        {item==='Profile' && <>Profile</>}
-        {item==='Our Product' && <>Our Product</> } 
-        {item==='Settings' && <>Settings</>}
+      <Dialog header={item} visible={visible} position={position} style={{ width: '50vw' }} onHide={() => setVisible(false)} draggable={false} resizable={false}>
+        {item === 'Home' && <><ChatItem
+          avatar={'https://facebook.github.io/react/img/logo.svg'}
+          alt={'Reactjs'}
+          title={'Facebook'}
+          subtitle={'What are you doing?'}
+          date={new Date()}
+          unread={0}
+        /></>}
+        {item === 'Profile' && <Profile />}
+        {item === 'Our Product' && <>Our Product</>}
+        {item === 'Settings' && <>Settings</>}
       </Dialog>
       <IconButton
         onClick={handleOpen}
@@ -162,11 +167,11 @@ export default function AccountPopover() {
           </Typography>
         </Box>
 
-        <Divider sx={{ borderStyle: 'solid' }} />
+        <Divider sx={{ borderStyle: 'none' }} />
 
-        <Stack sx={{ p: 1 }}>
+        <Stack >
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label}  onClick={() => handleMenuItems(option.label)}>
+            <MenuItem key={option.label} onClick={() => handleMenuItems(option.label)} style={{ borderRadius: '10px' }}>
               {option.icon}{' | '}{option.label}
             </MenuItem>
           ))}
@@ -174,7 +179,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleClose}>
           {<Iconify icon={'majesticons:logout'} color="#1C9CEA" width={20} />} {' | '}Logout
         </MenuItem>
       </Popover>

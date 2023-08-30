@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setFromDate, setToDate } from "../../../redux/reducers/globalFilterSlice";
 import Iconify from '../../../components/iconify/Iconify' ;
 import { prDateConvert } from "../../../utils/formatTime";
+import '../../../styles.css'
 
 export default function CalendarControl(props) {
     const dispatch = useDispatch()

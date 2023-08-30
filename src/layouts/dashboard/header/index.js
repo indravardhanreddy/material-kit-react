@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import '../../../styles.css'
 // @mui
 import { styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';

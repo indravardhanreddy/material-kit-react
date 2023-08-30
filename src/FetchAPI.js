@@ -1,22 +1,45 @@
-import React, { useState, useEffect } from "react";
-import Router from "./routes";
+import {gql} from '@apollo/client'
 
-
-function FetchAPI() {
-    const [data, setData] = useState([]);
-    console.log(data)
-
-    const fetchInfo = async () => {
-        await fetch('http://localhost:7099/api/values')
-            .then((res) => res.json())
-            .then((d) => setData(d))
+export const GET_ALL_DATA = gql`
+query getAllUsers{
+    users{
+      email
+      lastName
+      firstName
+      posts
+      {
+        post
+        userId
+        comments{
+          comment
+          userId
+        }
+      }
     }
+  }
+`
 
-    return (
-        <div>
-            <Router data = {data}/>
-        </div>
-    );
-}
+export const GET_ALL_USERS = gql`
+query getAllUsers{
+    users{
+      _id
+      firstName
+      lastName
+        password
+      email
+    }
+  }
+  `
 
-export default FetchAPI;
+export const GET_ALL_POSTS = gql`
+query getAllPostsData{
+    posts{
+      post
+      userId
+      comments{
+        comment
+        userId
+      }
+    }
+  }
+`

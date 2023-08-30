@@ -13,31 +13,31 @@ import {
 
 const states = [
   {
-    value: 'alabama',
-    label: 'Alabama'
+    value: 'andhrapradesh',
+    label: 'Andhrapradesh'
   },
   {
-    value: 'new-york',
-    label: 'New York'
+    value: 'karnataka',
+    label: 'Karnataka'
   },
   {
-    value: 'san-francisco',
-    label: 'San Francisco'
+    value: 'tamilnadu',
+    label: 'Tamilnadu'
   },
   {
-    value: 'los-angeles',
-    label: 'Los Angeles'
+    value: 'maharashtra',
+    label: 'Maharashtra'
   }
 ];
 
 export const AccountProfileDetails = () => {
   const [values, setValues] = useState({
-    firstName: 'Anika',
-    lastName: 'Visser',
-    email: 'demo@devias.io',
+    firstName: 'Indravardhan',
+    lastName: 'Reddy',
+    email: 'moramindravardhanreddy@gmail.com',
     phone: '',
-    state: 'los-angeles',
-    country: 'USA'
+    state: 'AP',
+    country: 'India'
   });
 
   const handleChange = useCallback(
@@ -63,7 +63,7 @@ export const AccountProfileDetails = () => {
       noValidate
       onSubmit={handleSubmit}
     >
-      <Card>
+<Card>
         <CardHeader
           subheader="The information can be edited"
           title="Profile"
@@ -173,7 +173,7 @@ export const AccountProfileDetails = () => {
             Save details
           </Button>
         </CardActions>
-      </Card>
+</Card>
     </form>
   );
 };
