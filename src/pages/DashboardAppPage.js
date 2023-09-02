@@ -2,11 +2,11 @@ import { Helmet } from 'react-helmet-async';
 import { faker } from '@faker-js/faker';
 import { useTheme } from '@mui/material/styles';
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from 'react-router-dom'; 
-import { Grid, Container, Typography } from '@mui/material';
+import { useLocation, Link as RouterLink } from 'react-router-dom';
+import { Grid, Container, Typography, Link } from '@mui/material';
 import { useState, useEffect } from 'react';
+import jwtDecode from 'jwt-decode';
 import { Dialog } from 'primereact/dialog';
-
 import axios from 'axios';
 
 // components
@@ -28,19 +28,81 @@ import { setProfileItems } from '../redux/reducers/profSlice';
 // ----------------------------------------------------------------------
 
 export default function DashboardAppPage(props) {
+
   const theme = useTheme();
   // const arr = props.data.props.data
   const [data, setData] = useState([]);
-  const profileData = useSelector((pd)=>pd.prof)
+  const profileData = useSelector((pd) => pd.prof)
+  const [tokenExpired, setTokenExpired] = useState(false);
+  const [rawData, setRawData] = useState([]);
   const dispatch = useDispatch();
   let uniqueStates = []
   let uniqueCities = []
 
+  // useEffect(() => {
+  //   setFilterIndexData([])
+  //   switch (selectedIndex) {
+  //     case 'NIFTY50':
+  //       url = 'https://latest-stock-price.p.rapidapi.com/price?Indices=NIFTY%2050';
+  //       break;
+  //     case 'NIFTYBANK':
+  //       url = 'https://latest-stock-price.p.rapidapi.com/price?Indices=NIFTY%20BANK';
+  //       break;
+  //     case 'NIFTY100':
+  //       url = 'https://latest-stock-price.p.rapidapi.com/price?Indices=NIFTY%20100';
+  //       break;
+  //     case 'NIFTYIT':
+  //       url = 'https://latest-stock-price.p.rapidapi.com/price?Indices=NIFTY%20IT';
+  //       break;
+  //     case 'ALL' : 
+  //       url = 'https://latest-stock-price.p.rapidapi.com/any';
+  //       break;
+  //     default:
+  //       url = 'https://latest-stock-price.p.rapidapi.com/price?Indices=NIFTY%2050';
+  //   }
+
+  //   const options = {
+  //     method: 'GET',
+  //     headers: {
+  //       'X-RapidAPI-Key': 'ae45a5fae5msh317b7baf0c980a0p1b4c3ajsn37ee746f0c3f',
+  //       'X-RapidAPI-Host': 'latest-stock-price.p.rapidapi.com'
+  //     }
+  //   };
+
+  //   fetchData();
+
+  //   async function fetchData() {
+  //     try {
+  //       const response = await fetch(url, options);
+  //       const result = await response.text();
+  //       console.log(JSON.parse(result))
+  //       setRawData(JSON.parse(result));
+  //       dataConversion(JSON.parse(result))
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // }, [selectedIndex])
+
   const token = localStorage.getItem("token")
+
+  const userData = localStorage.getItem("userData")
   console.log(token)
 
-  if(!token){
+  if (!token) {
     <Dialog />
+  }
+
+  function isTokenExpired(token) {
+    try {
+      const decoded = jwtDecode(token)
+      const currentTime = Date.now() / 1000; // Current time in seconds
+
+      return decoded.exp < currentTime;
+    } catch (error) {
+      // Handle decoding errors (e.g., invalid token format)
+      return true; // Treat as expired if there's an error
+    }
   }
 
   const arr = []
@@ -81,38 +143,59 @@ export default function DashboardAppPage(props) {
 
   const location = useLocation();
   const dataa = {
-    'emailaddress' : 'moramindravardhanreddy@gmail.com'
-}
+    'emailaddress': 'moramindravardhanreddy@gmail.com'
+  }
 
-  const fetchInfo = async () => {
+  useEffect(() => {
+    // Function to check token expiration
+    const checkTokenExpiration = () => {
+      if (token && isTokenExpired(token)) {
+        // Token has expired, unset it
+        localStorage.removeItem("token");
+        // Redirect to the login page or perform other logout actions
+        // Example: window.location.href = "/login";
+      }
+    };
 
-    fetch('https://localhost:7099/api/Users/userdata', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.parse(dataa)
-    })
-      .then(response => response.json(data))
-      .then(data => {
-        if (data.successMessage) {
-          console.log(data.successMessage)
-          // showSuccessToast(data.successMessage)
-        }
-        else {
-          // showErrorToast(data.errorMessage)
-        }
-        // Handle success or other actions
-      })
-      .catch(error => {
-        console.error('Error creating user:', error);
-        // Handle error
-      });
-}
+    // Check token expiration on component mount
+    checkTokenExpiration();
 
-useEffect(() => {
-    fetchInfo();
-}, []);
+    // You might want to periodically check token expiration, e.g., every minute
+    const interval = setInterval(checkTokenExpiration, 60);
+
+    // Clear the interval on component unmount
+    return () => clearInterval(interval);
+  }, [token]);
+
+  //   const fetchInfo = async () => {
+
+  //     fetch('https://localhost:7099/api/Users/userdata', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.parse(dataa)
+  //     })
+  //       .then(response => response.json(data))
+  //       .then(data => {
+  //         if (data.successMessage) {
+  //           console.log(data.successMessage)
+  //           // showSuccessToast(data.successMessage)
+  //         }
+  //         else {
+  //           // showErrorToast(data.errorMessage)
+  //         }
+  //         // Handle success or other actions
+  //       })
+  //       .catch(error => {
+  //         console.error('Error creating user:', error);
+  //         // Handle error
+  //       });
+  // }
+
+  // useEffect(() => {
+  //     fetchInfo();
+  // }, []);
 
 
   const uniqueStatesData = Object.values(counts);

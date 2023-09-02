@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom/client';
 import { configureStore } from '@reduxjs/toolkit';
 import {
-        ApolloClient,
-        InMemoryCache,
-        ApolloProvider,
-      } from "@apollo/client";
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+} from "@apollo/client";
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
@@ -12,15 +12,12 @@ import reportWebVitals from './reportWebVitals';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primereact/resources/primereact.css';                       // core css
 import 'primeicons/primeicons.css';                                 // icons
-import 'primeflex/primeflex.css'; 
-// ----------------------------------------------------------------------
-
-
-      
+import 'primeflex/primeflex.css';
+// ----------------------------------------------------------------------   
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const client = new ApolloClient({
-        uri: 'http://localhost:4000',
+        uri: 'http://localhost:4001',
         cache: new InMemoryCache(),
         headers:{
           authorization:localStorage.getItem("token") || ""
@@ -28,10 +25,9 @@ const client = new ApolloClient({
       });
 
 root.render(
-        <ApolloProvider client={client}>
-
-        <App />
-        </ApolloProvider>
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
 );
 
 // If you want to enable client cache, register instead.

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
@@ -8,6 +8,7 @@ import { Password } from 'primereact/password'
 import { InputText } from 'primereact/inputtext';
 import { Divider } from 'primereact/divider'
 import { useMutation } from '@apollo/client';
+import jwtDecode from "jwt-decode";
 import { SIGNIN_USER } from '../../../FetchMutationsAPI';
 import { setProfileItems } from '../../../redux/reducers/profSlice';
 // components
@@ -18,7 +19,6 @@ import Iconify from '../../../components/iconify';
 export default function LoginForm() {
 
   const navigate = useNavigate();
-
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -69,8 +69,14 @@ export default function LoginForm() {
     })
   };
 
-  if(data !== undefined){
+  if (data !== undefined) {
     localStorage.setItem("token", data.user.token)
+    console.log(data.user.user)
+    const decoded = jwtDecode(data.user.token);
+
+    console.log(decoded)
+    localStorage.setItem("userData", JSON.stringify(data.user.user))
+    dispatch(setProfileItems(data.user.user))
     navigate('/dashboard/app')
   }
 

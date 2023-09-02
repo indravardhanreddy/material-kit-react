@@ -33,16 +33,6 @@ const navConfig = [
     icon: icon('ic_blog'),
   },
   {
-    title: 'login',
-    path: '/login',
-    icon: icon('ic_lock'),
-  },
-  {
-    title: 'signup',
-    path: '/signup',
-    icon: icon('ic_lock'),
-  },
-  {
     title: 'CompanyBlock',
     path: '/dashboard/companydetails',
     icon: icon('ic_lock'),
@@ -84,6 +74,11 @@ export const navConfigFunds = [
     title: 'Other Services',
     path: '/finance/other',
     icon: icon('ic_lock'),
+  },
+  {
+    title: 'Discussions',
+    path: '/finance/discussions',
+    icon: icon('ic_cart'),
   },
 ];
 

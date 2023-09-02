@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Panel } from 'primereact/panel';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
@@ -95,7 +96,7 @@ const UsersList = () => {
         const _expandedRows = {};
 
         products.forEach((p) => {
-            (_expandedRows[`${p.id}`] = true)
+            (_expandedRows[`${p.customerId}`] = true)
             return _expandedRows
         });
         setExpandedRows(_expandedRows);
@@ -179,28 +180,18 @@ const UsersList = () => {
 
     const rowExpansionTemplate = (data) => {
         const result = []
-        const url = 'https://localhost:7099/api/Accounts/matchingAccounts?account_id=54685'
-        console.log(data.lastName)
-        const fetchInfo = async () => {
-            await fetch(url)
-                .then((res) => res.json())
-                .then((d) => {
-                    console.log(result)
-                })
-        }
 
         fetchInfo()
         return (
             <div className="p-3">
-                <h5>Orders for {data.lastName}</h5>
-                <DataTable value={result}>
-                    {console.log(result[0])}
-                    <Column field="name" header="Name" sortable />
-                    <Column field="email" header="Email" sortable />
-                    <Column field="active" header="Active" sortable />
-                    <Column field="accounts" header="Other Accounts" sortable />
-                    {/* <Column field="OrderStatus" header="Status" body={statusOrderBodyTemplate} sortable /> */}
-                </DataTable>
+                <Panel header="Header">
+                    <p className="m-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </Panel>
             </div>
         );
     };

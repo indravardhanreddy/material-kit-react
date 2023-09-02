@@ -24,6 +24,7 @@ import Other from './financepages/Other';
 import Bonds from './financepages/Bonds';
 import FAQ from './support/FAQ';
 import MainPage from './MainPage';
+import Discussions from './financepages/Discussions';
 
 // ----------------------------------------------------------------------
 
@@ -81,6 +82,7 @@ export default function Router(props) {
         { path: 'mutualfunds', element: <AuthRoute element={<MutualFunds /> } path = '/mutualfunds'/>},
         { path: 'privateequity', element: <AuthRoute element={<PrivateEquity /> } path = '/privateequity'/>},
         { path: 'other', element: <AuthRoute element={<Other /> } path = '/other'/>},
+        { path: 'discussions', element: <AuthRoute element={<Discussions /> } path = '/discussions'/>},
       ],
     },
     {

@@ -7,12 +7,13 @@ import { Container, Stack, Button, Typography } from '@mui/material';
 import { Dialog } from "primereact/dialog";
 import { InputNumber } from 'primereact/inputnumber';
 import { Chips } from "primereact/chips";
+import { useQuery } from '@apollo/client';
 
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
 // mock
 import PRODUCTS from '../_mock/products';
 import Iconify from '../components/iconify';
-
+import { GET_ALL_PRODUCTS } from '../FetchAPI';
 // ----------------------------------------------------------------------
 
 export default function ProductsPage() {
@@ -28,6 +29,12 @@ export default function ProductsPage() {
     productdescription: '',
     createdDate: new Date(),
   });
+
+  const { loading, error, data } = useQuery(GET_ALL_PRODUCTS)
+
+  if (data !== undefined) {
+    console.log(data)
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -47,14 +54,15 @@ export default function ProductsPage() {
   console.log(visible)
   return (
     <>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
-    <script dangerouslySetInnerHTML={{__html: `
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
+      <script dangerouslySetInnerHTML={{
+        __html: `
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
   
     gtag('config', 'G-G4ZSXFL6SZ');
-    ` }}/>
+    ` }} />
       <Dialog header="Add Product" visible={visible} onHide={() => setVisible(false)} style={{ width: '70vw' }} draggable={draggable} position='right' resizable={false}>
         <div className="p-inputgroup">
           <span className="p-inputgroup-addon">
@@ -89,8 +97,7 @@ export default function ProductsPage() {
           </Stack>
         </Stack>
 
-        {console.log(PRODUCTS)}
-        <ProductList products={PRODUCTS} />
+        { data !== undefined ? <ProductList products={data.products} /> : <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}><Iconify icon={'svg-spinners:blocks-wave'} color="#1877F2" width={60} /></div>}
         <ProductCartWidget />
       </Container>
     </>

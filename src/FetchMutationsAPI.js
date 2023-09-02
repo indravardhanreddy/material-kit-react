@@ -16,6 +16,12 @@ export const SIGNIN_USER = gql`
 mutation signinUser($signin: UserSigninInput!) {
     user:signinUser(signin: $signin){
       token
+      user{
+        _id
+        email
+        firstName
+        lastName
+      }
     }
   }
 `

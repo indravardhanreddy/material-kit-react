@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client'
+import { gql } from '@apollo/client'
 
 export const GET_ALL_DATA = gql`
 query getAllUsers{
@@ -42,4 +42,29 @@ query getAllPostsData{
       }
     }
   }
+`
+
+export const GET_ALL_PRODUCTS = gql`
+query{
+  products {
+    name
+    price
+    priceSale
+    colors 
+    colors
+    cover
+    id
+    status
+  }
+}
+`
+export const GET_USER_DATA = gql`
+query getUserById($_id: ID){
+  user (_id : $_id){
+    _id
+    email
+    firstName
+    lastName
+  }
+}  
 `

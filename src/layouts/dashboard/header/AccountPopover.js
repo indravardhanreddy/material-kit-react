@@ -43,8 +43,8 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
-  const user = useSelector((state) => { return state.prof })
-  console.log(user)
+  // const user = useSelector((state) => { return state.prof })
+  const userData = JSON.parse(localStorage.getItem("userData"))
   const [open, setOpen] = useState(null);
   const navigate = useNavigate();
 
@@ -56,6 +56,10 @@ export default function AccountPopover() {
   const handleClose = () => {
     localStorage.removeItem("token")
     navigate('/login')
+    setOpen(null);
+  };
+
+  const handleClosePopup = () => {
     setOpen(null);
   };
 
@@ -82,19 +86,19 @@ export default function AccountPopover() {
 
     switch (item) {
       case 'Home':
-        handleClose()
+        handleClosePopup()
         show(item)
         break;
       case 'Profile':
-        handleClose()
+        handleClosePopup()
         show(item)
         break;
       case 'Settings':
-        handleClose()
+        handleClosePopup()
         show(item)
         break;
       case 'Our Product':
-        handleClose()
+        handleClosePopup()
         show(item)
         break;
       default: <Home />
@@ -139,13 +143,13 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={user.profileItems.profilepic} alt="photoURL" />
+        <Avatar src={""} alt="photoURL" />
       </IconButton>
 
       <Popover
         open={Boolean(open)}
         anchorEl={open}
-        onClose={handleClose}
+        onClose={handleClosePopup}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         PaperProps={{
@@ -163,7 +167,7 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {'Indravardhan'}
+            {userData.firstName}
           </Typography>
         </Box>
 
