@@ -25,7 +25,7 @@ export default function MainPage() {
                                     The Actuals
                                 </h1>
                                 <p className="mbr-text pb-3 mbr-semibold mbr-fonts-style display-7">
-                                    At Financial Analytics Experts, we empower businesses and investors with cutting-edge financial analytics solutions.
+                                    At TheActuals , we empower businesses and investors with cutting-edge financial analytics solutions.
                                 </p>
                                 <div className="mbr-section-btn pb-5">
                                     <a
