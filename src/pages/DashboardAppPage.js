@@ -200,13 +200,13 @@ export default function DashboardAppPage(props) {
 
   const uniqueStatesData = Object.values(counts);
 
-  let uniqueCitiesData = (Object.values(cities)).filter((ct) => ct.value >= 40);
-  const handleFullCityData = () => {
-    uniqueCitiesData = Object.values(cities)
-    console.log(uniqueCitiesData)
+  // let uniqueCitiesData = (Object.values(cities)).filter((ct) => ct.value >= 40);
+  // const handleFullCityData = () => {
+  //   uniqueCitiesData = Object.values(cities)
+  //   console.log(uniqueCitiesData)
 
-  }
-  console.log(uniqueCitiesData)
+  // }
+
 
   return (
     <>
@@ -225,29 +225,29 @@ export default function DashboardAppPage(props) {
 
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome
+          Portfolio Performance(in ₹Rupees)
         </Typography>
 
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Weekly Sales" total={2345554} icon={'ant-design:dashboard-filled'} />
+            <AppWidgetSummary title="This Week Earnings" total={23450} icon={'ant-design:dashboard-filled'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="New Users" total={1352831} color="info" icon={'bxs:objects-vertical-bottom'} />
+            <AppWidgetSummary title="Options Earnings" total={15290} color="info" icon={'bxs:objects-vertical-bottom'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Item Orders" total={1723315} color="warning" icon={'clarity:flame-solid'} />
+            <AppWidgetSummary title="Futures Earnings" total={-5300} color="warning" icon={'clarity:flame-solid'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Bug Reports" total={234} color="error" icon={'ic:baseline-verified'} />
+            <AppWidgetSummary title="Other Earnings" total={1353} color="error" icon={'ic:baseline-verified'} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
-              title="Website Visits"
+              title="Stocks"
               subheader="(+43%) than last year"
               chartLabels={[
                 '01/01/2023',
@@ -264,19 +264,19 @@ export default function DashboardAppPage(props) {
               ]}
               chartData={[
                 {
-                  name: 'Team A',
+                  name: 'Mutual Funds',
                   type: 'column',
                   fill: 'solid',
                   data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
                 },
                 {
-                  name: 'Team B',
+                  name: 'Futures',
                   type: 'area',
                   fill: 'gradient',
                   data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
                 },
                 {
-                  name: 'Team C',
+                  name: 'Options',
                   type: 'line',
                   fill: 'solid',
                   data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
@@ -287,8 +287,13 @@ export default function DashboardAppPage(props) {
 
           <Grid item xs={12} md={6} lg={4}>
             <AppCurrentVisits
-              title="Popular States"
-              chartData={uniqueStatesData}
+              title="Share of Income"
+              chartData={[
+                { label: 'Options', value: 4344 },
+                { label: 'Futures', value: 5435 },
+                { label: 'Commodities', value: 1443 },
+                { label: 'Other', value: 4443 },
+              ]}
               chartColors={[
                 theme.palette.primary.main,
                 theme.palette.info.main,
@@ -300,20 +305,29 @@ export default function DashboardAppPage(props) {
 
           <Grid item xs={12} md={6} lg={8}>
             <AppConversionRates
-              title="City Visits Percentage"
-              subheader="(+43%) than last year"
-              chartData={uniqueCitiesData}
+              title="Profit Percentage"
+              subheader="(+43%) than last month"
+              chartData={[
+                { label: 'Tata Motors', value: 400 },
+                { label: 'Reliance Industries', value: 430 },
+                { label: 'Infosys', value: 448 },
+                { label: 'HDFC Bank', value: 470 },
+                { label: 'TCS', value: 540 },
+                { label: 'ITC Limited', value: 580 },
+                { label: 'ICICI Bank', value: 690 },
+                { label: 'HDFC', value: 1100 },
+              ]}
             />
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
             <AppCurrentSubject
-              title="Current Subject"
-              chartLabels={['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math']}
+              title="Portfolio"
+              chartLabels={['Equity', 'Options', 'Bonds', 'Fixed Assets', 'Mutual F...']}
               chartData={[
-                { name: 'Series 1', data: [80, 50, 30, 40, 100, 20] },
-                { name: 'Series 2', data: [20, 30, 40, 80, 20, 80] },
-                { name: 'Series 3', data: [44, 76, 78, 13, 43, 10] },
+                { name: 'Holdings', data: [80, 50, 30, 100, 20] },
+                { name: 'Sell off', data: [20, 30, 40, 20, 80] },
+                { name: 'To Buy', data: [44, 76, 78, 43, 10] },
               ]}
               chartColors={[...Array(6)].map(() => theme.palette.text.secondary)}
             />
@@ -334,18 +348,17 @@ export default function DashboardAppPage(props) {
 
           <Grid item xs={12} md={6} lg={4}>
             <AppOrderTimeline
-              title="Order Timeline"
+              title="Product Timeline"
               list={[...Array(5)].map((_, index) => ({
                 id: faker.datatype.uuid(),
                 title: [
-                  '1983, orders, $4220',
-                  '12 Invoices have been paid',
-                  'Order #37745 from September',
-                  'New order placed #XF-2356',
-                  'New order placed #XF-2346',
+                  'Implemented Multiple Widgets(Authorization)',
+                  'Added MongoDB and Graphql API',
+                  'Post and Comment Feature',
+                  'Stocks Data and Old project inclusion',
+                  'Sentimental Analysis',
                 ][index],
                 type: `order${index + 1}`,
-                time: faker.date.past(),
               }))}
             />
           </Grid>
@@ -356,22 +369,22 @@ export default function DashboardAppPage(props) {
               list={[
                 {
                   name: 'Instagram',
-                  value: 323234,
+                  value: 210,
                   icon: <Iconify icon={'line-md:instagram'} color="#1877F2" width={32} />,
                 },
                 {
                   name: 'Github',
-                  value: 341212,
+                  value: 1,
                   icon: <Iconify icon={'line-md:github'} color="#DF3E30" width={32} />,
                 },
                 {
                   name: 'Linkedin',
-                  value: 411213,
+                  value: 700,
                   icon: <Iconify icon={'line-md:linkedin'} color="#006097" width={32} />,
                 },
                 {
                   name: 'Twitter',
-                  value: 443232,
+                  value: 29,
                   icon: <Iconify icon={'line-md:twitter-x'} color="#1C9CEA" width={32} />,
                 },
               ]}
@@ -382,11 +395,12 @@ export default function DashboardAppPage(props) {
             <AppTasks
               title="Tasks"
               list={[
-                { id: '1', label: 'Create FireStone Logo' },
-                { id: '2', label: 'Add SCSS and JS files if required' },
-                { id: '3', label: 'Stakeholder Meeting' },
-                { id: '4', label: 'Scoping & Estimations' },
-                { id: '5', label: 'Sprint Showcase' },
+                { id: '1', label: 'Product Roadmap - AI Data Analysis' },
+                { id: '2', label: 'Chat Feature Implementation' },
+                { id: '3', label: 'Stocks Financial Document Analysis Feature' },
+                { id: '4', label: 'Adding Roles and Access Control' },
+                { id: '5', label: 'Live Data Analytics' },
+                { id: '6', label: 'Charts Analysis and Setup Alerts' },
               ]}
             />
           </Grid>

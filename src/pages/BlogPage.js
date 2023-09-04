@@ -55,7 +55,7 @@ export default function BlogPage() {
         <title> Dashboard: Blog | TheActuals </title>
       </Helmet>
 
-      <Container>
+      <Container style={{  zIndex: 2}}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Blog

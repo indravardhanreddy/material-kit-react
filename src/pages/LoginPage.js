@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet-async';
 import { styled } from '@mui/material/styles';
 import { Link, Container, Typography, Divider, Stack, Button } from '@mui/material';
 // hooks
+import { Dialog } from 'primereact/dialog';
+import { Message } from 'primereact/message';
 import useResponsive from '../hooks/useResponsive';
 // components
 import Logo from '../components/logo';
@@ -44,6 +46,16 @@ export default function LoginPage() {
 
   const mdUp = useResponsive('up', 'md');
 
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
     <>
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4ZSXFL6SZ" />
@@ -58,8 +70,7 @@ export default function LoginPage() {
       <Helmet>
         <title> Login | TheActuals </title>
       </Helmet>
-
-      <StyledRoot>
+      <StyledRoot style={{height:'680px'}}>
         <Logo
           sx={{
             position: 'fixed',
@@ -85,24 +96,29 @@ export default function LoginPage() {
               Sign in to The Actuals
             </Typography>
 
-            <Typography variant="body2" sx={{ mb: 5 }}>
+            <Typography  sx={{ mb: 5 }}>
               Don’t have an account? {''}
-              <Link href='/signup' variant="subtitle2">Get started</Link>
+              <Link className='no-underline' style={{fontWeight:'bold'}} href='/signup' variant="subtitle2">Get started</Link>
             </Typography>
 
-            <Stack direction="row" spacing={2}>
-              <Button fullWidth size="large" color="inherit" variant="outlined">
+            <Stack direction="row" spacing={2} >
+              <Button fullWidth size="large" color="inherit" variant="outlined" onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}>
                 <Iconify icon="eva:google-fill" color="#DF3E30" width={22} height={22} />
               </Button>
 
-              <Button fullWidth size="large" color="inherit" variant="outlined">
+              <Button fullWidth size="large" color="inherit" variant="outlined" onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}>
                 <Iconify icon="eva:facebook-fill" color="#1877F2" width={22} height={22} />
               </Button>
 
-              <Button fullWidth size="large" color="inherit" variant="outlined">
+              <Button fullWidth size="large" color="inherit" variant="outlined" onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}>
                 <Iconify icon="eva:twitter-fill" color="#1C9CEA" width={22} height={22} />
               </Button>
             </Stack>
+            {isHovered && <Message severity="warn" text='Not Implemented yet' />}
+
 
             <Divider sx={{ my: 3 }}>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>

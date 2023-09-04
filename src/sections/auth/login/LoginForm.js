@@ -143,13 +143,15 @@ export default function LoginForm() {
           onChange={handleChange} />
       </div>
 
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-        <Checkbox name="remember" label="Remember me" />
-        <Link variant="subtitle2" underline="hover">
-          Forgot password?
-        </Link>
-      </Stack>
-
+      <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
+      <div className="flex align-items-center justify-content-between mb-6">
+        <div className="flex align-items-center">
+          <Checkbox id="rememberme" onChange={e => setChecked(e.checked)} checked={checked} className="mr-2" />
+          <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
+          <label htmlFor="rememberme" >Remember me</label>
+        </div>
+        <a className="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer" style={{color: '#2065D1'}}>Forgot your password?</a>
+      </div>
       <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleSubmit}>
         Login
       </LoadingButton>

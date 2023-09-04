@@ -34,11 +34,11 @@ import users from '../_mock/UserData';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Email', alignRight: false },
-  { id: 'role', label: 'Phone Number', alignRight: false },
-  { id: 'isVerified', label: 'Verified', alignRight: false },
-  { id: 'status', label: 'Location', alignRight: false },
+  { id: 'name', label: 'First Name', alignRight: false },
+  { id: 'company', label: 'Last Name', alignRight: false },
+  { id: 'role', label: 'Country', alignRight: false },
+  { id: 'isVerified', label: 'Username', alignRight: false },
+  { id: 'status', label: 'emailaddress', alignRight: false },
   { id: '' },
 ];
 
@@ -220,14 +220,14 @@ export default function UserPage(props) {
                               </Stack>
                             </TableCell>
 
-                            <TableCell align="left">{password}</TableCell>
+                            <TableCell align="left">{lastname}</TableCell>
 
                             <TableCell align="left">{country}</TableCell>
 
-                            <TableCell align="left">{emailaddress}</TableCell>
+                            <TableCell align="left">{username}</TableCell>
 
                             <TableCell align="left">
-                              <Label color={(lastname === 'banned' && 'error') || 'success'}>{sentenceCase(lastname)}</Label>
+                              <Label color={(emailaddress === 'banned' && 'error') || 'success'}>{(emailaddress)}</Label>
                             </TableCell>
 
                             <TableCell align="right">

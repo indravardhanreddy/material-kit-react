@@ -36,6 +36,7 @@ Nav.propTypes = {
 export default function Nav({ openNav, onCloseNav }) {
   const { pathname } = useLocation();
   const user = useSelector((prof)=>prof.prof)
+  const userData = JSON.parse(localStorage.getItem('userData'))
   const [visible, setVisible] = useState(false)
   const [position, setPosition] = useState('center');
   const isDesktop = useResponsive('up', 'lg');
@@ -50,6 +51,8 @@ export default function Nav({ openNav, onCloseNav }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+
+  console.log(userData)
 
   const renderContent = (
     <Scrollbar
@@ -90,15 +93,15 @@ export default function Nav({ openNav, onCloseNav }) {
       <Box sx={{ mb: 5, mx: 2.5 }} onClick = {show}>
         <Link underline="none">
           <StyledAccount>
-            <Avatar src={user!= null || user!== undefined ? user.profileItems.profilepic: account.photoURL} alt="photoURL" />
+            <Avatar src={userData!= null || userData!== undefined && account.photoURL} alt="photoURL" />
 
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {user.profileItems.firstname + user.profileItems.lastname}
+                {userData.firstName + userData.lastName}
               </Typography>
 
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {user.profileItems.country}
+                {userData.email.length > 10 ? `${userData.email.substring(0, 15) }...`: userData.email}
               </Typography>
             </Box>
           </StyledAccount>
@@ -154,6 +157,7 @@ export default function Nav({ openNav, onCloseNav }) {
       {isDesktop ? (
         <Drawer
         open
+        zIndex={1}
           variant="permanent"
           PaperProps={{
             sx: {

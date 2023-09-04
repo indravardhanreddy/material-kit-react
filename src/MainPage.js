@@ -3,7 +3,7 @@ import { Button } from 'primereact/button'
 import { Link } from '@mui/material';
 import { Link as RouterLink, Route } from 'react-router-dom';
 import SideNavBar from "./theme/Sidebar";
-import Banner from "./assets/images/04.jpg";
+// import Banner from "/assets/illustrations/illustration_login.png";
 import Banner2 from "./assets/images/02.jpg";
 import Banner3 from "./assets/images/03.jpg";
 
@@ -22,29 +22,28 @@ export default function MainPage() {
                         <div className="card  text-center">
                             <div className="content">
                                 <h1 className="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1">
-                                    Financial Accounting
+                                    The Actuals
                                 </h1>
                                 <p className="mbr-text pb-3 mbr-semibold mbr-fonts-style display-7">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Donec ullamcorper neque dapibus ipsum semper, sit amet
-                                    luctus turpis porttitor. Ut libero ante, varius quis
-                                    ligula in.
+                                    At Financial Analytics Experts, we empower businesses and investors with cutting-edge financial analytics solutions.
                                 </p>
                                 <div className="mbr-section-btn pb-5">
                                     <a
                                         className="btn btn-sm btn-primary display-4 m-2"
-                                        href="https://indravardhan.com"
+                                        href="/signup"
+                                        style={{ textDecoration: 'none' }}
                                     >
                                         Sign up
                                     </a>
                                     <a
                                         className="btn btn-sm btn-black-outline display-4 m-2"
                                         href="https://indravardhan.com"
+                                        style={{ textDecoration: 'none' }}
                                     >
                                         Learn more
                                     </a>
                                 </div>
-                                <img src={Banner} alt="Mobirise" />
+                                {/* <img src='/assets/illustrations/illustration_login.png' alt="TheActuals" /> */}
                             </div>
                         </div>
                     </div>
@@ -54,13 +53,13 @@ export default function MainPage() {
                 <div className="container align-items-left">
                     <div className="row justify-content-center">
                         <h1 className="mbr-section-title mbr-bold mbr-fonts-style display-1">
-                            Accept online payments today.
+                            Get Started with your Analytics.
                         </h1>
                         <p className="mbr-text pb-3 mbr-semibold mbr-fonts-style display-1">
-                            Start growing your business with effortless payments.
-                            <span className="text-primary">
+                            Start growing your business, We help you do it.
+                            <a className="text-primary" href='/signup' style={{ fontWeight: 'normal' }}>
                                 Sign up
-                            </span>
+                            </a>
                         </p>
                     </div>
                 </div>
@@ -72,17 +71,17 @@ export default function MainPage() {
                             <div className="card-box align-center">
                                 <span className="mbr-iconfont mobi-mbri-cash mobi-mbri" />
                                 <h4 className="card-title align-center mbr-semibold mbr-white mbr-fonts-style display-2">
-                                    <strong>Multicurrency</strong>
+                                    <strong>Live Data & Analytics For you</strong>
                                 </h4>
                                 <p className="mbr-text pb-3 mbr-white mbr-semibold mbr-fonts-style display-7">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                    With Analytics, predict the future of your business and make better decisions.
                                 </p>
 
                                 <div className="link-wrap">
                                     <h5 className="link mbr-bold mbr-black mbr-fonts-style display-4">
-                                        <div className="text-white">
+                                        <a className="text-white" href='/signup'>
                                             Learn more
-                                        </div>
+                                        </a>
                                     </h5>
                                 </div>
                             </div>
@@ -94,14 +93,14 @@ export default function MainPage() {
                                     <strong>Security</strong>
                                 </h4>
                                 <p className="mbr-text pb-3 mbr-semibold mbr-white mbr-fonts-style display-7">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                    Your Data is safe with us. We do it for you.
                                 </p>
 
                                 <div className="link-wrap">
                                     <h5 className="link mbr-bold mbr-black mbr-fonts-style display-4">
-                                        <div className="text-white">
+                                        <a className="text-white" href="/signup">
                                             Learn more
-                                        </div>
+                                        </a>
                                     </h5>
                                 </div>
                             </div>
@@ -116,12 +115,10 @@ export default function MainPage() {
                         <div className="card-wrapper">
                             <div className="card-wrapper text-center">
                                 <h4 className="card-title text-center mbr-semibold pb-3 mbr-black mbr-fonts-style display-1">
-                                    <strong>Timesaving, moneymaking</strong>
+                                    <strong>Focus on building your Portfolio.</strong>
                                 </h4>
-                                <p className="mbr-text pb-3 mbr-semibold mbr-black mbr-fonts-style display-7">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Vestibulum in fermentum tellus. Etiam turpis metus, mattis
-                                    vel ullamcorper sed, convallis eget tellus.
+                                <p className="mbr-text pb-3 mbr-bold mbr-grey mbr-fonts-style display-7">
+                                    With Risk Management and Quick Response, we help you to grow your business.
                                 </p>
 
                                 <div className="link-wrap">
@@ -137,7 +134,7 @@ export default function MainPage() {
                 </div>
             </section>
 
-            <div className="grid grid-nogutter surface-0 text-800" >
+            {/* <div className="grid grid-nogutter surface-0 text-800" >
                 <div className="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
                     <section>
                         <span className="block text-6xl font-bold mb-1">Manage your <span style={{ fontFamily: 'revert-layer' }}>Portfolio</span></span>
@@ -151,23 +148,23 @@ export default function MainPage() {
                 <div className="col-12 md:col-6 overflow-hidden">
                     <img src='/assets/illustrations/illustration_login2.png' alt="hero-1" className="md:ml-auto block md:h-full" style={{ clipPath: 'polygon(8% 0, 100% 0%, 100% 100%, 0 100%)' }} />
                 </div>
-            </div>
+            </div> */}
 
 
-            <div className="card-box text-center mbr-semibold pb-3 mbr-white mbr-fonts-style" style={{ backgroundColor: 'black'}}>
-                <div className="text-900 font-bold text-6xl mb-4 text-center">Pricing Plans</div>
-                <div className="text-700 text-xl mb-6 text-center line-height-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos.</div>
+            <div className=" text-center mbr-semibold pb-3 mbr-white mbr-fonts-style" style={{ backgroundColor: 'black'}}>
+                <div className=" font-bold text-6xl mb-4 mbr-white text-center"  style={{ paddingTop:'50px' }}>Pricing Plans</div>
+                <div className="text-300 text-xl mb-6 text-center line-height-3">Get Started with your plan right now.We could help you with it. Contact our Team.</div>
 
                 <div className="grid">
                     <div className="col-12 lg:col-4">
                         <div className="p-3 h-full">
                             <div className="mbr-white  h-full flex flex-column" style={{ borderRadius: '6px' }}>
-                                <div className="text-900 font-medium text-xl mb-2">Basic</div>
-                                <div className="text-600">Plan description</div>
+                                <div className=" font-medium text-xl mb-2">Basic</div>
+                                <div className="text-300">Plan description</div>
                                 <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
                                 <div className="flex align-items-center">
-                                    <span className="font-bold text-2xl text-900">$0</span>
-                                    <span className="ml-2 font-medium text-600">per month</span>
+                                    <span className="font-bold text-2xl text-100">$0</span>
+                                    <span className="ml-2 font-medium text-300">per month</span>
                                 </div>
                                 <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
                                 <ul className="list-none p-0 m-0 flex-grow-1">
@@ -183,6 +180,10 @@ export default function MainPage() {
                                         <i className="pi pi-check-circle text-green-500 mr-2" />
                                         <span>No Support</span>
                                     </li>
+                                    <li className="flex align-items-center mb-3">
+                                        <i className="pi pi-check-circle text-green-500 mr-2" />
+                                        <span>One Month Free</span>
+                                    </li>
                                 </ul>
                                 <hr className="mb-3 mx-0 border-top-1 border-bottom-none border-300 mt-auto" />
                                 <Button label="Buy Now" className="p-3 w-full mt-auto" />
@@ -193,12 +194,12 @@ export default function MainPage() {
                     <div className="col-12 lg:col-4">
                         <div className="p-3 h-full">
                             <div className="shadow-2 p-3 h-full flex flex-column" style={{ borderRadius: '6px' }}>
-                                <div className="text-900 font-medium text-xl mb-2">Premium</div>
-                                <div className="text-600">Plan description</div>
+                                <div className="text-100 font-medium text-xl mb-2">Premium</div>
+                                <div className="text-300">Plan description</div>
                                 <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
                                 <div className="flex align-items-center">
-                                    <span className="font-bold text-2xl text-900">$9</span>
-                                    <span className="ml-2 font-medium text-600">per month</span>
+                                    <span className="font-bold text-2xl text-100">$9</span>
+                                    <span className="ml-2 font-medium text-300">per month</span>
                                 </div>
                                 <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
                                 <ul className="list-none p-0 m-0 flex-grow-1">
@@ -228,12 +229,12 @@ export default function MainPage() {
                     <div className="col-12 lg:col-4">
                         <div className="p-3 h-full">
                             <div className="shadow-2 p-3 flex flex-column" style={{ borderRadius: '6px' }}>
-                                <div className="text-900 font-medium text-xl mb-2">Enterprise</div>
-                                <div className="text-600">Plan description</div>
+                                <div className="text-100 font-medium text-xl mb-2">Enterprise</div>
+                                <div className="text-300">Plan description</div>
                                 <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
                                 <div className="flex align-items-center">
-                                    <span className="font-bold text-2xl text-900">$19</span>
-                                    <span className="ml-2 font-medium text-600">per month</span>
+                                    <span className="font-bold text-2xl text-100">$19</span>
+                                    <span className="ml-2 font-medium text-300">per month</span>
                                 </div>
                                 <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
                                 <ul className="list-none p-0 m-0 flex-grow-1">
@@ -255,7 +256,7 @@ export default function MainPage() {
                                     </li>
                                 </ul>
                                 <hr className="mb-3 mx-0 border-top-1 border-bottom-none border-300" />
-                                <Button label="Buy Now" className="p-3 w-full p-button-outlined" />
+                                <Button label="Buy Now" className="p-3 w-full" style={{ backgroundColor: '#6366F1' }} />
                             </div>
                         </div>
                     </div>
@@ -273,14 +274,26 @@ export default function MainPage() {
                                         <strong>Why partner with us?</strong>
                                     </h4>
                                     <p className="mbr-text pb-3 mbr-regular mbr-black mbr-fonts-style display-7">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Vestibulum in fermentum tellus. Etiam turpis metus,
-                                        convallis eget tellus sit amet.
+                                        <div>
+                                        📊 Data Analysis: Our Product leverages state-of-the-art tools and techniques to extract key insights from your financial data.
+                                        </div>
+                                        <div>
+                                            📈 Predictive Modeling: We help you understand customer behavior enabling you to make strategic choices.
+                                        </div>
+
+                                        <div>
+                                        📉 Risk Management: We offer risk assessment strategies to mitigate financial uncertainties and optimize your portfolio.
+                                        </div>
+                                        <div>
+                                        💡 Customized Dashboards: Monitor key performance indicators, track financial metrics, and make decisions with ease.
+                                        </div>
+                                        🌐 Global Market Insights: Stay informed about global market trends, pointers with our in-depth research and analysis.
                                     </p>
 
                                     <div className="link-wrap">
                                         <h5 className="link mbr-bold mbr-black mbr-fonts-style display-7">
                                             <div>Become a partner</div>
+
                                         </h5>
                                     </div>
                                 </div>
@@ -299,14 +312,7 @@ export default function MainPage() {
                             </h4>
 
                             <p className="mbr-text pb-3 mbr-white mbr-semibold mbr-fonts-style display-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Vestibulum in fermentum tellus. Etiam turpis metus, mattis
-                                vel ullamcorper sed, convallis eget tellus. Aliquam luctus
-                                nisl justo, iaculis maximus tortor hendrerit eget. Quisque
-                                vehicula nisl eget tincidunt auctor. Donec vitae justo
-                                aliquet est luctus tincidunt eget eu mi. Aenean eget diam a
-                                lectus maximus pharetra. Praesent semper, est nec ornare
-                                luctus.
+                            Ready to embark on a journey of financial excellence? Partner with us and gain the competitive edge you need in today's dynamic financial world. Contact us today to learn more about how [Your Company Name] can elevate your financial strategies and risk management practices.
                             </p>
                         </div>
                     </div>
@@ -319,18 +325,11 @@ export default function MainPage() {
 
                         <div className="wrapper align-left">
                             <h4 className="card-title mbr-semibold mbr-white mbr-fonts-style display-5">
-                                <strong>One-click payments</strong>
+                                <strong>Our Word</strong>
                             </h4>
 
                             <p className="mbr-text pb-3 mbr-white mbr-semibold mbr-fonts-style display-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Vestibulum in fermentum tellus. Etiam turpis metus, mattis
-                                vel ullamcorper sed, convallis eget tellus. Aliquam luctus
-                                nisl justo, iaculis maximus tortor hendrerit eget. Quisque
-                                vehicula nisl eget tincidunt auctor. Donec vitae justo
-                                aliquet est luctus tincidunt eget eu mi. Aenean eget diam a
-                                lectus maximus pharetra. Praesent semper, est nec ornare
-                                luctus.
+                            Ready to take your financial strategies to the next level? Contact Financial Analytics Experts today to learn more about how our analytics solutions can drive success for your business or investment portfolio.
                             </p>
                         </div>
                     </div>
@@ -434,10 +433,9 @@ export default function MainPage() {
                     </div>
                 </div>
             </section>
-            <section className="cid-rOM8KK0qFY">
+            <section className="cid-rOM5rKjpOn" style={{paddingBottom:'150px'}}>
                 <div className="container text-center">
-                    <div className="row justify-content-center">
-                        <h1 className="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-5">
+                        <h1 className="text-100 mbr-section-title mbr-bold pb-3 mbr-fonts-style display-5">
                             Can't find what you're looking for? Please contact our
                             support, for help.
                         </h1>
@@ -445,12 +443,12 @@ export default function MainPage() {
                         <div className="mbr-section-btn">
                             <a
                                 className="btn btn-sm btn-primary-outline display-4"
-                                href="https://indravardhan.com"
+                                href="https://indravardhan.com/signup"
+                                style={{textDecoration:'NONE'}}
                             >
                                 Contact us
                             </a>
                         </div>
-                    </div>
                 </div>
             </section>
         </div >

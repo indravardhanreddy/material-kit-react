@@ -80,7 +80,7 @@ export default function Router(props) {
         { path: 'hedgefunds', element: <AuthRoute element={<HedgeFunds /> } path = '/hedgefunds'/>},
         { path: 'bonds', element: <AuthRoute element={<Bonds /> } path = '/assets'/>},
         { path: 'mutualfunds', element: <AuthRoute element={<MutualFunds /> } path = '/mutualfunds'/>},
-        { path: 'privateequity', element: <AuthRoute element={<PrivateEquity /> } path = '/privateequity'/>},
+        { path: 'marketnews', element: <AuthRoute element={<PrivateEquity /> } path = '/marketnews'/>},
         { path: 'other', element: <AuthRoute element={<Other /> } path = '/other'/>},
         { path: 'discussions', element: <AuthRoute element={<Discussions /> } path = '/discussions'/>},
       ],

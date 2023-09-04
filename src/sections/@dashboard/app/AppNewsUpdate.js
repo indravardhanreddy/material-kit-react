@@ -51,7 +51,7 @@ NewsItem.propTypes = {
 };
 
 function NewsItem({ news }) {
-  const { image, title, description, postedAt } = news;
+  const { image, title, description, assetValue, postedAt } = news;
 
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
@@ -64,6 +64,10 @@ function NewsItem({ news }) {
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
           {description}
+        </Typography>
+
+        <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+          {assetValue}Crores
         </Typography>
       </Box>
 

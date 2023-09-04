@@ -1,7 +1,7 @@
 // component
 import { useSelector, useDispatch } from 'react-redux';
 import SvgColor from '../../../components/svg-color';
-
+import Iconify from '../../../components/iconify/Iconify';
 // ----------------------------------------------------------------------
 
 const icon = (name) => <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />;
@@ -20,7 +20,7 @@ const navConfig = [
   {
     title: 'Accounts List',
     path: '/dashboard/userlist',
-    icon: icon('ic_user'),
+    icon: <Iconify  icon="ic:twotone-manage-accounts" />,
   },
   {
     title: 'product',
@@ -43,42 +43,42 @@ export const navConfigFunds = [
   {
     title: 'Asset Management',
     path: '/finance/assets',
-    icon: icon('ic_analytics'),
+    icon:  <Iconify  icon="icon-park-outline:funds" />,
   },
   {
-    title: 'Equity',
+    title: 'Market Research',
     path: '/finance/equity',
-    icon: icon('ic_user'),
+    icon: <Iconify icon="icon-park-twotone:stock-market" />,
   },
   {
     title: 'Hedge Funds',
     path: '/finance/hedgefunds',
-    icon: icon('ic_user'),
+    icon: <Iconify icon="clarity:bank-solid" />,
   },
   {
     title: 'Bonds',
     path: '/finance/bonds',
-    icon: icon('ic_cart'),
+    icon: <Iconify icon="ri:shake-hands-fill" />,
   },
   {
     title: 'Mutual Funds',
     path: '/finance/mutualfunds',
-    icon: icon('ic_lock'),
+    icon: <Iconify icon="icon-park-outline:two-hands" />
   },
   {
-    title: 'Private Equity',
-    path: '/finance/privateequity',
-    icon: icon('ic_blog'),
+    title: 'Market News',
+    path: '/finance/marketnews',
+    icon: <Iconify icon="iconamoon:news-duotone" />,
   },
   {
     title: 'Other Services',
     path: '/finance/other',
-    icon: icon('ic_lock'),
+    icon: <Iconify icon="ic:twotone-design-services" />,
   },
   {
     title: 'Discussions',
     path: '/finance/discussions',
-    icon: icon('ic_cart'),
+    icon:  <Iconify icon="healthicons:group-discussion-meeting" />,
   },
 ];
 
@@ -86,17 +86,17 @@ export const navConfigQA = [
   {
     title: 'FAQ',
     path: '/support/faq',
-    icon: icon('ic_analytics'),
+    icon: <Iconify icon="wpf:faq" />,
   },
   {
     title: 'Support',
     path: '/support/care',
-    icon: icon('ic_user'),
+    icon: <Iconify icon="mdi:support" />,
   },
   {
     title: 'About',
     path: '/',
-    icon: icon('ic_user'),
+    icon: <Iconify icon="mdi:about" />,
   }
 ];
 

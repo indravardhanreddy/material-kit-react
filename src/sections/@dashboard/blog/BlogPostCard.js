@@ -109,7 +109,7 @@ export default function BlogPostCard({ post, index, value }) {
               </Card>
           </div> */}
 
-      {blogOpen === true ? <Dialog header={postDetails.title} visible={blogOpen} onHide={() => setBlogOpen(false)} style={{ width: '70vw' }} position='right' resizable={false}>
+      {blogOpen === true ? <Dialog header={postDetails.title} visible={blogOpen} onHide={() => setBlogOpen(false)} style={{ width: '70vw', zIndex: 1000 }} position='right' resizable={false}>
         <TabView>
           <TabPanel header="Post" leftIcon="pi pi-calendar mr-2">
             <p className="m-0">
