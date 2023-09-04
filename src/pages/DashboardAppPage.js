@@ -255,6 +255,8 @@ const chartData4 = [
 
   const uniqueStatesData = Object.values(counts);
 
+  const loss = true;
+
   // let uniqueCitiesData = (Object.values(cities)).filter((ct) => ct.value >= 40);
   // const handleFullCityData = () => {
   //   uniqueCitiesData = Object.values(cities)
@@ -285,19 +287,19 @@ const chartData4 = [
 
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6} md={12}>
-            <AppWidgetSummary title="This Week Earnings" props= {chartData1} total={23450} icon={'ant-design:dashboard-filled'} />
+            <AppWidgetSummary title="This Week Earnings" props= {chartData1} percentage={59.3} isLoss={!loss} total={23450} icon={'ant-design:dashboard-filled'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppWidgetSummary title="Options Earnings"  props= {chartData2} total={15290} color="info" icon={'bxs:objects-vertical-bottom'} />
+            <AppWidgetSummary title="Futures Earnings"  props= {chartData3} total={-5300} isLoss={loss} percentage={87.4} color="warning" icon={'clarity:flame-solid'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppWidgetSummary title="Futures Earnings"  props= {chartData3} total={-5300} color="warning" icon={'clarity:flame-solid'} />
+            <AppWidgetSummary title="Options Earnings"  props= {chartData2} percentage={34.4} isLoss={!loss} total={15290} color="info" icon={'bxs:objects-vertical-bottom'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppWidgetSummary title="Other Earnings"  props= {chartData4} total={3320} color="warning" icon={'clarity:flame-solid'} />
+            <AppWidgetSummary title="Other Earnings"  props= {chartData4} total={3320} percentage={38.3} isLoss={!loss} color="warning" icon={'clarity:flame-solid'} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>

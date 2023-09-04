@@ -1,12 +1,15 @@
 import { Button } from 'primereact/button'
 import { Sidebar } from 'primereact/sidebar'
 import { faker } from '@faker-js/faker';
-import React, { useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, Container, Typography, Link } from '@mui/material';
+import { Helmet } from 'react-helmet-async';
+import Iconify from '../components/iconify/Iconify';
 import LineChart from '../components/chart/LineChart';
 import {
   AppNewsUpdate
 } from '../sections/@dashboard/app';
+
 
 
 const MutualFunds = () => {
@@ -46,20 +49,26 @@ const MutualFunds = () => {
   })))
 
   return (
-    <Grid item xs={12} md={6} lg={8}>
+    mFNews!==undefined && mFNews? <Grid item xs={12} md={6} lg={8}>
+      <Helmet>
+        <title>
+          Finance | Discussions
+        </title>
+      </Helmet>
+
       <AppNewsUpdate
         title="Mutual Funds"
-        list={mFNews.slice(20,50).map((mf, index) => ({
+        list={mFNews.slice(20, 50).map((mf, index) => ({
           id: faker.datatype.uuid(),
           title: mf['Scheme Category'],
           description: mf['Mutual Fund Family'],
-          assetValue : mf['Net Asset Value'],
+          assetValue: mf['Net Asset Value'],
           image: index < 20 ? `/assets/images/covers/cover_${index + 1}.jpg` : `/assets/images/covers/cover_${index + 1 - index}.jpg`,
           postedAt: mf.Date,
         }))}
       />
 
-    </Grid>
+    </Grid> :  <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}><Iconify icon={'svg-spinners:blocks-wave'} color="#1877F2" width={60} /></div>
   )
 }
 

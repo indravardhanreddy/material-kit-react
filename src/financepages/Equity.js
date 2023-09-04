@@ -11,7 +11,9 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
 import { Toast } from 'primereact/toast';
 import { ExportToCsv } from "export-to-csv";
+import { Helmet } from 'react-helmet-async';
 import Iconify from '../components/iconify';
+import Typography from '../theme/overrides/Typography';
 
 const Equity = () => {
   let url = ''
@@ -211,9 +213,18 @@ const Equity = () => {
 
     return (
       <div className="p-3">
-        <Panel header="Header">
-          {console.log(data.moreData.length)}
-          {data.moreData.length > 0 ? JSON.stringify(data.moreData[0]) : 'No More Relevant Data'}
+        <Panel header="More Details">
+          {console.log(data.moreData[0])}
+          {data.moreData.length > 0 ? <div>
+              <p color="text.primary">Day High : {data.moreData[0].dayHigh}</p>
+              <p color="text.primary">Total Traded Value : {data.moreData[0].totalTradedValue}</p>
+              <p color="text.primary">Total Traded Volume : {data.moreData[0].totalTradedVolume}</p>
+              <p color="text.primary">Previous Close : {data.moreData[0].previousClose}</p>
+              <p color="text.primary">Year High : {data.moreData[0].yearHigh}</p>
+              <p color="text.primary">Year Low : {data.moreData[0].yearLow}</p>
+              <p color="text.primary">Change : {data.moreData[0].change}%</p>
+            </div> 
+            : 'No More Relevant Data'}
         </Panel>
       </div>
     );
@@ -255,6 +266,12 @@ const Equity = () => {
   return (
 
     <div className="card flex justify-content-center">
+        <Helmet>
+                <title>
+                    Finance | Market Research
+                </title>
+            </Helmet>
+
 
       <div className="card">
         <Toast ref={toast} />

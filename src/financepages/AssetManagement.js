@@ -1,4 +1,5 @@
-import React,{ useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet-async'
 import TabsContainer from "./shared/TabsContainer"
 import CustomizedTabs from "./shared/CustomizedTabs"
 
@@ -33,7 +34,7 @@ const AssetManagement = () => {
         {
             title: 'Mutual Funds Families',
             content: mFamilies ? <div>{mFamilies.map((mf, index) => (
-                    <div>{mf}</div>
+                <div>{mf}</div>
             ))}
             </div> : <div>No Data Available</div>
         },
@@ -86,19 +87,24 @@ const AssetManagement = () => {
     ]
     return (
         <div className="dashboard__content">
+            <Helmet>
+                <title>
+                    Finance | Asset Management
+                </title>
+            </Helmet>
 
             <div className="dashboard__content__tabs-container">
                 <div className='dashboard__content__tabs-container__top-content'>
                     <div className="dashboard__content__tabs-container__top-content__block">
                         <TabsContainer
-                            header={<div style={{fontWeight:'bold', fontSize: '25px'}}>Top Performing</div>}
+                            header={<div style={{ fontWeight: 'bold', fontSize: '25px' }}>Top Performing</div>}
                         >
                             <CustomizedTabs tabsMenu={accessTabs} />
                         </TabsContainer>
                     </div>
                     <div className="dashboard__content__tabs-container__top-content__block">
                         <TabsContainer
-                            header={<div style={{fontWeight:'bold',  fontSize: '25px'}}>Latest Picks</div>}
+                            header={<div style={{ fontWeight: 'bold', fontSize: '25px' }}>Latest Picks</div>}
                         >
                             <CustomizedTabs tabsMenu={favTabs} />
                         </TabsContainer>
@@ -106,7 +112,7 @@ const AssetManagement = () => {
                 </div>
                 <div className='dashboard__content__tabs-container__bottom-content'>
                     <TabsContainer
-                        header={<div style={{fontWeight:'bold',  fontSize: '25px'}}>Notifcations</div>}
+                        header={<div style={{ fontWeight: 'bold', fontSize: '25px' }}>Notifcations</div>}
                     >
                         <CustomizedTabs tabsMenu={notificationTabs} />
                     </TabsContainer>

@@ -1,10 +1,8 @@
 // @mui
 import PropTypes from 'prop-types';
 import { alpha, styled } from '@mui/material/styles';
-import { Card, Typography } from '@mui/material';
-// utils
+import { Card, Typography, Grid, Chip } from '@mui/material';
 import { fShortenNumber } from '../../../utils/formatNumber';
-// components
 import Iconify from '../../../components/iconify';
 import LineChart from '../../../components/chart/LineChart';
 
@@ -31,7 +29,7 @@ AppWidgetSummary.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function AppWidgetSummary({ title, total, icon, props, color = 'primary', sx, ...other }) {
+export default function AppWidgetSummary({ title, total, icon, props, color = 'primary', isLoss, percentage, sx, ...other }) {
   return (
     <Card
       sx={{
@@ -44,6 +42,7 @@ export default function AppWidgetSummary({ title, total, icon, props, color = 'p
       }}
       {...other}
     >
+
       {/* <StyledIcon
         sx={{
           color: (theme) => theme.palette[color].dark,
@@ -61,6 +60,24 @@ export default function AppWidgetSummary({ title, total, icon, props, color = 'p
 
 
       <Typography variant="h4">{fShortenNumber(total)}</Typography>
+
+      {percentage && (
+        <Grid item>
+          <Chip
+            variant="combined"
+            color={color}
+            icon={
+              <>
+                {!isLoss && <Iconify icon="ant-design:rise-outlined" style={{ fontSize: '0.75rem', color: 'inherit' }} />}
+                {isLoss && <Iconify icon="ant-design:fall-outlined" style={{ fontSize: '0.75rem', color: 'inherit' }} />}
+              </>
+            }
+            label={`${percentage}%`}
+            sx={{ ml: 1.25, pl: 1 }}
+            size="small"
+          />
+        </Grid>
+      )}
 
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
         {title}

@@ -1,30 +1,40 @@
-import React from 'react'
-import { NseIndia } from  "stock-nse-india";
+import { Button } from 'primereact/button'
+import { Sidebar } from 'primereact/sidebar'
+import React, { useState } from 'react'
 
-const Other = () => {
+const MutualFunds = () => {
 
-  const  nseIndia = new  NseIndia()
-    // To get all symbols from NSE
-    nseIndia.getAllStockSymbols().then(symbols  => {
-    console.log(symbols)
-    })
-    
-    // To get equity details for specific symbol
-    nseIndia.getEquityDetails('IRCTC').then(details  => {
-    console.log(details)
-    })
-    
-    // To get equity historical data for specific symbol
-    const range = {
-        start: new Date("2010-01-01"),
-        end: new Date("2021-03-20")
-    }
-    nseIndia.getEquityHistoricalData('IRCTC', range).then(data => {
-        console.log(data)
-    }) 
-  return (
-    <div>Hi </div>
-  )
+  const [visible, setVisible] = useState(false);
+
+  return (<div>
+    <Button icon="pi pi-th-large" onClick={() => setVisible(true)} />
+
+    {visible === true && <div className="card flex justify-content-center">
+      <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
+        <div style={{ width: '100%', height: '100%' }} >
+          <iframe
+            className="custombar1"
+            title="Option chain"
+            src="https://mrhx9x-3000.csb.app/" // Replace with the URL of the website you want to embed
+            width="100%"
+            height="100%"
+          />
+        </div>
+      </Sidebar>
+    </div>}
+
+    <div style={{ width: '100%', height: '100vh' }} >
+      <iframe
+        className="custombar1"
+        title="Option chain"
+        src="https://mrhx9x-3000.csb.app/" // Replace with the URL of the website you want to embed
+        width="100%"
+        height="500px"
+        border='none'
+        overflow='auto'
+      />
+    </div>
+  </div>)
 }
 
-export default Other
+export default MutualFunds

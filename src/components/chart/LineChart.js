@@ -3,6 +3,22 @@ import * as d3 from "d3";
 
 export default function LineChart({ props }) {
 
+    if (props === undefined) {
+        props = [
+            { id: '1', date: "2023-08-01", usersCountByDate: 2 },
+            { id: '2', date: "2023-08-02", usersCountByDate: 10 },
+            { id: '3', date: "2023-08-03", usersCountByDate: 7 },
+            { id: '4', date: "2023-08-04", usersCountByDate: 14 },
+            { id: '5', date: "2023-08-05", usersCountByDate: 3 },
+            { id: '6', date: "2023-08-06", usersCountByDate: 20 },
+            { id: '7', date: "2023-08-07", usersCountByDate: 5 },
+            { id: '8', date: "2023-08-08", usersCountByDate: 12 },
+            { id: '9', date: "2023-08-09", usersCountByDate: 1 },
+            { id: '10', date: "2023-08-10", usersCountByDate: 8 },
+            { id: '11', date: "2023-08-11", usersCountByDate: 17 },
+        ]
+
+    }
     const chartData = [
         { id: '1', date: "2023-08-01", usersCountByDate: 2 },
         { id: '2', date: "2023-08-02", usersCountByDate: 10 },

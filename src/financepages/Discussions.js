@@ -7,6 +7,7 @@ import { Dialog } from 'primereact/dialog';
 import { Message } from 'primereact/message';
 import { Tag } from 'primereact/tag';
 import { Chips } from 'primereact/chips';
+import { Helmet } from 'react-helmet-async';
 import Iconify from '../components/iconify/Iconify';
 import { GET_ALL_POSTS, GET_USER_DATA } from '../FetchAPI';
 import { POST_PUBLISH } from '../FetchMutationsAPI';
@@ -127,6 +128,12 @@ export default function Discussions() {
                     </div>
                 )
             })}</Dialog> : ""}
+
+            <Helmet>
+                <title>
+                    Finance | Discussions
+                </title>
+            </Helmet>
 
             <div className="container">
                 <div className="card flex justify-content-center">
