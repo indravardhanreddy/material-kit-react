@@ -24,6 +24,7 @@ import {
   AppConversionRates,
 } from '../sections/@dashboard/app';
 import { setProfileItems } from '../redux/reducers/profSlice';
+import LineChart from '../components/chart/LineChart';
 
 // ----------------------------------------------------------------------
 
@@ -88,6 +89,60 @@ export default function DashboardAppPage(props) {
 
   const userData = localStorage.getItem("userData")
   console.log(token)
+
+  const chartData1 = [
+    { id:'1', date: "2023-08-01", usersCountByDate: 2 },
+    { id:'2', date: "2023-08-02", usersCountByDate: 10 },
+    { id:'3',date: "2023-08-03", usersCountByDate: 7 },
+    { id:'4',date: "2023-08-04", usersCountByDate: 14 },
+    { id:'5',date: "2023-08-05", usersCountByDate: 3 },
+    { id:'6',date: "2023-08-06", usersCountByDate: 20 },
+    { id:'7',date: "2023-08-07", usersCountByDate: 5 },
+    { id:'8',date: "2023-08-08", usersCountByDate: 12 },
+    { id:'9',date: "2023-08-09", usersCountByDate: 1 },
+    { id:'10',date: "2023-08-10", usersCountByDate: 8 },
+    { id:'11',date: "2023-08-11", usersCountByDate: 17 },
+]
+
+const chartData2 = [
+    { id:'1', date: "2023-08-01", usersCountByDate: 212 },
+    { id:'2', date: "2023-08-02", usersCountByDate: 100 },
+    { id:'3',date: "2023-08-03", usersCountByDate: 232 },
+    { id:'4',date: "2023-08-04", usersCountByDate: 341 },
+    { id:'5',date: "2023-08-05", usersCountByDate: 342 },
+    { id:'6',date: "2023-08-06", usersCountByDate: 424 },
+    { id:'7',date: "2023-08-07", usersCountByDate: -32 },
+    { id:'8',date: "2023-08-08", usersCountByDate: 234 },
+    { id:'9',date: "2023-08-09", usersCountByDate: 323 },
+]
+
+const chartData3 = [
+  { id:'1', date: "2023-08-01", usersCountByDate: 434 },
+  { id:'2', date: "2023-08-02", usersCountByDate: 643 },
+  { id:'3',date: "2023-08-03", usersCountByDate: 384 },
+  { id:'5',date: "2023-08-05", usersCountByDate: 474 },
+  { id:'6',date: "2023-08-06", usersCountByDate: 332 },
+  { id:'7',date: "2023-08-07", usersCountByDate: 224 },
+  { id:'8',date: "2023-08-08", usersCountByDate: 45 },
+  { id:'9',date: "2023-08-09", usersCountByDate: 322 },
+  { id:'10',date: "2023-08-10", usersCountByDate: 112 },
+  { id:'11',date: "2023-08-11", usersCountByDate: 332 },
+  { id:'12',date: "2023-08-12", usersCountByDate: 467 },
+]
+
+const chartData4 = [
+  { id:'1', date: "2023-08-01", usersCountByDate: 232 },
+  { id:'2', date: "2023-08-02", usersCountByDate: 3234 },
+  { id:'3',date: "2023-08-03", usersCountByDate: 3244 },
+  { id:'5',date: "2023-08-05", usersCountByDate: 344 },
+  { id:'6',date: "2023-08-06", usersCountByDate: 244 },
+  { id:'7',date: "2023-08-07", usersCountByDate: 222 },
+  { id:'8',date: "2023-08-08", usersCountByDate: 245 },
+  { id:'9',date: "2023-08-09", usersCountByDate: 3322 },
+  { id:'10',date: "2023-08-10", usersCountByDate: 1242 },
+  { id:'11',date: "2023-08-11", usersCountByDate: 3342 },
+  { id:'12',date: "2023-08-12", usersCountByDate: 4627 },
+]
 
   if (!token) {
     <Dialog />
@@ -229,20 +284,20 @@ export default function DashboardAppPage(props) {
         </Typography>
 
         <Grid container spacing={1}>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="This Week Earnings" total={23450} icon={'ant-design:dashboard-filled'} />
+          <Grid item xs={12} sm={6} md={12}>
+            <AppWidgetSummary title="This Week Earnings" props= {chartData1} total={23450} icon={'ant-design:dashboard-filled'} />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Options Earnings" total={15290} color="info" icon={'bxs:objects-vertical-bottom'} />
+          <Grid item xs={12} sm={6} md={4}>
+            <AppWidgetSummary title="Options Earnings"  props= {chartData2} total={15290} color="info" icon={'bxs:objects-vertical-bottom'} />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Futures Earnings" total={-5300} color="warning" icon={'clarity:flame-solid'} />
+          <Grid item xs={12} sm={6} md={4}>
+            <AppWidgetSummary title="Futures Earnings"  props= {chartData3} total={-5300} color="warning" icon={'clarity:flame-solid'} />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Other Earnings" total={1353} color="error" icon={'ic:baseline-verified'} />
+          <Grid item xs={12} sm={6} md={4}>
+            <AppWidgetSummary title="Other Earnings"  props= {chartData4} total={3320} color="warning" icon={'clarity:flame-solid'} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>

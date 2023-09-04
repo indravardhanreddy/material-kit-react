@@ -3,6 +3,7 @@ import { Sidebar } from 'primereact/sidebar'
 import { faker } from '@faker-js/faker';
 import React, { useState,useEffect} from 'react'
 import { Grid, Container, Typography, Link } from '@mui/material';
+import LineChart from '../components/chart/LineChart';
 import {
   AppNewsUpdate
 } from '../sections/@dashboard/app';
@@ -57,6 +58,7 @@ const MutualFunds = () => {
           postedAt: mf.Date,
         }))}
       />
+
     </Grid>
   )
 }

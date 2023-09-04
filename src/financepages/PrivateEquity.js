@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Card } from 'primereact/card';
+// import { Card } from 'primereact/card';
 import { Tag } from 'primereact/tag';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import { Grid, Container, Typography, Link } from '@mui/material';
+import { Grid, Container, Typography, Link, Card } from '@mui/material';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 import Iconify from '../components/iconify/Iconify';
 
 const PrivateEquity = () => {
@@ -61,34 +64,59 @@ const PrivateEquity = () => {
   }, [])
 
   return (
-    <Grid item xs={12} md={6} lg={4}>
-      {titleSentiment !== undefined && titleSentiment.length > 0 && <Dialog footer={<h3>Model Used - roberta-base-sentiment </h3>} onHide={() => setTitleSentiment([])} visible={titleSentiment.length > 0}>{titleSentiment.map((cs) => {
+    <Card item md={6} lg={4}>
+      {titleSentiment !== undefined && titleSentiment.length > 0 && <Dialog footer={<Typography variant="subtitle1" color="text.secondary">Model Used - roberta-base-sentiment </Typography>} onHide={() => setTitleSentiment([])} visible={titleSentiment.length > 0}>{titleSentiment.map((cs) => {
         return (
-          <div>
             <div>
-              <p>{cs.label} - {cs.score}</p>
+              <Typography variant="subtitle1" color="text.primary">{cs.label} - {(cs.score * 100).toFixed(2)}%</Typography>
             </div>
-          </div>
         )
       })}</Dialog>}
 
       {
         newsInfo !== undefined && newsInfo.length > 0 ? newsInfo.map((news) => {
           const titleNews = news.Title;
+          console.log(news)
           return (
-            <Card style={{ marginBottom: '10px' }}>
-              <div className="card" style={{ width: '18rem' }}>
-                <Button className="card-title" style={{ fontWeight: 'bold', display:'column'}} onClick={() => handleSentiment(news.Title)}>{news.Title}</Button>
-                <div className="card-body">
-                  <a href={news.URL} className="card-img-top">{news.URL}</a>
-                </div>
-                <p className="card-text">{news.Source}</p>
-              </div >
-            </Card>
+            <Grid item xs={12} md={6}>
+      <CardActionArea component="a">
+        <Card sx={{ display: 'flex' }}>
+          <CardContent sx={{ flex: 1 }}>
+            <Typography component="h2" variant="h5"  onClick={() => handleSentiment(news.Title)}>
+            {news.Title}
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              {news.URL}
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              {news.Source}
+            </Typography>
+          </CardContent>
+           {/* <CardMedia
+            component="img"
+            sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
+            // image={}
+            // alt={post.imageLabel}
+          /> */}
+        </Card>
+        <a href={news.URL} style={{ fontWeight:'bold', textDecoration:'none', }} color="primary">
+            <p style={{color:'black'}} >Link : </p> {news.URL}
+            </a>
+      </CardActionArea>
+    </Grid>
+            // <Card style={{ marginBottom: '10px' }}>
+            //   <div className="card" style={{ width: '18rem' }}>
+            //     <Button className="card-title" style={{ fontWeight: 'bold', display:'column'}} onClick={() => handleSentiment(news.Title)}>{news.Title}</Button>
+            //     <div className="card-body">
+            //       <a href={news.URL} className="card-img-top">{news.URL}</a>
+            //     </div>
+            //     <p className="card-text">{news.Source}</p>
+            //   </div >
+            // </Card>
           )
         }) :  <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}><Iconify icon={'svg-spinners:blocks-wave'} color="#1877F2" width={60} /></div>
       }
-    </Grid>
+    </Card>
   )
 }
 

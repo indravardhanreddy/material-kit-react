@@ -340,20 +340,19 @@ export default function MainPage() {
                     <div className="row justify-content-center">
                         <div className="col-lg-12 col-lg-12">
                             <h2 className="mbr-section-title main-title mbr-fonts-style pb-5 text-center mbr-black display-2">
-                                <strong>Our Clients</strong>
+                                <strong>Our Features</strong>
                             </h2>
                         </div>
                         <div className="card-wrapper mbr-flex">
                             <div className="img-wrapper text-center">
-                                <img src={Image4} alt="Mobirise" />
+                                <img src={Image4} alt="Actuals" />
                             </div>
                             <div className="card-box text-center">
                                 <h4 className="card-title align-center mbr-semibold mbr-fonts-style display-5">
                                     <strong>COMFORT</strong>
                                 </h4>
                                 <p className="mbr-text mbr-semibold mbr-fonts-style display-4">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Vestium fermentum tellus.
+                                    Easy to Use and Flexible UI 
                                 </p>
                                 <div className="link-wrap">
                                     <h5 className="link mbr-bold mbr-black mbr-fonts-style display-4">
@@ -371,11 +370,10 @@ export default function MainPage() {
                             </div>
                             <div className="card-box text-center">
                                 <h4 className="card-title align-center mbr-semibold mbr-fonts-style display-5">
-                                    <strong>GEARHEAD</strong>
+                                    <strong>AI ENABLED</strong>
                                 </h4>
                                 <p className="mbr-text mbr-semibold mbr-fonts-style display-4">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Vestium fermentum tellus.
+                                    With AI, witness the power of Analytics
                                 </p>
                                 <div className="link-wrap">
                                     <h5 className="link mbr-bold mbr-black mbr-fonts-style display-4">
@@ -393,11 +391,10 @@ export default function MainPage() {
                             </div>
                             <div className="card-box text-center">
                                 <h4 className="card-title align-center mbr-semibold mbr-fonts-style display-5">
-                                    <strong>STYLE</strong>
+                                    <strong>UPDATES</strong>
                                 </h4>
                                 <p className="mbr-text mbr-semibold mbr-fonts-style display-4">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Vestium fermentum tellus.
+                                    Fastest updates regarding financial Information
                                 </p>
                                 <div className="link-wrap">
                                     <h5 className="link mbr-bold mbr-black mbr-fonts-style display-4">
@@ -409,27 +406,6 @@ export default function MainPage() {
                             </div>
                         </div>
 
-                        <div className="card-wrapper mbr-flex">
-                            <div className="img-wrapper text-center">
-                                <img src={Image7} alt="Mobirise" />
-                            </div>
-                            <div className="card-box text-center">
-                                <h4 className="card-title align-center mbr-semibold mbr-fonts-style display-5">
-                                    <strong>ORGANIC</strong>
-                                </h4>
-                                <p className="mbr-text mbr-semibold mbr-fonts-style display-4">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Vestium fermentum tellus.
-                                </p>
-                                <div className="link-wrap">
-                                    <h5 className="link mbr-bold mbr-black mbr-fonts-style display-4">
-                                        <div className="text-primary">
-                                            Learn more
-                                        </div>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>

@@ -102,9 +102,9 @@ export default function HedgeFunds() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
         <DrawerHeader />
-        <Divider />
+        {/* <Divider />
         <List>
           {['Dashboard'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
@@ -115,33 +115,28 @@ export default function HedgeFunds() {
             </ListItem>
           ))}
         </List>
-        <Divider />
+        <Divider /> */}
         <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
+          Hedge funds are investment vehicles that have gained prominence in the world of finance. These funds are known for their flexibility and unique strategies, which often set them apart from traditional investment options like mutual funds or exchange-traded funds (ETFs). Hedge funds are typically open to accredited or high-net-worth investors and are managed by experienced professionals who aim to generate returns regardless of market conditions.
         </Typography>
         <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
+        <p style={{fontWeight:'bold'}}>Diverse Investment Strategies:</p>
+What distinguishes hedge funds is their wide array of investment strategies. These strategies can range from long-short equity trading, where fund managers take both long (buy) and short (sell) positions in stocks, to global macro strategies that capitalize on broad economic trends. Hedge funds may also employ leverage and derivatives to amplify returns, although this comes with increased risk. Some hedge funds focus on specific sectors or asset classes, while others employ multi-strategy approaches to diversify risk.
+
+<p style={{fontWeight:'bold'}}>Risk and Reward</p>
+Hedge funds are known for their potential for both high returns and high risk. While they aim to deliver positive returns in various market conditions, they are not immune to losses. Investors in hedge funds should be aware of the risks associated with these investments, including market risk, liquidity risk, and operational risk. Due diligence is crucial when selecting a hedge fund, and investors often seek those with a track record of consistent performance.
+
+<p style={{fontWeight:'bold'}}>Fee Structure: </p>
+Hedge funds typically charge fees that differ from traditional investment vehicles. In addition to a management fee, which is a percentage of assets under management (AUM), hedge funds often impose a performance fee, also known as a "carried interest." This performance fee is a percentage of profits generated, providing an incentive for fund managers to deliver strong returns. The fee structure can vary significantly among hedge funds.
+
+<p style={{fontWeight:'bold'}}>Regulation and Transparency:</p>
+Hedge funds are subject to regulatory oversight, but the level of regulation can differ by jurisdiction. Many hedge funds are domiciled in offshore financial centers, which can provide certain tax advantages and regulatory flexibility. The degree of transparency also varies among hedge funds; some are known for their secretive nature, while others provide regular reporting to investors.
+
+<p style={{fontWeight:'bold'}}>Role in the Financial Markets:</p>
+Hedge funds play a significant role in the global financial markets. They provide liquidity, contribute to price discovery, and can influence market sentiment. Their ability to pursue unique strategies can lead to innovative investment approaches. However, their actions can also amplify market volatility, as demonstrated during events like the global financial crisis.
+
+<p style={{fontWeight:'bold'}}>Accessibility and Investor Base:</p>
+Hedge funds have historically been accessible primarily to institutional investors and high-net-worth individuals. However, in recent years, there has been a growing interest in making hedge fund strategies available to a broader range of investors through alternative mutual funds and exchange-traded products. This democratization of hedge fund strategies is changing the landscape of the industry.
         </Typography>
       </Box>
     </Box>

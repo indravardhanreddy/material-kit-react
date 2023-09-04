@@ -29,9 +29,12 @@ ShopProductCard.propTypes = {
 export default function ShopProductCard({ product }) {
   const { name, cover, price, colors, status, priceSale } = product;
   const [value3, setValue3] = useState(1);
+  const [productCount, setProductCount] = useState(0)
+  console.log(productCount)
   const [countBtn,setCountBtn] = useState(false)
-  const handleProductCount = () =>{
-    setCountBtn(true)
+  const handleProductCount = (pc) =>{
+    setCountBtn(!countBtn)
+    setProductCount(pc + 1)
   }
 
   return (
@@ -80,7 +83,7 @@ export default function ShopProductCard({ product }) {
           </Typography>
         </Stack>
         <div style={{gap: '30px', flexDirection: 'column'}}>
-          <Button icon="pi pi-shopping-cart" style={{marginRight:'10px', backgroundColor: 'skyblue' , borderColor:'transparent'}} onClick={handleProductCount}/>
+          <Button icon="pi pi-shopping-cart" style={{marginRight:'10px', backgroundColor: 'skyblue' , borderColor:'transparent'}} onClick={()=>handleProductCount(productCount)}/>
           {countBtn ? <InputNumber inputId="minmax-buttons" inputStyle={{ fontSize: '15px', width:'50px'}} value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" showButtons min={0} max={5} /> :" " }
         </div>
       </Stack>
