@@ -122,6 +122,7 @@ export default function LineChart({ props }) {
                 .attr("class", "line")
                 .attr("fill", "none")
                 .attr("stroke", colorClasses[id])
+                .attr("stroke-width", 2)
                 .attr("d", line);
 
             const path = svg.selectAll("dot").data(dataset);
@@ -138,7 +139,7 @@ export default function LineChart({ props }) {
                 .attr(
                     "r", (d, i) => {
                         if (i === (dataset.length - 1)) {
-                            return "1";
+                            return "2";
                         } return "0";
                     })
                 .attr("cx", (d) => {

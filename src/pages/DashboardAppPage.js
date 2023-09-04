@@ -404,7 +404,7 @@ const chartData4 = [
           <Grid item xs={12} md={6} lg={4}>
             <AppOrderTimeline
               title="Product Timeline"
-              list={[...Array(5)].map((_, index) => ({
+              list={[...Array(7)].map((_, index) => ({
                 id: faker.datatype.uuid(),
                 title: [
                   'Implemented Multiple Widgets(Authorization)',
@@ -412,6 +412,8 @@ const chartData4 = [
                   'Post and Comment Feature',
                   'Stocks Data and Old project inclusion',
                   'Sentimental Analysis',
+                  'Added News API',
+                  'Updated UI and Charts'
                 ][index],
                 type: `order${index + 1}`,
               }))}
