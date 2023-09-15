@@ -4,12 +4,60 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  :root {
+    --shadow: #baa2a2;
+    --scrollbarBG: #ffffff;
+    --thumbBG: #e2b309;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+    border-radius: 20px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+    border-radius: 20px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG);
+    box-shadow: 0 -100vh 0 100vh var(--shadow), 0 0 10px 0px;
+    border-radius: 20px;
+  }
   
   .display-1 {
     font-family: "DM Sans", sans-serif;
     font-size: 4.6rem;
     line-height: 1.1 !important;
   }
+
+  .p-dialog .p-dialog-header,
+  .p-dialog .p-dialog-footer {
+    display: none; /* Hide the header and footer */
+  }
+  
+
+.p-dialog-content {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    border-top-width: 0px;
+    margin-top: 0px;
+    border-style: none;
+    border-color: blue;
+    background-color: transparent;
+    text-align: center;
+    text-transform: none;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  
+.p-dialog.p-component.p-dialog-default.p-ripple-disabled.p-dialog-enter-done {
+  border-radius: 20px;
+}
   
   .display-2 {
     font-family: "DM Sans", sans-serif;
@@ -803,4 +851,8 @@ body {
     .cid-rOM5OI4pFc .card {
       margin-bottom: 2rem;
     }
+  }
+
+  .p-dropdown-panel {
+    z-index: 50000; /* Set your desired z-index value here */
   }

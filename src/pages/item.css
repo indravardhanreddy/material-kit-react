@@ -1,3 +1,80 @@
 .passwordelement {
     width: 100%;
   }
+
+  .gradio-container  {
+    /* Set a fixed height and enable overflow for scrolling */
+    --shadow: #baa2a2;
+    --scrollbarBG: #ffffff;
+    --thumbBG: #e2b309; /* thumb color and track color */
+  }
+  
+  /* Define scrollbar styles for Webkit (Chrome, Safari, Edge) */
+  .gradio-container::-webkit-scrollbar {
+    width: 16px;
+    border-radius: 20px; /* Adjust the width as needed */
+  }
+  
+  .gradio-container::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG);
+    box-shadow: 0 -100vh 0 100vh var(--shadow), 0 0 10px 0px;
+    border-radius: 20px;
+  }
+  
+  .gradio-container::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+    border-radius: 20px; /* track color */
+  }
+  
+
+  .p-dialog .p-dialog-content {
+    padding: 0; /* Remove padding */
+  }
+  
+  .p-dialog .p-dialog-header,
+  .p-dialog .p-dialog-footer {
+    display: none; /* Hide the header and footer */
+  }
+  
+
+  #pr_id_10_content {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    border-top-width: 0px;
+    margin-top: 0px;
+    border-style: none;
+    border-color: blue;
+    background-color: transparent;
+    text-align: center;
+    text-transform: none;
+    font-weight: 500;
+    font-style: normal;
+    border-radius: 40px;
+
+  }
+
+  #pr_id_11_content {
+    margin-bottom: 0px;
+    border-top-width: 0px;
+    margin-top: 0px;
+    border-style: none;
+    border-color: blue;
+    background-color: #ffffff;
+    text-align: center;
+    text-transform: none;
+    font-weight: 500;
+    font-style: normal;
+    border-radius: 20px;
+  }
+
+  
+#pr_id_10 {
+  border-radius: 40px;
+}
+
+#pr_id_11 {
+  border-radius: 40px;
+}

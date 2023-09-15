@@ -27,7 +27,7 @@
   "rules": {
     "no-new": 0,
     "object-shorthand": "off",
-    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/click-events-have-key-events": 1,
     "no-alert": 0,
     "no-shadow": 0,
     "no-console": 0,

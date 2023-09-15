@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.1",
+    "@auth0/auth0-react": "^2.2.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@faker-js/faker": "^7.6.0",
@@ -63,6 +64,7 @@
     "lodash": "^4.17.21",
     "npm": "^9.8.1",
     "numeral": "^2.0.6",
+    "openai": "^4.6.0",
     "primeflex": "^3.3.1",
     "primeicons": "^6.0.1",
     "primereact": "^9.6.0",

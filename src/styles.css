@@ -5,3 +5,15 @@
 .p-menuitem {
     border-radius: 50px;
 }
+
+.p-dropdown-panel {
+    z-index: 40000; /* Set your desired z-index value here */
+  }
+
+.p-dropdown-items {
+    z-index: 40000; /* Set your desired z-index value here */
+}
+
+.p-datepicker {
+    z-index: 40000; /* Set your desired z-index value here */
+}

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import './index.css'
 import { useEffect, useState } from 'react';
 import { useLocation, Link as RouterLink  } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
@@ -12,8 +13,6 @@ import Logo from '../../../components/logo';
 import Scrollbar from '../../../components/scrollbar';
 import NavSection from '../../../components/nav-section';
 import navConfig, { navConfigFunds, navConfigQA } from './config';
-
-// ----------------------------------------------------------------------
 
 const NAV_WIDTH = 280;
 
@@ -61,28 +60,24 @@ export default function Nav({ openNav, onCloseNav }) {
         '& .simplebar-content': { height: 1, display: 'flex', flexDirection: 'column' },
       }}
     >
-      <Box sx={{ px: 2, py: 3, display: 'inline-flex' }}>
+      <Box  sx={{ px: 2, py: 3, display: 'inline-flex' }}>
         <Logo style={{marginRight:'10px'}}/>
-        <Link to='/signup' style={{
-          fontWeight: 'bold',
+        <Link id="signupindex" to='/signup' style={{
+          fontFamily: 'monospace',
           display: 'inline-block',
           padding: '10px 20px',
-          background: '#007bff',
           color: '#fff',
           textDecoration: 'none',
           height: '45px',
-          borderRadius: '5px',
           border: 'none',
           cursor: 'pointer',
           marginRight: '10px'
         }} component={RouterLink}>Signup</Link>
-        <Link to='/signin' style={{ fontWeight: 'Bold'  ,display: 'inline-block',
+        <Link id="signupindex" to='/signin' style={{ fontWeight: 'Bold'  ,display: 'inline-block',
           padding: '10px 20px',
-          background: '#007bff',
           color: '#fff',
           height: '45px',
           textDecoration: 'none',
-          borderRadius: '5px',
           border: 'none',
           cursor: 'pointer',}} component={RouterLink}>  Signin  </Link>
 
@@ -157,7 +152,7 @@ export default function Nav({ openNav, onCloseNav }) {
       {isDesktop ? (
         <Drawer
         open
-        zIndex={1}
+        zIndex={-1}
           variant="permanent"
           PaperProps={{
             sx: {

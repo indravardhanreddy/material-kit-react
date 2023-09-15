@@ -5,6 +5,7 @@ import {
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
+import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
@@ -17,17 +18,24 @@ import 'primeflex/primeflex.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const client = new ApolloClient({
-        uri: 'http://localhost:4001',
-        cache: new InMemoryCache(),
-        headers:{
-          authorization:localStorage.getItem("token") || ""
-        }
-      });
+  uri: 'http://localhost:4001',
+  cache: new InMemoryCache(),
+  headers: {
+    authorization: localStorage.getItem("token") || ""
+  }
+});
 
 root.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>
+  // <Auth0Provider
+  //   domain="theactualsapp.us.auth0.com"
+  //   clientId="gRelE6Z0EWfc7RdSdKwpZFhnibjeqeVA"
+  //   authorizationParams={{
+  //     redirect_uri: window.location.origin
+  //   }}
+  // >
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
 );
 
 // If you want to enable client cache, register instead.

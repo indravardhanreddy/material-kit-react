@@ -6,16 +6,18 @@ import { setFromDate, setToDate } from "../../../redux/reducers/globalFilterSlic
 import Iconify from '../../../components/iconify/Iconify' ;
 import { prDateConvert } from "../../../utils/formatTime";
 import '../../../styles.css'
+import { formatDateAdded } from "../../../utils/formatDateAdded";
 
 export default function CalendarControl(props) {
     const dispatch = useDispatch()
     const datesData = useSelector((state) => state.globalFilter)
+    console.log(datesData)
     const [dates, setDates] = useState(null)
     console.log(dates)
 
     const handleDates = () => {
-        dispatch(setFromDate(dates[0].toString()))
-        dispatch(setToDate(dates[1].toString()))
+        dispatch(setFromDate(formatDateAdded(Date(dates[0]))))
+        dispatch(setToDate(dates[1]))
     }
     // write a use effect if there is a change in the dates then dispatch the action
     return (

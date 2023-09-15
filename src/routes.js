@@ -1,9 +1,8 @@
 import { useNavigate, Navigate, useRoutes } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-// layouts
+import { useAuth0 } from "@auth0/auth0-react";
 import DashboardLayout from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
-//
 import BlogPage from './pages/BlogPage';
 import UserPage from './pages/UserPage';
 import UsersList from './pages/UsersList';
@@ -30,6 +29,8 @@ import Discussions from './financepages/Discussions';
 
 export default function Router(props) {
   const [theme, setTheme] = useState(localStorage.getItem('theme'));
+
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
   function checkIfAuthenticated() {
     const token = localStorage.getItem('token'); // Replace with your token retrieval logic
@@ -62,12 +63,12 @@ export default function Router(props) {
       element: <AuthRoute element={<DashboardLayout />} path = '/dashboard'/>,
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
-        { path: 'app', element: <AuthRoute element={<DashboardAppPage data={{ props }} />} path = '/app'/> },
-        { path: 'user', element: <AuthRoute element={<UserPage data={{ props }} />} path = '/user'/> },
-        { path: 'products', element: <AuthRoute element={<ProductsPage />} path = '/products'/> },
-        { path: 'blog', element: <AuthRoute element={<BlogPage /> } path = '/blog'/>},
-        { path: 'userList', element: <AuthRoute element={<UsersList />} path = '/userlist'/> },
-        { path: 'companydetails', element: <AuthRoute element={<CompanyBlock />} path = '/companydetails'/> },
+        { path: 'app', element: <AuthRoute element={<DashboardAppPage auth0user={{ user }} data={{ props }} />} path = '/app'/> },
+        { path: 'user', element: <AuthRoute element={<UserPage  auth0user={{ user }} data={{ props }} />} path = '/user'/> },
+        { path: 'products', element: <AuthRoute element={<ProductsPage auth0user={{ user }} />} path = '/products'/> },
+        { path: 'blog', element: <AuthRoute element={<BlogPage auth0user={{ user }} /> } path = '/blog'/>},
+        { path: 'userList', element: <AuthRoute element={<UsersList auth0user={{ user }} />} path = '/userlist'/> },
+        { path: 'companydetails', element: <AuthRoute element={<CompanyBlock auth0user={{ user }} />} path = '/companydetails'/> },
       ],
     },
     {
@@ -75,14 +76,14 @@ export default function Router(props) {
       element: <DashboardLayout />,
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
-        { path: 'assets', element: <AuthRoute element={<AssetManagement data={{ props }} /> } path = '/assets'/>},
-        { path: 'equity', element: <AuthRoute element={<Equity /> } path = '/equity'/>},
+        { path: 'assets', element: <AuthRoute element={<AssetManagement auth0user={{ user }} data={{ props }} /> } path = '/assets'/>},
+        { path: 'equity', element: <AuthRoute element={<Equity auth0user={{ user }} /> } path = '/equity'/>},
         { path: 'hedgefunds', element: <AuthRoute element={<HedgeFunds /> } path = '/hedgefunds'/>},
-        { path: 'bonds', element: <AuthRoute element={<Bonds /> } path = '/assets'/>},
-        { path: 'mutualfunds', element: <AuthRoute element={<MutualFunds /> } path = '/mutualfunds'/>},
-        { path: 'marketnews', element: <AuthRoute element={<PrivateEquity /> } path = '/marketnews'/>},
-        { path: 'other', element: <AuthRoute element={<Other /> } path = '/other'/>},
-        { path: 'discussions', element: <AuthRoute element={<Discussions /> } path = '/discussions'/>},
+        { path: 'bonds', element: <AuthRoute element={<Bonds auth0user={{ user }} /> } path = '/assets'/>},
+        { path: 'mutualfunds', element: <AuthRoute element={<MutualFunds auth0user={{ user }} /> } path = '/mutualfunds'/>},
+        { path: 'marketnews', element: <AuthRoute element={<PrivateEquity auth0user={{ user }} /> } path = '/marketnews'/>},
+        { path: 'other', element: <AuthRoute element={<Other auth0user={{ user }} /> } path = '/other'/>},
+        { path: 'discussions', element: <AuthRoute element={<Discussions auth0user={{ user }} /> } path = '/discussions'/>},
       ],
     },
     {

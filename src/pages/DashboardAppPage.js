@@ -1,17 +1,19 @@
 import { Helmet } from 'react-helmet-async';
+import './item.css'
 import { faker } from '@faker-js/faker';
 import { useTheme } from '@mui/material/styles';
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, Link as RouterLink } from 'react-router-dom';
 import { Grid, Container, Typography, Link } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { SpeedDial } from 'primereact/speeddial';
+import { Button } from 'primereact/button';
+import { useState, useEffect, useRef } from 'react';
 import jwtDecode from 'jwt-decode';
 import { Dialog } from 'primereact/dialog';
 import axios from 'axios';
-
-// components
+import App from '../gpt/App';
+import { formatDate, formatDateAdded } from '../utils/formatDateAdded';
 import Iconify from '../components/iconify';
-// sections
 import {
   AppTasks,
   AppNewsUpdate,
@@ -26,8 +28,6 @@ import {
 import { setProfileItems } from '../redux/reducers/profSlice';
 import LineChart from '../components/chart/LineChart';
 
-// ----------------------------------------------------------------------
-
 export default function DashboardAppPage(props) {
 
   const theme = useTheme();
@@ -36,9 +36,88 @@ export default function DashboardAppPage(props) {
   const profileData = useSelector((pd) => pd.prof)
   const [tokenExpired, setTokenExpired] = useState(false);
   const [rawData, setRawData] = useState([]);
+  const globalDate = useSelector((state) => state.globalFilter.fromDate)
+  const [formattedGlobalDate, setFormattedGlobalDate] = useState('')
+  const [chartData1Data, setChartData1Data] = useState([{ id: '1', date: "2023-09-01", usersCountByDate: 2 },
+  ])
   const dispatch = useDispatch();
+  const chartData1 = [
+    { id: '1', date: "2023-09-01", usersCountByDate: 2 },
+    { id: '2', date: "2023-09-02", usersCountByDate: 10 },
+    { id: '3', date: "2023-09-03", usersCountByDate: 7 },
+    { id: '4', date: "2023-09-04", usersCountByDate: 14 },
+    { id: '5', date: "2023-09-05", usersCountByDate: 3 },
+    { id: '6', date: "2023-09-06", usersCountByDate: 20 },
+    { id: '7', date: "2023-09-07", usersCountByDate: 5 },
+    { id: '8', date: "2023-09-08", usersCountByDate: 12 },
+    { id: '9', date: "2023-09-09", usersCountByDate: 1 },
+    { id: '10', date: "2023-09-10", usersCountByDate: 8 },
+    { id: '11', date: "2023-09-11", usersCountByDate: 17 },
+  ];
+
+  const iframe = useRef(null);
+
+  const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const [visible3, setVisible3] = useState(false);
+  const [visible4, setVisible4] = useState(false);
+
+
+  const handleChat = () => {
+    setVisible(true)
+    scrolltobottom()
+  }
+
+
+  const iframeRef = useRef(null);
+
+  function scrolltobottom() {
+
+    console.log(iframeRef)
+    const iframe = iframeRef.current;
+
+    // Example: Change the source of the iframe
+    iframe.src = 'www.indravardhan.com';
+    // Wait for the iframe to load
+    iframeRef.current.addEventListener('load', () => {
+      // Access the contentWindow of the iframe
+      const iframeWindow = iframeRef.current.contentWindow;
+
+      console.log(iframeWindow.document.body.scrollHeight)
+      // Scroll the iframe to the bottom (adjust this value as needed)
+      iframeWindow.scrollTo(0, iframeWindow.document.body.scrollHeight);
+    });
+  };
+
+
+  const toast = useRef(null);
+  const items = [
+    {
+      label: 'TheActuals',
+      icon: <Iconify icon="mdi:web-check" />,
+      command: () => {
+        handleChat()
+      }
+    },
+    {
+      label: 'LLama 13b',
+      icon: <Iconify icon="carbon:model-alt" />,
+      command: () => {
+        setVisible2(true);
+      }
+    },
+    {
+      label: 'TheActuals GPT',
+      icon: <Iconify icon="carbon:chat-bot" />,
+      command: () => {
+        setVisible3(true)
+      }
+    }
+  ];
+
   let uniqueStates = []
   let uniqueCities = []
+  console.log(chartData1)
 
   // useEffect(() => {
   //   setFilterIndexData([])
@@ -88,65 +167,82 @@ export default function DashboardAppPage(props) {
   const token = localStorage.getItem("token")
 
   const userData = localStorage.getItem("userData")
+  const [position, setPosition] = useState('bottom-right');
+
   console.log(token)
 
-  const chartData1 = [
-    { id:'1', date: "2023-08-01", usersCountByDate: 2 },
-    { id:'2', date: "2023-08-02", usersCountByDate: 10 },
-    { id:'3',date: "2023-08-03", usersCountByDate: 7 },
-    { id:'4',date: "2023-08-04", usersCountByDate: 14 },
-    { id:'5',date: "2023-08-05", usersCountByDate: 3 },
-    { id:'6',date: "2023-08-06", usersCountByDate: 20 },
-    { id:'7',date: "2023-08-07", usersCountByDate: 5 },
-    { id:'8',date: "2023-08-08", usersCountByDate: 12 },
-    { id:'9',date: "2023-08-09", usersCountByDate: 1 },
-    { id:'10',date: "2023-08-10", usersCountByDate: 8 },
-    { id:'11',date: "2023-08-11", usersCountByDate: 17 },
-]
+  const chartData2 = [
+    { id: '1', date: "2023-08-01", usersCountByDate: 212 },
+    { id: '2', date: "2023-08-02", usersCountByDate: 100 },
+    { id: '3', date: "2023-08-03", usersCountByDate: 232 },
+    { id: '4', date: "2023-08-04", usersCountByDate: 341 },
+    { id: '5', date: "2023-08-05", usersCountByDate: 342 },
+    { id: '6', date: "2023-08-06", usersCountByDate: 424 },
+    { id: '7', date: "2023-08-07", usersCountByDate: -32 },
+    { id: '8', date: "2023-08-08", usersCountByDate: 234 },
+    { id: '9', date: "2023-08-09", usersCountByDate: 323 },
+  ]
 
-const chartData2 = [
-    { id:'1', date: "2023-08-01", usersCountByDate: 212 },
-    { id:'2', date: "2023-08-02", usersCountByDate: 100 },
-    { id:'3',date: "2023-08-03", usersCountByDate: 232 },
-    { id:'4',date: "2023-08-04", usersCountByDate: 341 },
-    { id:'5',date: "2023-08-05", usersCountByDate: 342 },
-    { id:'6',date: "2023-08-06", usersCountByDate: 424 },
-    { id:'7',date: "2023-08-07", usersCountByDate: -32 },
-    { id:'8',date: "2023-08-08", usersCountByDate: 234 },
-    { id:'9',date: "2023-08-09", usersCountByDate: 323 },
-]
+  const chartData3 = [
+    { id: '1', date: "2023-08-01", usersCountByDate: 434 },
+    { id: '2', date: "2023-08-02", usersCountByDate: 643 },
+    { id: '3', date: "2023-08-03", usersCountByDate: 384 },
+    { id: '5', date: "2023-08-05", usersCountByDate: 474 },
+    { id: '6', date: "2023-08-06", usersCountByDate: 332 },
+    { id: '7', date: "2023-08-07", usersCountByDate: 224 },
+    { id: '8', date: "2023-08-08", usersCountByDate: 45 },
+    { id: '9', date: "2023-08-09", usersCountByDate: 322 },
+    { id: '10', date: "2023-08-10", usersCountByDate: 112 },
+    { id: '11', date: "2023-08-11", usersCountByDate: 332 },
+    { id: '12', date: "2023-08-12", usersCountByDate: 467 },
+  ]
 
-const chartData3 = [
-  { id:'1', date: "2023-08-01", usersCountByDate: 434 },
-  { id:'2', date: "2023-08-02", usersCountByDate: 643 },
-  { id:'3',date: "2023-08-03", usersCountByDate: 384 },
-  { id:'5',date: "2023-08-05", usersCountByDate: 474 },
-  { id:'6',date: "2023-08-06", usersCountByDate: 332 },
-  { id:'7',date: "2023-08-07", usersCountByDate: 224 },
-  { id:'8',date: "2023-08-08", usersCountByDate: 45 },
-  { id:'9',date: "2023-08-09", usersCountByDate: 322 },
-  { id:'10',date: "2023-08-10", usersCountByDate: 112 },
-  { id:'11',date: "2023-08-11", usersCountByDate: 332 },
-  { id:'12',date: "2023-08-12", usersCountByDate: 467 },
-]
+  const chartData4 = [
+    { id: '1', date: "2023-08-01", usersCountByDate: 232 },
+    { id: '2', date: "2023-08-02", usersCountByDate: 3234 },
+    { id: '3', date: "2023-08-03", usersCountByDate: 3244 },
+    { id: '5', date: "2023-08-05", usersCountByDate: 344 },
+    { id: '6', date: "2023-08-06", usersCountByDate: 244 },
+    { id: '7', date: "2023-08-07", usersCountByDate: 222 },
+    { id: '8', date: "2023-08-08", usersCountByDate: 245 },
+    { id: '9', date: "2023-08-09", usersCountByDate: 3322 },
+    { id: '10', date: "2023-08-10", usersCountByDate: 1242 },
+    { id: '11', date: "2023-08-11", usersCountByDate: 3342 },
+    { id: '12', date: "2023-08-12", usersCountByDate: 4627 },
+  ]
 
-const chartData4 = [
-  { id:'1', date: "2023-08-01", usersCountByDate: 232 },
-  { id:'2', date: "2023-08-02", usersCountByDate: 3234 },
-  { id:'3',date: "2023-08-03", usersCountByDate: 3244 },
-  { id:'5',date: "2023-08-05", usersCountByDate: 344 },
-  { id:'6',date: "2023-08-06", usersCountByDate: 244 },
-  { id:'7',date: "2023-08-07", usersCountByDate: 222 },
-  { id:'8',date: "2023-08-08", usersCountByDate: 245 },
-  { id:'9',date: "2023-08-09", usersCountByDate: 3322 },
-  { id:'10',date: "2023-08-10", usersCountByDate: 1242 },
-  { id:'11',date: "2023-08-11", usersCountByDate: 3342 },
-  { id:'12',date: "2023-08-12", usersCountByDate: 4627 },
-]
+  console.log(globalDate)
 
   if (!token) {
     <Dialog />
   }
+
+  useEffect(() => {
+    console.log(chartData1)
+    setChartData1Data(chartData1.filter((cd) => cd.date === globalDate))
+  }, [globalDate])
+
+  const handleIframeAction = () => {
+    // Access the iframe element using the ref
+    const iframe = iframeRef.current;
+
+    // Check if the iframe exists and is loaded
+    if (iframe) {
+      // Access the iframe's content document
+      const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+      const elementsToHide = ["div"];
+      elementsToHide.forEach((elementId) => {
+        const elementToHide = iframeDocument.getElementById(elementId);
+        if (elementToHide) {
+          elementToHide.style.display = "none";
+        }
+      });
+
+      // Perform actions on the iframe's content, for example, changing the background color
+      iframeDocument.body.style.backgroundColor = 'red';
+    }
+  };
 
   function isTokenExpired(token) {
     try {
@@ -222,37 +318,10 @@ const chartData4 = [
     return () => clearInterval(interval);
   }, [token]);
 
-  //   const fetchInfo = async () => {
-
-  //     fetch('https://localhost:7099/api/Users/userdata', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.parse(dataa)
-  //     })
-  //       .then(response => response.json(data))
-  //       .then(data => {
-  //         if (data.successMessage) {
-  //           console.log(data.successMessage)
-  //           // showSuccessToast(data.successMessage)
-  //         }
-  //         else {
-  //           // showErrorToast(data.errorMessage)
-  //         }
-  //         // Handle success or other actions
-  //       })
-  //       .catch(error => {
-  //         console.error('Error creating user:', error);
-  //         // Handle error
-  //       });
-  // }
-
-  // useEffect(() => {
-  //     fetchInfo();
-  // }, []);
-
-
+  const show = (position) => {
+    setPosition(position);
+    setVisible(true);
+  };
   const uniqueStatesData = Object.values(counts);
 
   const loss = true;
@@ -280,6 +349,29 @@ const chartData4 = [
         <title> Dashboard | TheActuals </title>
       </Helmet>
 
+      {/* <SpeedDial model={items} radius={80} type="quarter-circle" direction="up-left" style={{ right: 50, bottom: 50, baseZIndex: "5000000" }} /> */}
+
+      {visible ? <div>
+        <Dialog id="pr_id_10" visible={visible} closable={false} dismissableMask={!visible} position={position} baseZIndex={1000000}
+          style={{ backgroundColor: '#0b0f19' }} onHide={() => setVisible(false)} draggable={false} resizable={false}>
+          <div style={{ height: '400px', width: '400px' }}><iframe ref={iframeRef} sandbox="allow-scripts allow-same-origin allow-presentation allow-popups" src="www.indravardhan.com" title='Python Chat' style={{ width: '100%', height: '100%' , borderRadius: "20px" }} />
+          </div>
+          {/* <button onClick={handleIframeAction}>Change Iframe Content</button> */}
+        </Dialog> </div> : ""}
+
+      {visible2 ? <Dialog id="pr_id_10" closable={false} dismissableMask={!visible} visible={visible2} position={position} baseZIndex={1000000}
+        style={{ backgroundColor: '#0b0f19', padding: '0px' }} onHide={() => setVisible2(false)} draggable={false} resizable={false}>
+        <div style={{ height: '400px', width: '400px' }}><iframe ref={iframeRef} sandbox="allow-scripts allow-same-origin allow-presentation allow-popups" src="https://codellama-codellama-13b-chat.hf.space" title='Python Chat' style={{ width: '100%', height: '100%', borderRadius: "20px" }} />
+        </div>
+      </Dialog> : ""}
+
+      {visible3 ? <Dialog id="pr_id_11" closable={false} dismissableMask={!visible} visible={visible3} position={position} baseZIndex={1000000}
+        style={{ backgroundColor: '#0b0f19' }} onHide={() => setVisible3(false)} draggable={false} resizable={false}>
+        <div style={{ height: '400px', width: '600px' ,borderRadius: "20px" }}>
+          <App />
+        </div>
+      </Dialog> : ""}
+
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
           Portfolio Performance(in ₹Rupees)
@@ -287,19 +379,19 @@ const chartData4 = [
 
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6} md={12}>
-            <AppWidgetSummary title="This Week Earnings" props= {chartData1} percentage={59.3} isLoss={!loss} total={23450} icon={'ant-design:dashboard-filled'} />
+            <AppWidgetSummary title="This Week Earnings" props={(chartData1Data)} percentage={59.3} isLoss={!loss} total={23450} icon={'ant-design:dashboard-filled'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppWidgetSummary title="Futures Earnings"  props= {chartData3} total={-5300} isLoss={loss} percentage={87.4} color="warning" icon={'clarity:flame-solid'} />
+            <AppWidgetSummary title="Futures Earnings" props={chartData3} total={-5300} isLoss={loss} percentage={87.4} color="warning" icon={'clarity:flame-solid'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppWidgetSummary title="Options Earnings"  props= {chartData2} percentage={34.4} isLoss={!loss} total={15290} color="info" icon={'bxs:objects-vertical-bottom'} />
+            <AppWidgetSummary title="Options Earnings" props={chartData2} percentage={34.4} isLoss={!loss} total={15290} color="info" icon={'bxs:objects-vertical-bottom'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppWidgetSummary title="Other Earnings"  props= {chartData4} total={3320} percentage={38.3} isLoss={!loss} color="warning" icon={'clarity:flame-solid'} />
+            <AppWidgetSummary title="Other Earnings" props={chartData4} total={3320} percentage={38.3} isLoss={!loss} color="warning" icon={'clarity:flame-solid'} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>

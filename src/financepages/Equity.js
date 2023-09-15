@@ -36,6 +36,7 @@ const Equity = () => {
     { name: 'Nifty 100', code: 'NIFTY100' },
     { name: 'Nifty Bank', code: 'NIFTYBANK' },
     { name: 'Nifty IT', code: 'NIFTYIT' },
+    { name: 'Nifty MidCap 50', code: 'NIFTYMID50' },
     { name: 'All', code: 'ALL'}
   ];
 
@@ -79,6 +80,9 @@ const Equity = () => {
         break;
       case 'NIFTYIT':
         url = 'https://latest-stock-price.p.rapidapi.com/price?Indices=NIFTY%20IT';
+        break;
+      case 'NIFTYMID50':
+        url = 'https://latest-stock-price.p.rapidapi.com/price?Indices=NIFTY%20MIDCAP%2050'
         break;
       case 'ALL' : 
         url = 'https://latest-stock-price.p.rapidapi.com/any';
@@ -186,6 +190,7 @@ const Equity = () => {
         yearLow : visit.yearLow
       })
     })
+
 
     setFilterIndexData(Object.values(groupedUsers))
     setRawData([])

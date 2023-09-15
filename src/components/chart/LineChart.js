@@ -19,6 +19,7 @@ export default function LineChart({ props }) {
         ]
 
     }
+
     const chartData = [
         { id: '1', date: "2023-08-01", usersCountByDate: 2 },
         { id: '2', date: "2023-08-02", usersCountByDate: 10 },
@@ -32,9 +33,6 @@ export default function LineChart({ props }) {
         { id: '10', date: "2023-08-10", usersCountByDate: 8 },
         { id: '11', date: "2023-08-11", usersCountByDate: 17 },
     ]
-
-    console.log(props)
-
 
     const id = 1;
     const colorClasses = [

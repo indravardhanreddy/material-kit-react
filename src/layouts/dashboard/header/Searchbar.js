@@ -1,12 +1,10 @@
-import { useState } from 'react';
-// @mui
+import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { Input, Slide, Button, IconButton, InputAdornment, ClickAwayListener } from '@mui/material';
-// utils
+import { Input, Slide, Button, IconButton, Link, InputAdornment, ClickAwayListener } from '@mui/material';
+import { Dropdown } from 'primereact/dropdown';
+import { Link as RouterLink } from 'react-router-dom';
 import { bgBlur } from '../../../utils/cssStyles';
-// component
 import Iconify from '../../../components/iconify';
-
 // ----------------------------------------------------------------------
 
 const HEADER_MOBILE = 64;
@@ -39,6 +37,22 @@ export default function Searchbar() {
     setOpen(!open);
   };
 
+  const dropdownOptions = [
+    { label: 'DashboardApp', value: 'dbapp', url: 'http://localhost:3000/dashboard/app' },
+    { label: 'DashboardUser', value: 'dbuser', url: 'http://localhost:3000/dashboard/user' },
+    { label: 'Option 2', value: 'option2', url: 'https://example.com/page2' },
+    { label: 'Option 3', value: 'option3', url: 'https://example.com/page3' },
+  ];
+
+  const handleDropdownItemClick = (event) => {
+    const selectedOption = dropdownOptions.find(option => option.value === event.value);
+    
+    if (selectedOption && selectedOption.url) {
+      // Redirect to the specified URL
+      window.location.href = selectedOption.url;
+    }
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -53,8 +67,8 @@ export default function Searchbar() {
         )}
 
         <Slide direction="down" in={open} mountOnEnter unmountOnExit>
-          <StyledSearchbar>
-            <Input
+          <StyledSearchbar zIndex='1000'>
+            {/* <Input
               autoFocus
               fullWidth
               disableUnderline
@@ -65,10 +79,20 @@ export default function Searchbar() {
                 </InputAdornment>
               }
               sx={{ mr: 1, fontWeight: 'fontWeightBold' }}
+            /> */}
+            <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled', width: 20, height: 20, marginRight: '20px' }} />
+            <Dropdown
+              optionLabel="label" 
+              value={dropdownOptions[0].url}
+              style={{ width: '100%', maxWidth : '100%', backgroundColor: 'transparent', border: 'none', outline: 'none', boxShadow: 'none', position: 'relative', zIndex: '1060', fontSize:'1.5rem', fontWeight: 'bold'}}
+              options={dropdownOptions}
+              onChange={handleDropdownItemClick} // Attach the click handler
             />
+
             <Button variant="contained" onClick={handleClose}>
               Navigate
             </Button>
+
           </StyledSearchbar>
         </Slide>
       </div>

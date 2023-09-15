@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { Toast } from "primereact/toast";
+import { Button } from 'primereact/button';
 import { Password } from 'primereact/password'
 import { InputText } from 'primereact/inputtext';
 import { Divider } from 'primereact/divider'
 import { useMutation } from '@apollo/client';
 import jwtDecode from "jwt-decode";
+import { useAuth0 } from "@auth0/auth0-react";
 import { SIGNIN_USER } from '../../../FetchMutationsAPI';
 import { setProfileItems } from '../../../redux/reducers/profSlice';
 // components
@@ -23,8 +25,8 @@ export default function LoginForm() {
     email: '',
     password: '',
   });
+  const { loginWithRedirect } = useAuth0();
   const [signinUser, { data, loading, error }] = useMutation(SIGNIN_USER)
-  console.log(error)
   const dispatch = useDispatch();
 
   const toast = useRef(null);
@@ -71,10 +73,8 @@ export default function LoginForm() {
 
   if (data !== undefined) {
     localStorage.setItem("token", data.user.token)
-    console.log(data.user.user)
     const decoded = jwtDecode(data.user.token);
 
-    console.log(decoded)
     localStorage.setItem("userData", JSON.stringify(data.user.user))
     dispatch(setProfileItems(data.user.user))
     navigate('/dashboard/app')

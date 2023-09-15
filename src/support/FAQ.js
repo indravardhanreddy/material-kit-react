@@ -3,6 +3,7 @@ import { Box, Container, Stack, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 import { SettingsNotifications } from '../sections/settings/settings-notifications';
 import { SettingsPassword } from '../sections/settings/settings-password';
+import App from '../gpt/App';
 // import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 
 const FAQ = () => {

@@ -10,12 +10,12 @@ const navConfig = [
   {
     title: 'dashboard',
     path: '/dashboard/app',
-    icon: icon('ic_analytics'),
+    icon:<Iconify  icon="ic:round-dashboard" />,
   },
   {
     title: 'user',
     path: '/dashboard/user',
-    icon: icon('ic_user'),
+    icon: <Iconify  icon="solar:user-bold" />,
   },
   {
     title: 'Accounts List',
@@ -25,17 +25,17 @@ const navConfig = [
   {
     title: 'product',
     path: '/dashboard/products',
-    icon: icon('ic_cart'),
+    icon: <Iconify  icon="fluent:cart-16-filled" />,
   },
   {
     title: 'blog',
     path: '/dashboard/blog',
-    icon: icon('ic_blog'),
+    icon: <Iconify  icon="material-symbols:post-outline" />,
   },
   {
     title: 'CompanyBlock',
     path: '/dashboard/companydetails',
-    icon: icon('ic_lock'),
+    icon: <Iconify  icon="clarity:organization-solid" />,
   },
 ];
 

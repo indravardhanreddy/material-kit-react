@@ -7,6 +7,7 @@ import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover 
 import { useSelector, useDispatch } from 'react-redux';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button'
+import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate, useNavigate } from 'react-router-dom';
 import Iconify from '../../../components/iconify';
 import ProfilePage from '../../MenuItems/ProfilePage';
@@ -24,19 +25,19 @@ import account from '../../../_mock/account';
 const MENU_OPTIONS = [
   {
     label: 'Home',
-    icon: <Iconify icon={'basil:home-solid'} color="#1C9CEA" width={20} />,
+    icon: <Iconify icon={'basil:home-solid'} color="black" width={20} />,
   },
   {
     label: 'Profile',
-    icon: <Iconify icon={'solar:settings-bold'} color="#1C9CEA" width={20} />,
+    icon: <Iconify icon={'solar:settings-bold'} color="black" width={20} />,
   },
   {
     label: 'Settings',
-    icon: <Iconify icon={'iconamoon:profile-fill'} color="#1C9CEA" width={20} />,
+    icon: <Iconify icon={'iconamoon:profile-fill'} color="black" width={20} />,
   },
   {
     label: 'Our Product',
-    icon: <Iconify icon={'ph:sparkle-fill'} color="#1C9CEA" width={20} />,
+    icon: <Iconify icon={'ph:sparkle-fill'} color="black" width={20} />,
   }
 ];
 
@@ -47,6 +48,7 @@ export default function AccountPopover() {
   const userData = JSON.parse(localStorage.getItem("userData"))
   const [open, setOpen] = useState(null);
   const navigate = useNavigate();
+  const { logout } = useAuth0();
 
 
   const handleOpen = (event) => {
@@ -55,6 +57,7 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     localStorage.removeItem("token")
+    logout({ logoutParams: { returnTo: window.location.origin } })
     navigate('/login')
     setOpen(null);
   };
@@ -123,27 +126,20 @@ export default function AccountPopover() {
           unread={0}
         /></>}
         {item === 'Profile' && <Profile />}
-        {item === 'Our Product' && <>Our Product</>}
+        {item === 'Our Product' && <div style={{height:'400px', width:'400px'}}><iframe sandbox="allow-scripts allow-same-origin allow-presentation" src="http://localhost:8501" title='Python Chat' style={{width: '100%', height: '100%'}} />  
+</div>}
         {item === 'Settings' && <>Settings</>}
       </Dialog>
       <IconButton
         onClick={handleOpen}
-        sx={{
-          p: 0,
-          ...(open && {
-            '&:before': {
-              zIndex: 1,
-              content: "''",
-              width: '100%',
-              height: '100%',
-              borderRadius: '50%',
-              position: 'absolute',
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.8),
-            },
-          }),
+
+        style={{
+          borderRadius: '5px',
+          width:'55px',
+          height: '55px',
         }}
       >
-        <Avatar src={""} alt="photoURL" />
+<Iconify icon={'line-md:account-small'} color="black" style={{ borderRadius: '5px', width:'100%', height:'100%', border:'none', backgroundColor:'lightgrey'}}/>
       </IconButton>
 
       <Popover
@@ -155,12 +151,9 @@ export default function AccountPopover() {
         PaperProps={{
           sx: {
             p: 0,
-            mt: 1.5,
-            ml: 0.75,
             width: 180,
             '& .MuiMenuItem-root': {
               typography: 'body2',
-              borderRadius: 0.75,
             },
           },
         }}
@@ -175,7 +168,7 @@ export default function AccountPopover() {
 
         <Stack >
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={() => handleMenuItems(option.label)} style={{ borderRadius: '10px' }}>
+            <MenuItem key={option.label} onClick={() => handleMenuItems(option.label)} style={{ borderRadius: '10px', }}>
               {option.icon}{' | '}{option.label}
             </MenuItem>
           ))}
@@ -184,7 +177,7 @@ export default function AccountPopover() {
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <MenuItem onClick={handleClose}>
-          {<Iconify icon={'majesticons:logout'} color="#1C9CEA" width={20} />} {' | '}Logout
+          {<Iconify icon={'majesticons:logout'} color="black" width={20} />} {' | '}Logout
         </MenuItem>
       </Popover>
     </>
