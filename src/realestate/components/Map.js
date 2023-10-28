@@ -898,7 +898,7 @@ const Map = () => {
 
   const itemTemplate = (item) => {
     return (
-      <div style={{ borderColor: 'grey' }}>
+      <div style={{ borderColor: 'grey' }} onClick={() => setDefaultCenter({ lat: item.lat, lng: item.lng })}>
         {/* <img src="" className="item-image" /> */}
         <div className="item-details">
           <h2 className="item-title">{item.location}</h2>
@@ -1497,7 +1497,7 @@ const Map = () => {
                         scaledSize: new google.maps.Size(50, 50),
                       }}
                       title={JSON.stringify(marker)}
-                      label={{ text: marker.title.toString(), color: "blue", fontSize: "10px", fontWeight: "bold", fontFamily: 'sans-serif' }}
+                      label={{ text: marker.id.toString(), color: "black", fontSize: "10px", fontWeight: "bold", fontFamily: 'sans-serif' }}
                       onClick={() => handleMarkerMouseOver(marker)}
                       clusterer={clusterer}
                     />
