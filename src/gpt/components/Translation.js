@@ -6,7 +6,6 @@ import Iconify from "../../components/iconify/Iconify";
 export default function Translation({ doStuff, setInput, result, resultchat , title, selectOptionBack }) {
   console.log(resultchat)
   const [writeInput, setWriteInput] = useState("")
-  
 
   const handleActions = () =>{
     setInput(writeInput)
@@ -14,17 +13,17 @@ export default function Translation({ doStuff, setInput, result, resultchat , ti
   }
   
   const [text, setText] = useState('');
-  const message = '  Try out Something on GPT...';
-  const delay = 30;
+  const message = 'Try out Something on GPT...';
+  const delay = 0;
 
   console.log(text)
 
   useEffect(() => {
-    let index = 0;
+    let index = -1;
 
     const intervalId = setInterval(() => {
       if (index < message.length) {
-        setText((prevText) => prevText + message.charAt(index));
+        setText((prevText) =>  `${prevText}${result.charAt(index)}`);
         index += 1;
       } else {
         clearInterval(intervalId); 
@@ -37,11 +36,12 @@ export default function Translation({ doStuff, setInput, result, resultchat , ti
   }, []);
 
   useEffect(() => {
-    let index = 0;
+    let index = -1;
 
     const intervalId = setInterval(() => {
       if (index < result.length) {
-        setText((prevText) => prevText + result.charAt(index));
+        console.log(index )
+        setText((prevText) => `${prevText}${result.charAt(index)}`);
         index += 1;
       } else {
         clearInterval(intervalId); 
@@ -73,7 +73,7 @@ export default function Translation({ doStuff, setInput, result, resultchat , ti
         Send <Iconify icon="formkit:submit"/>
       </Button>
 
-      <h3 className="result-text">{text.length > 0 ? text : text }</h3>
+      <h3 className="result-text">{text.length > 0 ? `${text}` : text }</h3>
     </> : <div> <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' ,  backgroundColor: '#2065D1' }}>
 
       <h3>{title}</h3>

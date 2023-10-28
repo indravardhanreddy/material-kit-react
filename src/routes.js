@@ -22,6 +22,8 @@ import MutualFunds from './financepages/MutualFunds';
 import Other from './financepages/Other';
 import Bonds from './financepages/Bonds';
 import FAQ from './support/FAQ';
+import REMaps from './realestate/REMaps';
+import Email from './support/Email';
 import MainPage from './MainPage';
 import Discussions from './financepages/Discussions';
 
@@ -92,11 +94,18 @@ export default function Router(props) {
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
         { path: 'faq', element: <FAQ data={{ props }} /> },
+        { path: 'maps', element: <REMaps data={{ props }} /> },
+        // { path: 'gpt', element: <AppGPT data={{ props }} /> },
+        { path: 'email', element: <Email data={{ props }} /> },
       ],
     },
     {
       path: 'login',
       element: <LoginPage />,
+    },
+    {
+      path  : 'realestate',
+      element: <REMaps />,
     },
     {
       path: 'signup',

@@ -281,7 +281,7 @@ export default function UserPage(props) {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
-            </Card> : <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center'}}><Iconify icon={'svg-spinners:blocks-wave'} color="#1877F2" width={60} /></div>}
+            </Card> : <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center'}}><Iconify icon={'svg-spinners:blocks-wave'} color="#b1c4c7" width={60} /></div>}
         </Container>
 
         <Popover

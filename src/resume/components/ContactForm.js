@@ -94,7 +94,6 @@ function ContactForm() {
                                     <InputText id="name" name="name" value={formik.values.name}
                                             onChange={formik.handleChange}
                                             className={classNames({'p-invalid': isFormFieldValid('name')}, 'w-full')}/>
-                                    <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }</>
                                     <label htmlFor="name"
                                         className={classNames({'p-error': isFormFieldValid('name')}, 'w-full')}>Name*</label>
                                 </span>
@@ -106,7 +105,6 @@ function ContactForm() {
                                     <InputText id="email" name="email" value={formik.values.email}
                                             onChange={formik.handleChange}
                                             className={classNames({'p-invalid': isFormFieldValid('email')}, 'w-full')}/>
-                                    <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }</>
                                     <label htmlFor="email"
                                         className={classNames({'p-error': isFormFieldValid('email')}, 'w-full')}>Email*</label>
                                 </span>
@@ -117,7 +115,6 @@ function ContactForm() {
                                     <InputText id="subject" name="subject" value={formik.values.subject}
                                             onChange={formik.handleChange}
                                             className={classNames({'p-invalid': isFormFieldValid('subject')}, 'w-full')}/>
-                                <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }</>
                                     <label htmlFor="subject"
                                         className={classNames({'p-error': isFormFieldValid('subject')}, 'w-full')}>Subject</label>
                                 </span>
@@ -128,7 +125,6 @@ function ContactForm() {
                             <InputTextarea rows={5} id="message" name="message" value={formik.values.message}
                                             onChange={formik.handleChange}
                                             className={classNames({'p-invalid': isFormFieldValid('message')}, 'w-full')}/>
-                            <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }</>
                             <label htmlFor="message"
                                     className={classNames({'p-error': isFormFieldValid('message')}, 'w-full')}>Message*</label>
                             </span>

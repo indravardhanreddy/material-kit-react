@@ -104,7 +104,6 @@ export default function Discussions() {
                 // });
                 return (
                     <div key={i}>
-                        <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
                         <Tag onClick={() => handleSentiment(p.comment)} style={{ height: '50px', marginRight: '30px' }}>{p.comment} </Tag>
                         <Message key={i + 5} style={{
                             border: 'solid #696cff',
@@ -139,7 +138,6 @@ export default function Discussions() {
                 <div className="card flex justify-content-center">
                     <span className="p-float-label">
                         <InputTextarea id="description" value={value} onChange={(e) => setValue(e.target.value)} rows={3} cols={70} />
-                        <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
                         <label htmlFor="description">What's Happening...</label>
                         <Button label="Post" className="p-button-raised p-button-rounded" onClick={handlePost} />
                     </span>

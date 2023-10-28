@@ -132,7 +132,6 @@ const Equity = () => {
     <div className="flex flex-wrap justify-content-end gap-2">
       <span className="p-float-label">
         <Dropdown inputId="dd-city" value={selectedIndex} onChange={(e) => setSelectedIndex(e.value)} options={cities} optionLabel="name" optionValue='code' className="w-full md:w-14rem" />
-        <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
         <label htmlFor="dd-city">Select Index</label>
       </span>
       <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} text />

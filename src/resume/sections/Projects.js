@@ -140,7 +140,6 @@ function MyProjects() {
                 })
             }
         })
-        // eslint-disable-next-line
     }, [filters]);
 
     const toTitleCase = (phrase) => {

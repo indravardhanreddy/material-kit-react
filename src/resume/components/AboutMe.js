@@ -35,7 +35,6 @@ function AboutMe() {
             })
             .start();
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [animateStyle, theme]);
 
     return (

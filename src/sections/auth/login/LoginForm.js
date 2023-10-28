@@ -119,7 +119,6 @@ export default function LoginForm() {
       {error !== undefined && showErrorToast(error.message)}
 
       <div>
-        <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
         <label htmlFor="email" className="block text-900 font-medium mb-2">Email</label>
         <InputText
           name="email"
@@ -130,7 +129,6 @@ export default function LoginForm() {
           onChange={handleChange}
           className="w-full mb-3" />
 
-        <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
         <label htmlFor="password" className="block text-900 font-medium mb-2">Password</label>
         <InputText
           className="w-full mb-3"
@@ -143,11 +141,9 @@ export default function LoginForm() {
           onChange={handleChange} />
       </div>
 
-      <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
       <div className="flex align-items-center justify-content-between mb-6">
         <div className="flex align-items-center">
           <Checkbox id="rememberme" onChange={e => setChecked(e.checked)} checked={checked} className="mr-2" />
-          <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
           <label htmlFor="rememberme" >Remember me</label>
         </div>
         <a className="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer" style={{color: '#2065D1'}}>Forgot your password?</a>

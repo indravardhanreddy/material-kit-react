@@ -31,11 +31,11 @@
     padding: 0; /* Remove padding */
   }
   
-  .p-dialog .p-dialog-header,
+  /* .p-dialog .p-dialog-header,
   .p-dialog .p-dialog-footer {
-    display: none; /* Hide the header and footer */
+    display: none; 
   }
-  
+   */
 
   #pr_id_10_content {
     padding-left: 0px;

@@ -97,7 +97,6 @@
 //         </div>
 //       </div>
 //       <div className="post-bottom">
-//         <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }</>
 //         <button className="icons" onClick={likePost}>{currentPost?.likes.includes(currentUser?._id) ? (
 //             <ThumbUpAltRoundedIcon />
 //           ) : (

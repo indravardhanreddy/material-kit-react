@@ -97,7 +97,7 @@ export default function ProductsPage() {
           </Stack>
         </Stack>
 
-        { data !== undefined ? <ProductList products={data.products} /> : <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}><Iconify icon={'svg-spinners:blocks-wave'} color="#1877F2" width={60} /></div>}
+        { data !== undefined ? <ProductList products={data.products} /> : <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}><Iconify icon={'svg-spinners:blocks-wave'} color="#b1c4c7" width={60} /></div>}
         <ProductCartWidget />
       </Container>
     </>

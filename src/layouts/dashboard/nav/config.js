@@ -89,6 +89,16 @@ export const navConfigQA = [
     icon: <Iconify icon="wpf:faq" />,
   },
   {
+    title: 'Email',
+    path: '/support/email',
+    icon: <Iconify icon="wpf:email" />,
+  },
+  {
+    title: 'Maps',
+    path: '/support/maps',
+    icon: <Iconify icon="wpf:email" />,
+  },
+  {
     title: 'Support',
     path: '/support/care',
     icon: <Iconify icon="mdi:support" />,

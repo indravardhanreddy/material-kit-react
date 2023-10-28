@@ -150,27 +150,21 @@ function SignupPage() {
               </div>
 
               <div>
-                <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
                 {/* <label htmlFor="email" className="block text-900 font-medium mb-2">Email</label> */}
                 <InputText id="email" name="email" onChange={handleChange} type="text" placeholder="Email address" className="w-full mb-3" />
 
-                <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
                 {/* <label htmlFor="password" className="block text-900 font-medium mb-2">Password</label> */}
                 <InputText id="password" name="password" onChange={handleChange} type="password" placeholder="Password" className="w-full mb-3" header={header} footer={footer} />
 
-                <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
                 {/* <label htmlFor="firstname" className="block text-900 font-medium mb-2">First Name</label> */}
                 <InputText id="firstname" name="firstName" onChange={handleChange} type="text" placeholder="First Name" className="w-full mb-3" />
 
-                <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
                 {/* <label htmlFor="lastname" className="block text-900 font-medium mb-2">Last Name</label> */}
                 <InputText id="lastname" name="lastName" onChange={handleChange} type="text" placeholder="Last Name" className="w-full mb-3" />
 
-                <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
                 <div className="flex align-items-center justify-content-between mb-6">
                   <div className="flex align-items-center">
                     <Checkbox id="rememberme" onChange={e => setChecked(e.checked)} checked={checked} className="mr-2" />
-                    <>{ /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}</>
                     <label htmlFor="rememberme">Remember me</label>
                   </div>
                   <a className="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot your password?</a>

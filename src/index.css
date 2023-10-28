@@ -8,7 +8,7 @@ body {
   :root {
     --shadow: #baa2a2;
     --scrollbarBG: #ffffff;
-    --thumbBG: #e2b309;
+    --thumbBG: #aaa9a6;
   }
   ::-webkit-scrollbar {
     width: 10px;
@@ -31,10 +31,10 @@ body {
     line-height: 1.1 !important;
   }
 
-  .p-dialog .p-dialog-header,
+  /* .p-dialog .p-dialog-header,
   .p-dialog .p-dialog-footer {
-    display: none; /* Hide the header and footer */
-  }
+    display: none; 
+  } */
   
 
 .p-dialog-content {

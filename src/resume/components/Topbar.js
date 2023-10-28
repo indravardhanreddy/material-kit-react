@@ -34,13 +34,11 @@ const template = (item, options) => {
     );
 }
 
-  // eslint-disable-next-line object-shorthand
 const items = [
     {
         label: 'Home',
         icon: 'pi pi-fw pi-home',
         url: '#',
-        // eslint-disable-next-line object-shorthand
         template: template
     },
     {
@@ -50,13 +48,11 @@ const items = [
             {
                 label: 'Projects',
                 url: '#projects',
-                // eslint-disable-next-line object-shorthand
                 template: template
             },
             {
                 label: 'Experience',
                 url: '#experience',
-                // eslint-disable-next-line object-shorthand
                 template: template
             }
         ]
@@ -65,27 +61,23 @@ const items = [
         label: 'Skills',
         icon: 'pi pi-fw pi-bolt',
         url: '#skills',
-        // eslint-disable-next-line object-shorthand
         template: template
     },
     {
         label: 'Education',
         icon: 'pi pi-fw pi-book',
         url: '#education',
-        // eslint-disable-next-line object-shorthand
         template: template
     },
     {
         label: 'Contact',
         icon: 'pi pi-fw pi-phone',
         url: '#contact',
-        // eslint-disable-next-line object-shorthand
         template: template
     },
     {
         label: 'Resume',
         icon: 'pi pi-fw pi-download',
-        // eslint-disable-next-line object-shorthand
         template: (item, options) => {
 
             return (
